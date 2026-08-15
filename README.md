@@ -130,26 +130,3 @@ Aplikasi akan otomatis terbuka di browser Anda pada alamat: `http://localhost:85
 2. Ajukan pertanyaan seputar isi dokumen PDF yang telah diunggah oleh admin.
 3. Chatbot akan memberikan jawaban berdasarkan konteks dokumen beserta kutipan sumber dokumen yang relevan.
 
----
-
-## 🛠️ Rekomendasi Dependensi (`requirements.txt`)
-
-Jika belum mengisi `requirements.txt`, Anda dapat menggunakan paket-paket berikut:
-
-```txt
-streamlit>=1.30.0
-langchain>=0.2.0
-langchain-community>=0.2.0
-langchain-openai>=0.1.0
-chromadb>=0.5.0
-pypdf>=4.0.0
-python-dotenv>=1.0.0
-tiktoken>=0.7.0
-```
-
----
-
-## 🔒 Keamanan & Praktik Terbaik
-
-- **Jangan pernah melakukan commit pada file `.env`** yang berisi API Key asli ke GitHub repository publik.
-- Gunakan file `.gitignore` yang sudah disediakan untuk mencegah terunggahnya file sensitif, file cache, dan basis data lokal.
