@@ -26,98 +26,22 @@ Aplikasi ini dibangun menggunakan **Streamlit** (Multi-page App), **LangChain**,
 
 ## ✨ Fitur Utama
 
-- 👨‍💼 **Admin Dashboard (Upload & Manajemen Dokumen)**
+- **Admin Dashboard (Upload & Manajemen Dokumen)**
   - Upload file PDF baru ke sistem secara mudah melalui antarmuka web.
   - Pemrosesan otomatis dokumen (ekstraksi teks, chunking, dan pembuatan embedding).
   - Monitoring dan sinkronisasi berkas knowledge base ke dalam Vector Database.
-- 🤖 **Chatbot Interaktif (User Experience)**
+- **Chatbot Interaktif (User Experience)**
   - Tanya jawab cerdas berbasis konteks PDF yang diunggah.
   - Menampilkan sitasi / sumber referensi dokumen untuk transparansi jawaban.
   - Riwayat percakapan (*chat history*) interaktif.
-- ⚡ **Penyimpanan Vektor Persisten (*Vector Store*)**
+- **Penyimpanan Vektor Persisten (*Vector Store*)**
   - Menggunakan ChromaDB / FAISS untuk pencarian similaritas vektor dokumen dengan latensi rendah.
-- 🧪 **Notebook Eksperimen RAG**
+- **Notebook Eksperimen RAG**
   - Dilengkapi Jupyter Notebook untuk memvalidasi *chunk size*, *overlap*, serta pengujian performa prompt LLM.
 
 ---
 
-## 🚀 Panduan Instalasi & Menjalankan
-
-### 1. Prasyarat
-- **Python 3.10** atau versi yang lebih baru.
-- Akun & API Key penyedia LLM (seperti **OpenAI** atau **Google Gemini**).
-- Git terpasang di komputer Anda.
-
----
-
-### 2. Clone Repository
-```bash
-git clone https://github.com/username-anda/Chatbot_Farm.git
-cd Chatbot_Farm
-```
-
----
-
-### 3. Buat dan Aktifkan Virtual Environment
-
-- **Windows (Command Prompt / PowerShell):**
-  ```powershell
-  python -m venv venv
-  .\venv\Scripts\activate
-  ```
-
-- **Linux / macOS:**
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate
-  ```
-
----
-
-### 4. Install Dependensi
-```bash
-pip install -r requirements.txt
-```
-
----
-
-### 5. Konfigurasi Environment Variables
-Salin file `.env.example` menjadi `.env`, lalu masukkan API Key yang Anda miliki:
-
-- **Windows (PowerShell):**
-  ```powershell
-  Copy-Item .env.example .env
-  ```
-- **Linux / macOS:**
-  ```bash
-  cp .env.example .env
-  ```
-
-Buka file `.env` dan lengkapi konfigurasi:
-```env
-OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxx
-LLM_MODEL=gpt-4o-mini
-EMBEDDING_MODEL=text-embedding-3-small
-ADMIN_PASSWORD=admin123
-VECTOR_DB_PATH=./data/vector_db
-RAW_PDF_PATH=./data/raw_pdfs
-CHUNK_SIZE=1000
-CHUNK_OVERLAP=200
-```
-
----
-
-### 6. Jalankan Aplikasi
-Jalankan aplikasi Streamlit dengan perintah:
-```bash
-streamlit run app.py
-```
-
-Aplikasi akan otomatis terbuka di browser Anda pada alamat: `http://localhost:8501`.
-
----
-
-## 📖 Cara Penggunaan
+## 🚀 Cara Penggunaan
 
 ### 1. Menambahkan Dokumen Pengetahuan (Admin)
 1. Buka menu navigasi di sidebar dan pilih **`Admin`** (atau `pages/admin.py`).
