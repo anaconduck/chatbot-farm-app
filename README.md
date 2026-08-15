@@ -44,13 +44,13 @@ Aplikasi ini dibangun menggunakan **Streamlit** (Multi-page App), **LangChain**,
 ## 🚀 Cara Penggunaan
 
 ### 1. Menambahkan Dokumen Pengetahuan (Admin)
-1. Buka menu navigasi di sidebar dan pilih **`Admin`** (atau `pages/admin.py`).
-2. Masukkan kata sandi admin yang telah dikonfigurasi di file `.env`.
-3. Unggah satu atau beberapa file **PDF** yang memuat materi atau pengetahuan yang diinginkan.
-4. Klik tombol **"Proses & Simpan ke Vector DB"**. Sistem akan mengekstrak teks, membagi menjadi chunk, membuat embedding, dan memperbarui basis data vektor.
+- Buka menu navigasi di sidebar dan pilih **`Admin`** (atau `pages/admin.py`).
+- Masukkan kata sandi admin yang telah dikonfigurasi di file `.env`.
+- Unggah satu atau beberapa file **PDF** yang memuat materi atau pengetahuan yang diinginkan.
+- Klik tombol **"Proses & Simpan ke Vector DB"**. Sistem akan mengekstrak teks, membagi menjadi chunk, membuat embedding, dan memperbarui basis data vektor.
 
 ### 2. Berinteraksi dengan Chatbot (User)
-1. Buka menu **`Chatbot`** (atau `pages/chatbot.py`).
-2. Ajukan pertanyaan seputar isi dokumen PDF yang telah diunggah oleh admin.
-3. Chatbot akan memberikan jawaban berdasarkan konteks dokumen beserta kutipan sumber dokumen yang relevan.
+- Buka menu **`Chatbot`** (atau `pages/chatbot.py`).
+- Ajukan pertanyaan seputar isi dokumen PDF yang telah diunggah oleh admin.
+- Chatbot akan memberikan jawaban berdasarkan konteks dokumen beserta kutipan sumber dokumen yang relevan.
 
