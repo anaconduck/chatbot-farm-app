@@ -1,4 +1,4 @@
-# 🌾 FarmAI — Chatbot RAG Berbasis Knowledge Base PDF
+# FarmAI — Chatbot RAG Berbasis Knowledge Base PDF
 
 <div align="center">
 
