@@ -9,27 +9,38 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({
+  size = "md",
   className = "",
   href = "/",
 }) => {
+  const iconDimensions = {
+    sm: { box: "w-7 h-7", img: 28 },
+    md: { box: "w-9 h-9", img: 36 },
+    lg: { box: "w-12 h-12", img: 48 },
+  }[size];
+
+  const textDimensions = {
+    sm: "text-lg",
+    md: "text-xl",
+    lg: "text-2xl",
+  }[size];
 
   const content = (
     <div className={`flex items-center gap-2.5 select-none ${className}`}>
-      {/* Golden icon frame with chicken */}
-      <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#E2A638] to-[#C4861C] p-0.5 shadow-sm">
-        <div className="w-full h-full bg-[#FAF7F2] rounded-[10px] flex items-center justify-center p-1">
-          <Image
-            src="/images/chatbot/cowboy-robot.png"
-            alt="ChickyAI Emblem"
-            width={28}
-            height={28}
-            className="object-contain"
-          />
-        </div>
+      {/* Official ChickyAI Poultry Emblem from design */}
+      <div className={`relative ${iconDimensions.box} flex items-center justify-center shrink-0`}>
+        <Image
+          src="/images/logo/emblem.png"
+          alt="ChickyAI Logo"
+          width={iconDimensions.img}
+          height={iconDimensions.img}
+          className="object-contain"
+          priority
+        />
       </div>
 
       <div className="flex flex-col">
-        <span className="font-extrabold text-xl tracking-tight text-[#4A2D1B] leading-none">
+        <span className={`font-extrabold ${textDimensions} tracking-tight text-[#4A2D1B] leading-none`}>
           Chicky<span className="text-[#DE992B]">AI</span>
         </span>
         <span className="text-[9px] font-semibold text-[#8C7B71] tracking-widest uppercase mt-0.5">

@@ -26,11 +26,6 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] tracking-wider uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#DE992B]" />
-                TENTANG CHICKYAI
-              </div>
-
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#361D10] leading-[1.2] tracking-tight">
                 Mendedikasikan Inovasi untuk Masa Depan & Peternakan Unggas Indonesia
               </h1>

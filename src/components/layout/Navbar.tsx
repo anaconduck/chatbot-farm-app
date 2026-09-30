@@ -13,6 +13,7 @@ import {
   Bot,
   LayoutDashboard,
   BookOpen,
+  Home,
   Info,
 } from "lucide-react";
 
@@ -22,9 +23,8 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isActive = (path: string) => {
-    if (path === "/" && pathname === "/") return true;
-    if (path !== "/" && pathname.startsWith(path)) return true;
-    return false;
+    if (path === "/") return pathname === "/";
+    return pathname.startsWith(path);
   };
 
   return (
@@ -41,23 +41,25 @@ export const Navbar: React.FC = () => {
             )}
           </div>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links: Beranda -> Riset & Edukasi -> [User links] -> About */}
           <nav className="hidden md:flex items-center gap-8">
+            {/* 1. Beranda */}
             <Link
-              href="/about"
+              href="/"
               className={`text-sm font-semibold transition-colors pb-1 relative ${
-                isActive("/about")
+                isActive("/")
                   ? "text-[#4A2D1B] border-b-2 border-[#4A2D1B]"
                   : "text-[#6E5D52] hover:text-[#4A2D1B]"
               }`}
             >
-              About
+              Beranda
             </Link>
 
+            {/* 2. Riset & Edukasi */}
             <Link
               href="/riset"
               className={`text-sm font-semibold transition-colors pb-1 relative ${
-                isActive("/riset") || pathname === "/"
+                isActive("/riset")
                   ? "text-[#4A2D1B] border-b-2 border-[#4A2D1B]"
                   : "text-[#6E5D52] hover:text-[#4A2D1B]"
               }`}
@@ -65,6 +67,7 @@ export const Navbar: React.FC = () => {
               Riset & Edukasi
             </Link>
 
+            {/* Logged in User links */}
             {user && (
               <>
                 <Link
@@ -106,6 +109,18 @@ export const Navbar: React.FC = () => {
                 Admin Panel
               </Link>
             )}
+
+            {/* 3. About (ditaruh terakhir sesuai instruksi) */}
+            <Link
+              href="/about"
+              className={`text-sm font-semibold transition-colors pb-1 relative ${
+                isActive("/about")
+                  ? "text-[#4A2D1B] border-b-2 border-[#4A2D1B]"
+                  : "text-[#6E5D52] hover:text-[#4A2D1B]"
+              }`}
+            >
+              About
+            </Link>
           </nav>
 
           {/* Right Action / Auth */}
@@ -161,13 +176,14 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-[#EADBCE] bg-[#FAF7F2] px-4 pt-3 pb-6 space-y-3">
           <Link
-            href="/about"
+            href="/"
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center gap-2 py-2 px-3 rounded-lg text-sm font-medium text-[#4A2D1B] hover:bg-[#EADBCE]/40"
           >
-            <Info className="w-4 h-4 text-[#DE992B]" />
-            About
+            <Home className="w-4 h-4 text-[#DE992B]" />
+            Beranda
           </Link>
+
           <Link
             href="/riset"
             onClick={() => setMobileMenuOpen(false)}
@@ -208,6 +224,15 @@ export const Navbar: React.FC = () => {
               Admin Portal
             </Link>
           )}
+
+          <Link
+            href="/about"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2 py-2 px-3 rounded-lg text-sm font-medium text-[#4A2D1B] hover:bg-[#EADBCE]/40"
+          >
+            <Info className="w-4 h-4 text-[#DE992B]" />
+            About
+          </Link>
 
           <div className="pt-3 border-t border-[#EADBCE]">
             {user ? (

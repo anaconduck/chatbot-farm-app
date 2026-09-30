@@ -56,11 +56,6 @@ export default function RisetPage() {
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 space-y-12">
         {/* HEADER SECTION */}
         <section className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] tracking-wider uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#DE992B]" />
-            ARSIP SAINS
-          </div>
-
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#361D10] tracking-tight">
             Pusat Riset dan Edukasi
           </h1>
