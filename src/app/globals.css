@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #FAF7F2;
+    --foreground: #2A1D15;
+    --card: #FFFFFF;
+    --card-foreground: #2A1D15;
+    --primary: #54321D;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F3AC3C;
+    --secondary-foreground: #331A0B;
+    --accent: #FDF4E7;
+    --accent-foreground: #8B5718;
+    --muted: #F3ECE2;
+    --muted-foreground: #7C6D63;
+    --border: #E8DCCF;
+    --ring: #F3AC3C;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom utility classes matching the design */
+.bg-cream {
+  background-color: #FAF7F2;
+}
+
+.bg-warm-white {
+  background-color: #FDFBF8;
+}
+
+.bg-chicky-brown {
+  background-color: #54321D;
+}
+
+.bg-chicky-gold {
+  background-color: #F3AC3C;
+}
+
+.text-chicky-brown {
+  color: #54321D;
+}
+
+.text-chicky-gold {
+  color: #C98218;
+}
+
+.border-chicky-border {
+  border-color: #E8DCCF;
+}
+
+.card-shadow {
+  box-shadow: 0 4px 20px -2px rgba(84, 50, 29, 0.05);
+}
+
+.card-hover {
+  transition: all 0.2s ease-in-out;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px -4px rgba(84, 50, 29, 0.08);
+}

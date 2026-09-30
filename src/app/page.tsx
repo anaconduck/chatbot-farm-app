@@ -1,0 +1,253 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import {
+  Bot,
+  ShieldCheck,
+  Cpu,
+  Layers,
+  ArrowRight,
+} from "lucide-react";
+
+export default function HomePage() {
+  return (
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
+      <Navbar />
+
+      <main className="flex-1">
+        {/* HERO SECTION */}
+        <section className="relative overflow-hidden py-14 sm:py-20 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Copy */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] tracking-wider uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#DE992B] animate-pulse" />
+                ASISTEN CERDAS PETERNAKAN AYAM
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#361D10] leading-[1.15] tracking-tight">
+                Konsultasi & Riset Peternakan Unggas Berbasis{" "}
+                <span className="text-[#DE992B] underline decoration-[#DE992B]/40 decoration-wavy decoration-2">
+                  Dokumen Ilmiah
+                </span>
+              </h1>
+
+              <p className="text-base sm:text-lg text-[#6A5A50] leading-relaxed max-w-2xl">
+                Tingkatkan efisiensi pakan, kendalikan mikroklimat kandang closed-house,
+                dan perkuat biosekuriti peternakan ayam Anda bersama ChickyAI.
+                Didukung repositori jurnal ilmiah dan panduan veteriner terverifikasi.
+              </p>
+
+              {/* Main CTAs per brief Section O */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <Link
+                  href="/chat"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#4A2D1B] hover:bg-[#382112] text-white font-bold text-sm shadow-md transition-all active:scale-95"
+                >
+                  <Bot className="w-5 h-5 text-[#DE992B]" />
+                  <span>Mulai Bertanya</span>
+                  <ArrowRight className="w-4 h-4 ml-1" />
+                </Link>
+
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white border border-[#DCD0C1] hover:border-[#4A2D1B] text-[#4A2D1B] font-bold text-sm shadow-xs transition-all"
+                >
+                  <span>Pelajari Lebih Lanjut</span>
+                </Link>
+              </div>
+
+              {/* Trust Badges */}
+              <div className="pt-6 border-t border-[#EADECE] grid grid-cols-3 gap-4 text-left">
+                <div>
+                  <div className="text-2xl font-black text-[#361D10]">45+</div>
+                  <div className="text-xs text-[#7A6A60] font-medium">Jurnal Ilmiah Unggas</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-black text-[#DE992B]">24/7</div>
+                  <div className="text-xs text-[#7A6A60] font-medium">Asisten Cerdas Aktif</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-black text-[#2E7D32]">100%</div>
+                  <div className="text-xs text-[#7A6A60] font-medium">Rujukan Terverifikasi</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Hero Visual */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group">
+                <Image
+                  src="/images/farm/modern-poultry-farm.jpg"
+                  alt="Modern Poultry Farm"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+
+                {/* Floating Preview Card */}
+                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-lg space-y-2">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#4A2D1B]">
+                    <div className="w-6 h-6 rounded-lg bg-[#FAF7F2] p-0.5 border border-[#DE992B]/40 flex items-center justify-center">
+                      <Image
+                        src="/images/chatbot/cowboy-robot.png"
+                        alt="Chicky"
+                        width={20}
+                        height={20}
+                        className="object-contain"
+                      />
+                    </div>
+                    <span>ChickyAI Rekomendasi Pakan:</span>
+                  </div>
+                  <p className="text-xs text-[#5D4E44] italic">
+                    &ldquo;Rasio kalsium 3.8% pada umur 32 minggu memaksimalkan ketebalan kerabang telur tanpa mengganggu absorpsi fosfor.&rdquo;
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FEATURES SECTION */}
+        <section className="py-16 bg-white/70 border-y border-[#E9DDD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF4EB] border border-[#F3E2CB] text-[11px] font-bold text-[#966318] uppercase">
+                FITUR UTAMA CHICKYAI
+              </div>
+              <h2 className="text-3xl font-extrabold text-[#361D10]">
+                Solusi Cerdas untuk Setiap Aspek Peternakan Anda
+              </h2>
+              <p className="text-sm text-[#6C5D53]">
+                Menggabungkan kapabilitas model RAG modern dengan dokumen keilmuan unggas pilihan.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Feature 1 */}
+              <div className="bg-[#FAF7F2] rounded-2xl p-7 border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all space-y-4">
+                <div className="w-12 h-12 rounded-xl bg-[#FFF3D6] text-[#DE992B] border border-[#F3DB9A] flex items-center justify-center">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#361D10]">
+                  Formulasi Nutrisi & Pakan
+                </h3>
+                <p className="text-xs text-[#6B5B51] leading-relaxed">
+                  Hitung kebutuhan asam amino, energi metabolis, dan imbangan kalsium-fosfor untuk ayam ras petelur (layer) maupun pedaging (broiler) sesuai fase pertumbuhan.
+                </p>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="bg-[#FAF7F2] rounded-2xl p-7 border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all space-y-4">
+                <div className="w-12 h-12 rounded-xl bg-[#EAF5EA] text-[#2E7D32] border border-[#C8E6C9] flex items-center justify-center">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#361D10]">
+                  Biosekuriti & Pengendalian Penyakit
+                </h3>
+                <p className="text-xs text-[#6B5B51] leading-relaxed">
+                  Panduan sanitasi tiga zona kandang, jadwal vaksinasi berkala, serta identifikasi awal gejala klinis penyakit unggas seperti ND, AI, IB, dan Coryza.
+                </p>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="bg-[#FAF7F2] rounded-2xl p-7 border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all space-y-4">
+                <div className="w-12 h-12 rounded-xl bg-[#F0EAE1] text-[#4A2D1B] border border-[#D5C7B7] flex items-center justify-center">
+                  <Cpu className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#361D10]">
+                  Manajemen Kandang Closed-House
+                </h3>
+                <p className="text-xs text-[#6B5B51] leading-relaxed">
+                  Optimalkan kecepatan angin (wind speed), evaporative cooling pad, dan pembuangan gas amonia menggunakan standar mikroklimat tropis Indonesia.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* HOW IT WORKS SECTION */}
+        <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] uppercase">
+              ALUR KERJA
+            </div>
+            <h2 className="text-3xl font-extrabold text-[#361D10]">
+              Bagaimana ChickyAI Bekerja
+            </h2>
+            <p className="text-sm text-[#6C5D53]">
+              Tiga langkah mudah untuk mendapatkan insight ilmiah secara instan
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-2xl p-6 border border-[#E8DCCF] text-center space-y-3">
+              <div className="w-10 h-10 rounded-full bg-[#361D10] text-white font-bold text-base flex items-center justify-center mx-auto">
+                1
+              </div>
+              <h4 className="font-bold text-base text-[#361D10]">Ketik Pertanyaan</h4>
+              <p className="text-xs text-[#6B5B51] leading-relaxed">
+                Tulis kendala pakan, penurunan produksi, atau ventilasi kandang dalam bahasa sehari-hari.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 border border-[#E8DCCF] text-center space-y-3">
+              <div className="w-10 h-10 rounded-full bg-[#DE992B] text-white font-bold text-base flex items-center justify-center mx-auto">
+                2
+              </div>
+              <h4 className="font-bold text-base text-[#361D10]">Analisis Literatur RAG</h4>
+              <p className="text-xs text-[#6B5B51] leading-relaxed">
+                AI mencari dan mencocokkan bab relevan dari puluhan buku dan dokumen ilmiah terindeks.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 border border-[#E8DCCF] text-center space-y-3">
+              <div className="w-10 h-10 rounded-full bg-[#2E7D32] text-white font-bold text-base flex items-center justify-center mx-auto">
+                3
+              </div>
+              <h4 className="font-bold text-base text-[#361D10]">Solusi & Sumber Rujukan</h4>
+              <p className="text-xs text-[#6B5B51] leading-relaxed">
+                Terima ringkasan praktis lengkap dengan nomor halaman dan judul referensi aslinya.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA SECTION */}
+        <section className="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-[#4E2E1E] via-[#3B1F10] to-[#261208] text-white rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-xl relative overflow-hidden">
+            <div className="relative z-10 max-w-2xl mx-auto space-y-4">
+              <h2 className="text-3xl sm:text-4xl font-black">
+                Mulai Konsultasi Peternakan Ayam Hari Ini
+              </h2>
+              <p className="text-sm sm:text-base text-[#DBCBC0] leading-relaxed">
+                Bergabunglah dengan ribuan peternak dan praktisi unggas modern yang memanfaatkan kecerdasan buatan untuk hasil panen optimal.
+              </p>
+              <div className="pt-2 flex flex-wrap justify-center gap-4">
+                <Link
+                  href="/register"
+                  className="px-8 py-3.5 rounded-xl bg-[#DE992B] hover:bg-[#C8851E] text-white font-bold text-sm shadow-md transition-all active:scale-95"
+                >
+                  Daftar Akun Gratis
+                </Link>
+                <Link
+                  href="/riset"
+                  className="px-8 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
+                >
+                  Buka Repositori Riset
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

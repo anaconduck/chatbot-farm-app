@@ -1,155 +1,107 @@
-# 🌾 FarmAI — Chatbot RAG Berbasis Knowledge Base PDF
+# ChickyAI — Asisten Cerdas Peternakan Ayam & Pusat Riset Sains
 
-<div align="center">
-
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
-![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
-![VectorDB](https://img.shields.io/badge/Vector_DB-ChromaDB-orange?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-
-<p align="center">
-  <b>Sistem Chatbot Cerdas berbasis RAG (Retrieval-Augmented Generation) dengan basis pengetahuan dokumen PDF yang dikelola langsung oleh Admin.</b>
-</p>
-
-</div>
+ChickyAI adalah platform chatbot cerdas berbasis RAG (*Retrieval-Augmented Generation*) dan repositori riset untuk bidang peternakan ayam (layer & broiler). Aplikasi dibangun dengan **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, **Supabase (PostgreSQL & Auth)**, dan dirancang siap terintegrasi dengan **Dify Cloud API**.
 
 ---
 
-## 📌 Gambaran Umum
+## 🚀 Fitur Utama & Visual Sesuai Desain
 
-**FarmAI Chatbot** adalah aplikasi chatbot interaktif berbasis AI yang menggunakan arsitektur **Retrieval-Augmented Generation (RAG)**. Chatbot ini dirancang untuk menjawab setiap pertanyaan pengguna secara akurat, kontekstual, dan minim halusinasi karena seluruh pengetahuannya bersumber langsung dari dokumen PDF yang diunggah oleh **Admin** ke dalam Vector Database.
-
-Aplikasi ini dibangun menggunakan **Streamlit** (Multi-page App), **LangChain**, dan **Vector Store (ChromaDB / FAISS)**.
-
----
-
-## ✨ Fitur Utama
-
-- 👨‍💼 **Admin Dashboard (Upload & Manajemen Dokumen)**
-  - Upload file PDF baru ke sistem secara mudah melalui antarmuka web.
-  - Pemrosesan otomatis dokumen (ekstraksi teks, chunking, dan pembuatan embedding).
-  - Monitoring dan sinkronisasi berkas knowledge base ke dalam Vector Database.
-- 🤖 **Chatbot Interaktif (User Experience)**
-  - Tanya jawab cerdas berbasis konteks PDF yang diunggah.
-  - Menampilkan sitasi / sumber referensi dokumen untuk transparansi jawaban.
-  - Riwayat percakapan (*chat history*) interaktif.
-- ⚡ **Penyimpanan Vektor Persisten (*Vector Store*)**
-  - Menggunakan ChromaDB / FAISS untuk pencarian similaritas vektor dokumen dengan latensi rendah.
-- 🧪 **Notebook Eksperimen RAG**
-  - Dilengkapi Jupyter Notebook untuk memvalidasi *chunk size*, *overlap*, serta pengujian performa prompt LLM.
+1. **Desain & Identitas Visual**: Mengikuti bahasa visual *warm brown*, *golden/yellow*, *cream*, dan *white* sesuai panduan mockup `design_web/`.
+2. **Landing Page (`/`)**: Hero modern, fitur formulasi nutrisi, biosekuriti 3 zona, manajemen kandang closed-house, alur kerja, dan CTA pendaftaran.
+3. **Pusat Riset & Edukasi (`/riset`)**: Mengikuti `design_web/Riset.png` dengan filter pencarian domain, wawasan biologis (5 kartu fakta unik ayam petelur), dan *Research Library* dengan tombol unduh PDF peer-reviewed.
+4. **Halaman Tentang Kami (`/about`)**: Mengikuti `design_web/About.png` dengan 2 kartu Visi & Misi komprehensif, arah landasan kerja, dan kartu profil Dewan Pakar Riset.
+5. **Autentikasi Terpisah USER & ADMIN**:
+   - **Login Peternak (`/login`)**: Tampilan split-layout sesuai `design_web/Login.png`.
+   - **Registrasi Akun (`/register`)**: Card terpusat sesuai `design_web/Daftar Akun.png`. Otomatis menetapkan role `USER` demi keamanan.
+   - **Login Administrator (`/admin/login`)**: Khusus login pengelola dengan verifikasi ketat *server-side* terhadap kolom `profiles.role`.
+6. **Dashboard Peternak (`/dashboard`)**: Ucapan selamat datang personal, tombol aksi *"Tanya ChickyAI"*, riwayat percakapan, dan 8 topik populer (Nutrisi, Penyakit, Biosekuriti, Broiler, Layer, Produksi Telur, Kandang, Kesehatan).
+7. **Ruang Chatbot Interaktif (`/chat`)**: Sidebar percakapan, balon obrolan dengan *greeting* ramah, indikator *loading*, dan kartu rujukan dokumen ilmiah (*source cards*).
+8. **Floating Robot Chicken Chatbot**: Mascot robot ayam di pojok kanan bawah yang dapat diklik untuk membuka jendela obrolan cepat (*quick-drawer*) di seluruh halaman.
+9. **Admin Panel (`/admin`)**: Mengikuti `design_web/Admin.png` lengkap dengan:
+   - Metrik statistik platform (Pengunjung aktif, Unduhan riset PDF, dsb.)
+   - Grafik batang interaktif kunjungan vs unduhan
+   - Formulir unggah dokumen PDF riset (*drag & drop*)
+   - Tabel arsip PDF terunggah beserta aksi dan penomoran halaman
+10. **Admin Sub-Pages**: `/admin/documents` (manajemen dokumen RAG), `/admin/users` (manajemen aktivasi pengguna), `/admin/conversations` (log obrolan), `/admin/analytics`, dan `/admin/settings`.
 
 ---
 
-## 🚀 Panduan Instalasi & Menjalankan
+## 🛠️ Tech Stack
 
-### 1. Prasyarat
-- **Python 3.10** atau versi yang lebih baru.
-- Akun & API Key penyedia LLM (seperti **OpenAI** atau **Google Gemini**).
-- Git terpasang di komputer Anda.
+- **Frontend**: Next.js (App Router), React 19, TypeScript, Tailwind CSS, Lucide React, Zod
+- **Backend & API**: Next.js Route Handlers (`/api/chat`), Server Actions & Service Modules
+- **Database & Auth**: Supabase PostgreSQL dengan Row-Level Security (RLS) & Supabase Auth
+- **AI / RAG**: Dify Cloud API abstraction layer dengan simulasi otomatis (*mock fallback*)
+- **Deployment**: Vercel Ready
 
 ---
 
-### 2. Clone Repository
+## 💻 Menjalankan di Komputer Lokal
+
+### 1. Instalasi Dependensi
 ```bash
-git clone https://github.com/username-anda/Chatbot_Farm.git
-cd Chatbot_Farm
+npm install
 ```
 
----
-
-### 3. Buat dan Aktifkan Virtual Environment
-
-- **Windows (Command Prompt / PowerShell):**
-  ```powershell
-  python -m venv venv
-  .\venv\Scripts\activate
-  ```
-
-- **Linux / macOS:**
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate
-  ```
-
----
-
-### 4. Install Dependensi
-```bash
-pip install -r requirements.txt
-```
-
----
-
-### 5. Konfigurasi Environment Variables
-Salin file `.env.example` menjadi `.env`, lalu masukkan API Key yang Anda miliki:
-
-- **Windows (PowerShell):**
-  ```powershell
-  Copy-Item .env.example .env
-  ```
-- **Linux / macOS:**
-  ```bash
-  cp .env.example .env
-  ```
-
-Buka file `.env` dan lengkapi konfigurasi:
+### 2. Konfigurasi Lingkungan (`.env.local`)
+File `.env.local` sudah dikonfigurasikan dengan **Demo Mode** aktif:
 ```env
-OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxx
-LLM_MODEL=gpt-4o-mini
-EMBEDDING_MODEL=text-embedding-3-small
-ADMIN_PASSWORD=admin123
-VECTOR_DB_PATH=./data/vector_db
-RAW_PDF_PATH=./data/raw_pdfs
-CHUNK_SIZE=1000
-CHUNK_OVERLAP=200
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_APP_NAME="ChickyAI"
+NEXT_PUBLIC_DEMO_MODE=true
+
+# Supabase (Masukkan kredensial asli saat integrasi cloud)
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+
+# Dify RAG
+DIFY_BASE_URL=https://api.dify.ai/v1
+DIFY_CHAT_API_KEY=your-dify-chat-key
+DIFY_KNOWLEDGE_API_KEY=your-dify-knowledge-key
+DIFY_DATASET_ID=your-dataset-id
+DIFY_MOCK_MODE=true
 ```
 
----
-
-### 6. Jalankan Aplikasi
-Jalankan aplikasi Streamlit dengan perintah:
+### 3. Menjalankan Server Pengembangan
 ```bash
-streamlit run app.py
+npm run dev
 ```
+Buka browser di [http://localhost:3000](http://localhost:3000).
 
-Aplikasi akan otomatis terbuka di browser Anda pada alamat: `http://localhost:8501`.
-
----
-
-## 📖 Cara Penggunaan
-
-### 1. Menambahkan Dokumen Pengetahuan (Admin)
-1. Buka menu navigasi di sidebar dan pilih **`Admin`** (atau `pages/admin.py`).
-2. Masukkan kata sandi admin yang telah dikonfigurasi di file `.env`.
-3. Unggah satu atau beberapa file **PDF** yang memuat materi atau pengetahuan yang diinginkan.
-4. Klik tombol **"Proses & Simpan ke Vector DB"**. Sistem akan mengekstrak teks, membagi menjadi chunk, membuat embedding, dan memperbarui basis data vektor.
-
-### 2. Berinteraksi dengan Chatbot (User)
-1. Buka menu **`Chatbot`** (atau `pages/chatbot.py`).
-2. Ajukan pertanyaan seputar isi dokumen PDF yang telah diunggah oleh admin.
-3. Chatbot akan memberikan jawaban berdasarkan konteks dokumen beserta kutipan sumber dokumen yang relevan.
-
----
-
-## 🛠️ Rekomendasi Dependensi (`requirements.txt`)
-
-Jika belum mengisi `requirements.txt`, Anda dapat menggunakan paket-paket berikut:
-
-```txt
-streamlit>=1.30.0
-langchain>=0.2.0
-langchain-community>=0.2.0
-langchain-openai>=0.1.0
-chromadb>=0.5.0
-pypdf>=4.0.0
-python-dotenv>=1.0.0
-tiktoken>=0.7.0
+### 4. Menguji Lint & Build Produksi
+```bash
+npm run lint
+npm run build
 ```
 
 ---
 
-## 🔒 Keamanan & Praktik Terbaik
+## 🔑 Akun Demo (Development Mode)
 
-- **Jangan pernah melakukan commit pada file `.env`** yang berisi API Key asli ke GitHub repository publik.
-- Gunakan file `.gitignore` yang sudah disediakan untuk mencegah terunggahnya file sensitif, file cache, dan basis data lokal.
+| Tipe Akun | Email | Kata Sandi | Halaman Akses |
+|---|---|---|---|
+| **User (Peternak)** | `user@demo.local` | `demo1234` | `/login` → diarahkan ke `/dashboard` |
+| **Admin** | `admin@demo.local` | `admin1234` | `/admin/login` → diarahkan ke `/admin` |
+
+*Catatan: Tombol "Isi Otomatis" tersedia pada halaman login untuk memudahkan pengujian.*
+
+---
+
+## 🗄️ Database Supabase & Migrasi
+
+Skema migrasi database SQL tersedia lengkap di:
+- `supabase/migrations/20260930_initial_schema.sql` (Tabel `profiles`, `conversations`, `messages`, `documents`, Trigger `handle_new_user`, dan RLS Policies).
+- `supabase/seed.sql` (Data awal jurnal penelitian unggas).
+- `supabase/README.md` (Panduan konfigurasi Supabase).
+
+---
+
+## 🤖 Abstraksi Dify RAG (Fase Lanjutan)
+
+Modul Dify telah diisolasi pada lapisan server-side:
+- `src/lib/dify/client.ts` — Client HTTP dengan perlindungan token rahasia
+- `src/lib/dify/chat.ts` — `sendChatMessage()` dengan *fallback* jawaban cerdas peternakan ayam saat mock mode aktif
+- `src/lib/dify/knowledge.ts` — Stub `uploadKnowledgeDocument()`, `deleteKnowledgeDocument()`, `getDocumentStatus()`
+- `src/lib/dify/types.ts` — Definisi tipe respons Dify Cloud
+- `src/app/api/chat/route.ts` — Route handler POST tanpa mengekspos API key ke browser client

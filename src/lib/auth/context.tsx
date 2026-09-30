@@ -1,0 +1,280 @@
+"use client";
+
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import type { Profile, UserRole } from "@/types";
+
+interface AuthContextType {
+  user: Profile | null;
+  role: UserRole | null;
+  isLoading: boolean;
+  isDemo: boolean;
+  login: (email: string, pass: string, targetRole?: UserRole) => Promise<{ success: boolean; error?: string }>;
+  register: (data: { full_name: string; email: string; phone: string; password: string }) => Promise<{ success: boolean; error?: string }>;
+  logout: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+const DEMO_USERS: Record<string, Profile> = {
+  "admin@demo.local": {
+    id: "demo-admin-uuid",
+    email: "admin@demo.local",
+    full_name: "Administrator Demo",
+    role: "ADMIN",
+    is_active: true,
+    avatar_url: "/images/chatbot/cowboy-robot.png",
+    phone: "081234567890",
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  "user@demo.local": {
+    id: "demo-user-uuid",
+    email: "user@demo.local",
+    full_name: "Budi Santoso",
+    role: "USER",
+    is_active: true,
+    avatar_url: null,
+    phone: "081398765432",
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+};
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<Profile | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
+  const supabase = createClient();
+
+  useEffect(() => {
+    // Check saved session in local storage or Supabase
+    const initAuth = async () => {
+      try {
+        const storedDemo = typeof window !== "undefined" ? localStorage.getItem("chickyai_demo_user") : null;
+        if (storedDemo) {
+          try {
+            const parsed = JSON.parse(storedDemo);
+            setUser(parsed);
+            setIsLoading(false);
+            return;
+          } catch {
+            localStorage.removeItem("chickyai_demo_user");
+          }
+        }
+
+        // Check real Supabase Auth
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", session.user.id)
+            .single();
+
+          if (profile) {
+            setUser(profile as Profile);
+          }
+        }
+      } catch (err) {
+        console.warn("Auth initialization note:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initAuth();
+  }, [supabase]);
+
+  const login = async (
+    email: string,
+    pass: string,
+    targetRole?: UserRole
+  ): Promise<{ success: boolean; error?: string }> => {
+    setIsLoading(true);
+
+    const cleanEmail = email.trim().toLowerCase();
+
+    // 1. Check Demo credentials
+    if (isDemo && (cleanEmail === "admin@demo.local" || cleanEmail === "user@demo.local")) {
+      const demoProfile = DEMO_USERS[cleanEmail];
+
+      // Strict role check for Admin portal
+      if (targetRole === "ADMIN" && demoProfile.role !== "ADMIN") {
+        setIsLoading(false);
+        return {
+          success: false,
+          error: "Akun ini tidak memiliki akses administrator.",
+        };
+      }
+
+      setUser(demoProfile);
+      localStorage.setItem("chickyai_demo_user", JSON.stringify(demoProfile));
+      // Set cookie for Next.js routing if needed
+      document.cookie = `chickyai_role=${demoProfile.role}; path=/; max-age=86400; SameSite=Lax`;
+
+      setIsLoading(false);
+      return { success: true };
+    }
+
+    // 2. Real Supabase Authentication
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: cleanEmail,
+        password: pass,
+      });
+
+      if (error) {
+        setIsLoading(false);
+        return { success: false, error: error.message };
+      }
+
+      if (data.user) {
+        const { data: profile, error: profError } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", data.user.id)
+          .single();
+
+        if (profError || !profile) {
+          setIsLoading(false);
+          return { success: false, error: "Gagal memuat profil pengguna." };
+        }
+
+        if (targetRole === "ADMIN" && profile.role !== "ADMIN") {
+          await supabase.auth.signOut();
+          setIsLoading(false);
+          return {
+            success: false,
+            error: "Akun ini tidak memiliki akses administrator.",
+          };
+        }
+
+        setUser(profile as Profile);
+        document.cookie = `chickyai_role=${profile.role}; path=/; max-age=86400; SameSite=Lax`;
+        setIsLoading(false);
+        return { success: true };
+      }
+    } catch {
+      // In demo mode with random email
+      if (isDemo) {
+        const fallbackRole: UserRole = cleanEmail.includes("admin") ? "ADMIN" : "USER";
+        if (targetRole === "ADMIN" && fallbackRole !== "ADMIN") {
+          setIsLoading(false);
+          return {
+            success: false,
+            error: "Akun ini tidak memiliki akses administrator.",
+          };
+        }
+
+        const syntheticProfile: Profile = {
+          id: `demo-${Date.now()}`,
+          email: cleanEmail,
+          full_name: cleanEmail.split("@")[0],
+          role: fallbackRole,
+          is_active: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
+
+        setUser(syntheticProfile);
+        localStorage.setItem("chickyai_demo_user", JSON.stringify(syntheticProfile));
+        document.cookie = `chickyai_role=${fallbackRole}; path=/; max-age=86400; SameSite=Lax`;
+        setIsLoading(false);
+        return { success: true };
+      }
+    }
+
+    setIsLoading(false);
+    return { success: false, error: "Gagal masuk ke akun." };
+  };
+
+  const register = async (data: {
+    full_name: string;
+    email: string;
+    phone: string;
+    password: string;
+  }): Promise<{ success: boolean; error?: string }> => {
+    setIsLoading(true);
+
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          data: {
+            full_name: data.full_name,
+            phone: data.phone,
+          },
+        },
+      });
+
+      if (error) {
+        if (!isDemo) {
+          setIsLoading(false);
+          return { success: false, error: error.message };
+        }
+      }
+    } catch {
+      // Allow demo registration simulation
+    }
+
+    if (isDemo) {
+      const newProfile: Profile = {
+        id: `user-${Date.now()}`,
+        email: data.email,
+        full_name: data.full_name,
+        role: "USER", // ALWAYS USER
+        phone: data.phone,
+        is_active: true,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      setUser(newProfile);
+      localStorage.setItem("chickyai_demo_user", JSON.stringify(newProfile));
+      document.cookie = `chickyai_role=USER; path=/; max-age=86400; SameSite=Lax`;
+    }
+
+    setIsLoading(false);
+    return { success: true };
+  };
+
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut();
+    } catch {
+      // Ignored
+    }
+    setUser(null);
+    localStorage.removeItem("chickyai_demo_user");
+    document.cookie = "chickyai_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    router.push("/login");
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        role: user?.role || null,
+        isLoading,
+        isDemo,
+        login,
+        register,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+}
