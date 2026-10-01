@@ -7,39 +7,41 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
         {/* Left Side: 3 Logos & Grant Info */}
         <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 text-center sm:text-left">
-          {/* 3 Logos: TanyaTernak, Universitas Brawijaya, Diktisaintek */}
+          {/* 3 Logos: TanyaTernak, Universitas Brawijaya, Diktisaintek - Exact Matched Sizing */}
           <div className="flex items-center gap-3.5 shrink-0">
-            {/* Logo TanyaTernak - visual optical size matched with UB */}
-            <div className="w-9 h-9 sm:w-10 sm:h-10 relative flex items-center justify-center">
+            {/* Logo TanyaTernak (Tight crop: 1047x1019) */}
+            <div className="w-10 h-10 sm:w-11 sm:h-11 relative flex items-center justify-center">
               <Image
-                src="/images/logo/logo1.png?v=4"
+                src="/images/logo/logo1-tight.png"
                 alt="Logo TanyaTernak"
-                width={36}
-                height={36}
-                className="object-contain"
+                width={44}
+                height={44}
+                className="w-full h-full object-contain"
                 unoptimized
               />
             </div>
 
-            {/* Logo Universitas Brawijaya */}
+            {/* Logo Universitas Brawijaya (1149x1155) */}
             <div className="w-10 h-10 sm:w-11 sm:h-11 relative flex items-center justify-center">
               <Image
                 src="/images/logo/universitas-brawijaya.svg"
                 alt="Logo Universitas Brawijaya"
-                width={42}
-                height={42}
-                className="object-contain"
+                width={44}
+                height={44}
+                className="w-full h-full object-contain"
+                unoptimized
               />
             </div>
 
-            {/* Logo Diktisaintek */}
-            <div className="w-9 h-9 sm:w-10 sm:h-10 relative flex items-center justify-center">
+            {/* Logo Diktisaintek (Tight crop: 159x160) */}
+            <div className="w-10 h-10 sm:w-11 sm:h-11 relative flex items-center justify-center">
               <Image
-                src="/images/logo/diktisaintek-emblem.png"
+                src="/images/logo/diktisaintek-tight.png"
                 alt="Logo Diktisaintek"
-                width={38}
-                height={38}
-                className="object-contain"
+                width={44}
+                height={44}
+                className="w-full h-full object-contain"
+                unoptimized
               />
             </div>
           </div>

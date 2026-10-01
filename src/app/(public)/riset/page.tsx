@@ -123,16 +123,14 @@ export default function RisetPage() {
 
         {/* TAHUKAH ANDA? FAKTA UNIK SECTION */}
         <section className="space-y-6 pt-4">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A86F15] mb-1">
-                <Lightbulb className="w-4 h-4 text-[#DE992B]" />
-                WAWASAN BIOLOGIS
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#361D10]">
-                Tahukah Anda? Fakta Unik & Menarik Seputar Ayam Petelur
-              </h2>
+          <div>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A86F15] mb-1">
+              <Lightbulb className="w-4 h-4 text-[#DE992B]" />
+              WAWASAN BIOLOGIS
             </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#361D10]">
+              Tahukah Anda? Fakta Unik & Menarik Seputar Ayam Petelur
+            </h2>
           </div>
 
           {/* Fact Cards Grid */}
