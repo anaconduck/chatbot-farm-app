@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
 
         {/* Copyright */}
         <div className="pt-2 text-center text-[11px] sm:text-xs text-[#8A7A6E]">
-          © 2026 PoultryMind. Fakultas Peternakan Universitas Brawijaya.
+          © 2026 TanyaTernak. Fakultas Peternakan Universitas Brawijaya.
         </div>
       </div>
     </footer>

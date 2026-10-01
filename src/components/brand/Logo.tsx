@@ -27,11 +27,11 @@ export const Logo: React.FC<LogoProps> = ({
 
   const content = (
     <div className={`flex items-center gap-2.5 select-none ${className}`}>
-      {/* Official ChickyAI Poultry Emblem from design */}
+      {/* Official TanyaTernak Logo */}
       <div className={`relative ${iconDimensions.box} flex items-center justify-center shrink-0`}>
         <Image
-          src="/images/logo/emblem.png"
-          alt="ChickyAI Logo"
+          src="/images/logo/logo1.png"
+          alt="TanyaTernak Logo"
           width={iconDimensions.img}
           height={iconDimensions.img}
           className="object-contain"
@@ -41,7 +41,7 @@ export const Logo: React.FC<LogoProps> = ({
 
       <div className="flex flex-col">
         <span className={`font-extrabold ${textDimensions} tracking-tight text-[#4A2D1B] leading-none`}>
-          Poultry<span className="text-[#DE992B]">Mind</span>
+          Tanya<span className="text-[#DE992B]">Ternak</span>
         </span>
         <span className="text-[9px] font-semibold text-[#8C7B71] tracking-widest uppercase mt-0.5">
           Agribisnis Peternakan Cerdas

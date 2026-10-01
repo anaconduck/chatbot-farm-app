@@ -37,7 +37,7 @@ function ChatInner() {
       conversation_id: "c-1",
       role: "assistant",
       content:
-        "Hai 👋 Selamat datang di PoultryMind!\n\nSaya siap membantu menjawab pertanyaan mengenai riset dan agribisnis peternakan unggas berdasarkan literatur ilmiah terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
+        "Hai 👋 Selamat datang di ChickAI Assistant!\n\nSaya asisten virtual cerdas TanyaTernak, siap membantu menjawab pertanyaan mengenai riset dan agribisnis peternakan unggas berdasarkan literatur ilmiah terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
       created_at: new Date().toISOString(),
     },
   ]);
@@ -118,7 +118,7 @@ function ChatInner() {
         conversation_id: newId,
         role: "assistant",
         content:
-          "Hai 👋 Selamat datang di ChickyAI!\n\nSaya siap membantu menjawab pertanyaan mengenai peternakan ayam berdasarkan buku dan dokumen yang tersedia.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
+          "Hai 👋 Selamat datang di ChickAI Assistant!\n\nSaya asisten virtual cerdas TanyaTernak, siap membantu menjawab pertanyaan mengenai peternakan ayam berdasarkan dokumen terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
         created_at: new Date().toISOString(),
       },
     ]);
@@ -236,12 +236,12 @@ function ChatInner() {
                   }`}
                 >
                   {msg.role === "assistant" && (
-                    <div className="w-9 h-9 rounded-2xl bg-[#FAF7F2] border border-[#DE992B]/40 p-1 flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-9 h-9 rounded-xl overflow-hidden bg-white/10 border border-[#DE992B]/30 p-0.5 flex items-center justify-center shrink-0 shadow-xs">
                       <Image
                         src="/images/chatbot/cowboy-robot.png"
-                        alt="ChickyAI Avatar"
-                        width={28}
-                        height={28}
+                        alt="ChickAI Assistant Avatar"
+                        width={32}
+                        height={32}
                         className="object-contain"
                       />
                     </div>

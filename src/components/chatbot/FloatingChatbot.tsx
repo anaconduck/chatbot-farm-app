@@ -16,7 +16,7 @@ export const FloatingChatbot: React.FC = () => {
       conversation_id: "quick-chat",
       role: "assistant",
       content:
-        "Hai 👋 Selamat datang di PoultryMind!\n\nSaya siap membantu menjawab pertanyaan mengenai riset dan agribisnis peternakan unggas berdasarkan literatur ilmiah terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
+        "Hai 👋 Selamat datang di ChickAI Assistant!\n\nSaya asisten virtual cerdas TanyaTernak, siap membantu menjawab pertanyaan mengenai riset, manajemen pakan, biosekuriti, dan agribisnis peternakan unggas berdasarkan literatur ilmiah terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
       created_at: new Date().toISOString(),
     },
   ]);
@@ -94,19 +94,19 @@ export const FloatingChatbot: React.FC = () => {
           {/* Chat Header */}
           <div className="bg-[#4E2E1E] text-white p-3.5 flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-2.5">
-              <div className="relative w-9 h-9 rounded-xl bg-[#FAF7F2] p-0.5 border border-[#DE992B]/50 flex items-center justify-center">
+              <div className="relative w-9 h-9 rounded-xl bg-white/10 border border-white/20 p-0.5 flex items-center justify-center">
                 <Image
                   src="/images/chatbot/cowboy-robot.png"
-                  alt="ChickyAI"
-                  width={28}
-                  height={28}
+                  alt="ChickAI Assistant"
+                  width={32}
+                  height={32}
                   className="object-contain"
                 />
                 <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#4E2E1E]" />
               </div>
               <div>
                 <h4 className="font-bold text-sm leading-tight text-[#FAF7F2]">
-                  PoultryMind Assistant
+                  ChickAI Assistant
                 </h4>
                 <p className="text-[11px] text-[#D8C7B8] flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -254,12 +254,12 @@ export const FloatingChatbot: React.FC = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#965A2E] to-[#54321D] p-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#FAF7F2]"
-        aria-label="Buka Chatbot PoultryMind"
+        aria-label="Buka Chatbot ChickAI Assistant"
       >
         <div className="w-full h-full rounded-xl bg-[#613619] flex items-center justify-center relative overflow-hidden">
           <Image
             src="/images/chatbot/cowboy-robot.png"
-            alt="PoultryMind Mascot"
+            alt="ChickAI Assistant Mascot"
             width={38}
             height={38}
             className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"

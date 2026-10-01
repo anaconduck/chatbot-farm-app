@@ -1,6 +1,6 @@
-# PoultryMind — Platform Riset & Asisten Cerdas Peternakan Unggas
+# TanyaTernak — Platform Riset & Asisten Cerdas Peternakan Unggas
 
-PoultryMind adalah platform chatbot cerdas berbasis RAG (*Retrieval-Augmented Generation*) dan repositori riset untuk bidang peternakan ayam (layer & broiler). Aplikasi didanai oleh Program HIBAH Fakultas Peternakan Universitas Brawijaya (FAPET UB) dan dibangun dengan **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, **Supabase (PostgreSQL & Auth)**, serta siap terintegrasi dengan **Dify Cloud API**.
+TanyaTernak adalah platform chatbot cerdas berbasis RAG (*Retrieval-Augmented Generation*) dan repositori riset untuk bidang peternakan ayam (layer & broiler). Aplikasi didanai oleh Program HIBAH Fakultas Peternakan Universitas Brawijaya (FAPET UB) dan dibangun dengan **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, **Supabase (PostgreSQL & Auth)**, serta siap terintegrasi dengan **Dify Cloud API**. Chatbot asisten interaktif ditenagai oleh **ChickAI Assistant**.
 
 ---
 

@@ -23,7 +23,7 @@ export default function HomePage() {
         <section className="relative overflow-hidden pt-12 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left Copy */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-6 space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#361D10] leading-[1.15] tracking-tight">
                 Konsultasi & Riset Peternakan Unggas Berbasis{" "}
                 <span className="text-[#DE992B] underline decoration-[#DE992B]/40 decoration-wavy decoration-2">
@@ -33,7 +33,7 @@ export default function HomePage() {
 
               <p className="text-base sm:text-lg text-[#6A5A50] leading-relaxed max-w-2xl">
                 Tingkatkan efisiensi pakan, kendalikan mikroklimat kandang closed-house,
-                dan perkuat biosekuriti peternakan ayam Anda bersama PoultryMind.
+                dan perkuat biosekuriti peternakan ayam Anda bersama TanyaTernak.
                 Didukung repositori jurnal ilmiah dan panduan veteriner terverifikasi.
               </p>
 
@@ -57,8 +57,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Hero Visual: Centered with the text block */}
-            <div className="lg:col-span-5 relative">
+            {/* Right Hero Visual: Shifted higher and expanded slightly to the left per user instruction */}
+            <div className="lg:col-span-6 relative -mt-3 lg:-mt-8 lg:-ml-4">
               <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group">
                 <Image
                   src="/images/farm/modern-poultry-farm.jpg"
@@ -77,7 +77,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF4EB] border border-[#F3E2CB] text-[11px] font-bold text-[#966318] uppercase">
-                FITUR UTAMA POULTRYMIND
+                FITUR UTAMA TANYATERNAK
               </div>
               <h2 className="text-3xl font-extrabold text-[#361D10]">
                 Solusi Cerdas untuk Setiap Aspek Peternakan Anda
@@ -137,7 +137,7 @@ export default function HomePage() {
               ALUR KERJA
             </div>
             <h2 className="text-3xl font-extrabold text-[#361D10]">
-              Bagaimana PoultryMind Bekerja
+              Bagaimana TanyaTernak Bekerja
             </h2>
             <p className="text-sm text-[#6C5D53]">
               Tiga langkah mudah untuk mendapatkan insight ilmiah secara instan
