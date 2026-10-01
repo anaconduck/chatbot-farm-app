@@ -133,9 +133,6 @@ export default function RisetPage() {
                 Tahukah Anda? Fakta Unik & Menarik Seputar Ayam Petelur
               </h2>
             </div>
-            <p className="text-xs text-[#7A6A60] max-w-md">
-              Mekanisme neurobiologi dan fisiologi luar biasa di balik siklus produksi harian ayam petelur komersial.
-            </p>
           </div>
 
           {/* Fact Cards Grid */}

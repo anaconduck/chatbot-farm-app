@@ -4,13 +4,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MOCK_TEAM } from "@/lib/mock-data";
 import {
-  Compass,
-  Target,
-  Sparkles,
-  CheckCircle2,
-  FlaskConical,
-  Microscope,
+  BookOpen,
   Cpu,
+  GraduationCap,
+  Microscope,
+  FlaskConical,
+  Award,
+  ShieldCheck,
+  CheckCircle,
 } from "lucide-react";
 
 export default function AboutPage() {
@@ -18,189 +19,227 @@ export default function AboutPage() {
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
       <Navbar />
 
-      <main className="flex-1">
-        {/* HERO SECTION */}
-        <section className="pt-6 sm:pt-8 lg:pt-10 pb-10 sm:pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-6">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#361D10] leading-[1.2] tracking-tight">
-                Mendedikasikan Inovasi untuk Masa Depan & Peternakan Unggas Indonesia
-              </h1>
-
-              <p className="text-base sm:text-lg text-[#6A5A50] leading-relaxed max-w-2xl">
-                TanyaTernak hadir sebagai jembatan ilmu pengetahuan antara riset akademis,
-                keilmuan veteriner, dan operasional peternakan lapangan melalui kecerdasan
-                buatan (AI) yang kredibel dan berbasis literatur ilmiah.
-              </p>
-            </div>
-
-            {/* Right Image */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-xl aspect-4/3 group">
-                <Image
-                  src="/images/farm/modern-poultry-farm.jpg"
-                  alt="Modern Poultry Farm Interior"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  priority
-                />
-              </div>
-            </div>
+      <main className="flex-1 pb-16">
+        {/* EDITORIAL HEADER / INTRO */}
+        <section className="pt-10 sm:pt-14 pb-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] tracking-wider uppercase">
+            <GraduationCap className="w-3.5 h-3.5 text-[#DE992B]" />
+            Program Riset & Hilirisasi FAPET UB
           </div>
+
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#361D10] leading-tight tracking-tight max-w-4xl mx-auto">
+            Menghubungkan Riset Akademis dengan Peternak Unggas Indonesia
+          </h1>
+
+          <p className="text-base sm:text-lg text-[#6C5D53] max-w-3xl mx-auto leading-relaxed">
+            TanyaTernak adalah inisiatif berbasis sains dan kecerdasan buatan (AI) terapan yang dikembangkan oleh Fakultas Peternakan Universitas Brawijaya untuk mentransformasikan literatur ilmiah menjadi solusi nyata di lapangan.
+          </p>
         </section>
 
-        {/* VISI & MISI */}
-        <section className="py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Visi Card */}
-            <div className="bg-white rounded-2xl p-7 border border-[#E9DDCF] shadow-sm hover:shadow-md transition-all flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#FFF5E5] border border-[#F6D7A0] flex items-center justify-center shrink-0 text-[#DE992B]">
-                <Compass className="w-6 h-6" />
-              </div>
-              <div className="space-y-2">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#DE992B]">
-                  Visi Kami
-                </div>
-                <h3 className="text-xl font-bold text-[#361D10]">
-                  Kedaulatan & Modernisasi Perunggasan Nasional
-                </h3>
-                <p className="text-sm text-[#6C5D53] leading-relaxed">
-                  Menjadi ekosistem kecerdasan buatan dan pusat rujukan ilmiah perunggasan terdepan di Asia Tenggara, mewujudkan peternakan ayam yang berdaya saing tinggi, berkelanjutan, dan efisien berbasis data empiris.
-                </p>
-              </div>
-            </div>
-
-            {/* Misi Card */}
-            <div className="bg-white rounded-2xl p-7 border border-[#E9DDCF] shadow-sm hover:shadow-md transition-all flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#EAF5EA] border border-[#C6E6C7] flex items-center justify-center shrink-0 text-[#2E7D32]">
-                <Target className="w-6 h-6" />
-              </div>
-              <div className="space-y-2">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#2E7D32]">
-                  Misi Kami
-                </div>
-                <h3 className="text-xl font-bold text-[#361D10]">
-                  Demokratisasi Pengetahuan & Biosekuriti Presisi
-                </h3>
-                <p className="text-sm text-[#6C5D53] leading-relaxed">
-                  Menyederhanakan akses literatur veteriner, panduan manajemen kandang, dan formulasi nutrisi pakan terkini melalui asisten AI interaktif yang dapat diakses oleh setiap peternak rakyat hingga industri besar.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ARAH & LANDASAN KERJA */}
-        <section className="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-3 mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] tracking-wider uppercase">
-              ARAH & LANDASAN KERJA
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#361D10]">
-              Membangun Ekosistem Berkelanjutan
-            </h2>
-          </div>
-
-          <div className="max-w-3xl mx-auto bg-white rounded-2xl p-8 border border-[#E9DDCF] shadow-sm space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#FFF5E5] text-[#DE992B] flex items-center justify-center">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#DE992B]">
-                  MISI PERUSAHAAN
-                </span>
-                <h3 className="text-lg font-bold text-[#361D10]">
-                  Langkah Nyata Digitalisasi & Demokratisasi Riset
-                </h3>
-              </div>
-            </div>
-
-            <div className="space-y-4 pt-2">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#2E7D32] shrink-0 mt-0.5" />
-                <p className="text-sm text-[#5B4C42]">
-                  <strong className="text-[#361D10]">Demokratisasi Riset Ilmiah:</strong> Menyajikan hasil uji laboratorium secara transparan, mudah diakses, dan aplikatif bagi pengguna di setiap jenjang peternakan.
-                </p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-[#54321D] flex items-center justify-center shrink-0 mt-0.5">
-                  <div className="w-2 h-2 rounded-full bg-[#FAF7F2]" />
-                </div>
-                <p className="text-sm text-[#5B4C42]">
-                  <strong className="text-[#361D10]">Inklusif & Berorientasi Lapangan:</strong> Menyelaraskan rekomendasi teori pakan dengan ketersediaan bahan baku lokal Indonesia dan kondisi cuaca tropis basah.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* TIM RISET SECTION */}
-        <section className="py-14 bg-gradient-to-b from-transparent via-[#F3ECE2]/40 to-transparent">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center space-y-2 mb-12">
+        {/* NARRATIVE SECTION: LATAR BELAKANG & CERITA KAMI */}
+        <section className="py-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#E8DCCF] shadow-xs space-y-8">
+            <div className="space-y-4">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#DE992B] block">
+                Latar Belakang
+              </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#361D10]">
-                Tim Riset & Dewan Pakar
+                Mengapa TanyaTernak Didirikan?
               </h2>
-              <p className="text-sm text-[#6C5D53]">
-                Didukung oleh akademisi dan praktisi veteriner unggas terkemuka Indonesia
+            </div>
+
+            <div className="space-y-5 text-sm sm:text-base text-[#5A483E] leading-relaxed">
+              <p>
+                Industri peternakan unggas nasional menghadapi berbagai dinamika kritis: fluktuasi harga dan ketersediaan bahan baku pakan, tantangan biosekuriti terhadap penyakit endemik, serta penyesuaian iklim mikro kandang tropis. Di sisi lain, perguruan tinggi dan lembaga penelitian terus memproduksi ratusan publikasi ilmiah, data empiris, dan pedoman teknis yang teruji di laboratorium.
+              </p>
+              <p>
+                Sayangnya, sebagian besar hasil penelitian tersebut tersimpan dalam bentuk jurnal ilmiah yang menggunakan terminologi kompleks dan sulit diakses dengan cepat oleh para peternak saat mengambil keputusan di kandang. Kesenjangan komunikasi antara laboratorium riset dan peternak rakyat menjadi alasan utama lahirnya platform <strong>TanyaTernak</strong>.
+              </p>
+              <p>
+                Didanai melalui Program HIBAH Fakultas Peternakan Universitas Brawijaya (FAPET UB), kami merancang sistem asisten virtual cerdas berbasis <em>Retrieval-Augmented Generation</em> (RAG) yang mampu memahami pertanyaan peternak sehari-hari dan merujuk langsung ke dokumen riset ilmiah yang terverifikasi dan peer-reviewed.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {MOCK_TEAM.map((member) => (
-                <div
-                  key={member.id}
-                  className="bg-white rounded-2xl overflow-hidden border border-[#E9DDCF] shadow-sm hover:shadow-md transition-all flex flex-col group"
-                >
-                  {/* Portrait with Badge */}
-                  <div className="relative aspect-4/3 overflow-hidden bg-[#EAE2D7]">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute bottom-3 left-3">
-                      <span className="px-2.5 py-1 rounded-md bg-white/95 text-[10px] font-extrabold tracking-wider text-[#4A2D1B] shadow-sm uppercase">
-                        {member.specialtyBadge}
-                      </span>
-                    </div>
-                  </div>
+            {/* In-text Stats / Highlights */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#F1E8DF]">
+              <div className="p-4 rounded-2xl bg-[#FAF7F2] border border-[#EADBCE]">
+                <div className="text-2xl font-black text-[#361D10]">100%</div>
+                <div className="text-xs font-semibold text-[#7A6A60] mt-1">
+                  Literatur Ilmiah Peer-Reviewed
+                </div>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#FAF7F2] border border-[#EADBCE]">
+                <div className="text-2xl font-black text-[#361D10]">3 Zona</div>
+                <div className="text-xs font-semibold text-[#7A6A60] mt-1">
+                  Standar Protokol Biosekuriti
+                </div>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#FAF7F2] border border-[#EADBCE]">
+                <div className="text-2xl font-black text-[#361D10]">FAPET UB</div>
+                <div className="text-xs font-semibold text-[#7A6A60] mt-1">
+                  Didukung Dewan Pakar & Peneliti
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                  {/* Body */}
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div className="space-y-1.5">
-                      <h3 className="font-bold text-base text-[#361D10] leading-snug">
-                        {member.name}
-                      </h3>
-                      <p className="text-xs font-semibold text-[#DE992B]">
-                        {member.role}
-                      </p>
-                      <p className="text-xs text-[#6C5D53] leading-relaxed pt-2">
-                        {member.description}
-                      </p>
-                    </div>
+        {/* VISI & MISI KAMI */}
+        <section className="py-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Visi */}
+            <div className="bg-white rounded-3xl p-8 border border-[#E8DCCF] shadow-xs space-y-4 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-[#FFF5E5] text-[#DE992B] flex items-center justify-center">
+                  <Award className="w-5 h-5" />
+                </div>
+                <h3 className="text-xl font-bold text-[#361D10]">Visi Kami</h3>
+                <p className="text-sm text-[#5A483E] leading-relaxed">
+                  Menjadi pusat rujukan riset dan ekosistem kecerdasan buatan terapan perunggasan yang inklusif di Indonesia, guna mewujudkan kemandirian pangan dan efisiensi budidaya unggas yang berkelanjutan berbasis sains.
+                </p>
+              </div>
+              <div className="pt-4 border-t border-[#F1E8DF] text-xs font-bold text-[#DE992B]">
+                Inovasi Berkelanjutan
+              </div>
+            </div>
 
-                    {/* Footer achievement */}
-                    <div className="pt-4 border-t border-[#EFE8DF] flex items-center justify-between text-xs text-[#5B4C42]">
-                      <span className="font-medium">{member.achievement}</span>
-                      {member.specialtyBadge.includes("KESEHATAN") && (
-                        <Microscope className="w-4 h-4 text-[#DE992B]" />
-                      )}
-                      {member.specialtyBadge.includes("NUTRISI") && (
-                        <FlaskConical className="w-4 h-4 text-[#DE992B]" />
-                      )}
-                      {member.specialtyBadge.includes("SISTEM") && (
-                        <Cpu className="w-4 h-4 text-[#DE992B]" />
-                      )}
-                    </div>
+            {/* Misi */}
+            <div className="bg-white rounded-3xl p-8 border border-[#E8DCCF] shadow-xs space-y-4 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-[#EAF5EA] text-[#2E7D32] flex items-center justify-center">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <h3 className="text-xl font-bold text-[#361D10]">Misi Kami</h3>
+                <ul className="text-sm text-[#5A483E] space-y-2 leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#2E7D32] shrink-0 mt-0.5" />
+                    <span>Hilirisasi riset akademis ke dalam format praktis siap guna bagi peternak.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#2E7D32] shrink-0 mt-0.5" />
+                    <span>Penyediaan asisten cerdas 24/7 untuk diagnosa awal manajemen & nutrisi pakan.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#2E7D32] shrink-0 mt-0.5" />
+                    <span>Mendukung gerakan Diktisaintek Berdampak melalui pengabdian masyarakat nyata.</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-4 border-t border-[#F1E8DF] text-xs font-bold text-[#2E7D32]">
+                Dampak Nyata Lapangan
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* NILAI UTAMA / PRINSIP KERJA */}
+        <section className="py-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#E8DCCF] shadow-xs space-y-6">
+            <div className="space-y-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#DE992B] block">
+                Prinsip Kerja
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-[#361D10]">
+                Nilai Utama Pengembanan Riset
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
+              <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E8DCCF] space-y-2">
+                <div className="w-8 h-8 rounded-lg bg-[#EFE4D6] text-[#4A2D1B] flex items-center justify-center">
+                  <Microscope className="w-4 h-4" />
+                </div>
+                <h4 className="font-bold text-sm text-[#361D10]">Evidence-Based</h4>
+                <p className="text-xs text-[#6C5D53] leading-relaxed">
+                  Setiap rekomendasi nutrisi dan formulasi mengacu pada uji laboratorium dan literatur ilmiah teruji.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E8DCCF] space-y-2">
+                <div className="w-8 h-8 rounded-lg bg-[#EFE4D6] text-[#4A2D1B] flex items-center justify-center">
+                  <BookOpen className="w-4 h-4" />
+                </div>
+                <h4 className="font-bold text-sm text-[#361D10]">Aplikatif & Terbuka</h4>
+                <p className="text-xs text-[#6C5D53] leading-relaxed">
+                  Dokumen riset dapat diunduh gratis dan diterjemahkan dalam bahasa yang mudah dipahami peternak.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E8DCCF] space-y-2">
+                <div className="w-8 h-8 rounded-lg bg-[#EFE4D6] text-[#4A2D1B] flex items-center justify-center">
+                  <Cpu className="w-4 h-4" />
+                </div>
+                <h4 className="font-bold text-sm text-[#361D10]">Teknologi Presisi</h4>
+                <p className="text-xs text-[#6C5D53] leading-relaxed">
+                  Mengintegrasikan AI generasi terbaru untuk mempercepat pencarian data dan kalkulasi peternakan.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* TIM RISET & DEWAN PAKAR */}
+        <section className="py-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-2 mb-10">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#DE992B] block">
+              Kolaborator Ahli
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#361D10]">
+              Tim Riset & Dewan Pakar
+            </h2>
+            <p className="text-xs sm:text-sm text-[#6C5D53] max-w-xl mx-auto">
+              Didukung oleh akademisi dan praktisi veteriner Fakultas Peternakan Universitas Brawijaya
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {MOCK_TEAM.map((member) => (
+              <div
+                key={member.id}
+                className="bg-white rounded-3xl overflow-hidden border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all flex flex-col group"
+              >
+                <div className="relative aspect-4/3 overflow-hidden bg-[#EAE2D7]">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute bottom-3 left-3">
+                    <span className="px-2.5 py-1 rounded-md bg-white/95 text-[10px] font-extrabold tracking-wider text-[#4A2D1B] shadow-sm uppercase">
+                      {member.specialtyBadge}
+                    </span>
                   </div>
                 </div>
-              ))}
-            </div>
+
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-1.5">
+                    <h3 className="font-bold text-base text-[#361D10] leading-snug">
+                      {member.name}
+                    </h3>
+                    <p className="text-xs font-semibold text-[#DE992B]">
+                      {member.role}
+                    </p>
+                    <p className="text-xs text-[#6C5D53] leading-relaxed pt-2">
+                      {member.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-[#F1E8DF] flex items-center justify-between text-xs text-[#5B4C42]">
+                    <span className="font-medium">{member.achievement}</span>
+                    {member.specialtyBadge.includes("KESEHATAN") && (
+                      <Microscope className="w-4 h-4 text-[#DE992B]" />
+                    )}
+                    {member.specialtyBadge.includes("NUTRISI") && (
+                      <FlaskConical className="w-4 h-4 text-[#DE992B]" />
+                    )}
+                    {member.specialtyBadge.includes("SISTEM") && (
+                      <Cpu className="w-4 h-4 text-[#DE992B]" />
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       </main>
