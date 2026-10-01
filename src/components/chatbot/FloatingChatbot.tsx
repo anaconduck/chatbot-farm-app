@@ -160,7 +160,7 @@ export const FloatingChatbot: React.FC = () => {
                   <div className="w-7 h-7 rounded-lg bg-[#DE992B]/20 flex items-center justify-center shrink-0 border border-[#DE992B]/30 p-0.5">
                     <Image
                       src="/images/chatbot/cowboy-robot.png"
-                      alt="Chicky"
+                      alt="ChickAI"
                       width={20}
                       height={20}
                       className="object-contain"
@@ -202,7 +202,7 @@ export const FloatingChatbot: React.FC = () => {
                 <div className="w-7 h-7 rounded-lg bg-[#DE992B]/20 flex items-center justify-center shrink-0 p-0.5">
                   <Image
                     src="/images/chatbot/cowboy-robot.png"
-                    alt="Chicky"
+                    alt="ChickAI"
                     width={20}
                     height={20}
                     className="object-contain"
@@ -210,7 +210,7 @@ export const FloatingChatbot: React.FC = () => {
                 </div>
                 <div className="bg-white border border-[#EADBCE] rounded-2xl px-3 py-2 flex items-center gap-2">
                   <Loader2 className="w-3.5 h-3.5 animate-spin text-[#DE992B]" />
-                  <span>Chicky sedang mencari literatur...</span>
+                  <span>ChickAI sedang mencari literatur...</span>
                 </div>
               </div>
             )}
@@ -263,7 +263,7 @@ export const FloatingChatbot: React.FC = () => {
         </div>
       )}
 
-      {/* Collapsed Button: Compact & responsive */}
+      {/* Floating Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#965A2E] to-[#54321D] p-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#FAF7F2]"

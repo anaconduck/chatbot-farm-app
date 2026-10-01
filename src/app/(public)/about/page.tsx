@@ -50,7 +50,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* VISI & MISI SECTION (Replaces single 45+ Jurnal card per user instruction) */}
+        {/* VISI & MISI */}
         <section className="py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Visi Card */}

@@ -1,61 +1,81 @@
 # TanyaTernak — Platform Riset & Asisten Cerdas Peternakan Unggas
 
-TanyaTernak adalah platform chatbot cerdas berbasis RAG (*Retrieval-Augmented Generation*) dan repositori riset untuk bidang peternakan ayam (layer & broiler). Aplikasi didanai oleh Program HIBAH Fakultas Peternakan Universitas Brawijaya (FAPET UB) dan dibangun dengan **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, **Supabase (PostgreSQL & Auth)**, serta siap terintegrasi dengan **Dify Cloud API**. Chatbot asisten interaktif ditenagai oleh **ChickAI Assistant**.
+TanyaTernak adalah platform digital dan repositori riset terintegrasi untuk peternakan unggas (layer & broiler), didukung asisten cerdas berbasis Retrieval-Augmented Generation (RAG). Platform ini dikembangkan dalam kerangka Program HIBAH Fakultas Peternakan Universitas Brawijaya (FAPET UB) untuk mendukung hilirisasi riset ilmiah dan peningkatan produktivitas agribisnis peternakan nasional.
 
 ---
 
-## 🚀 Fitur Utama & Visual Sesuai Desain
+## Fitur Utama
 
-1. **Desain & Identitas Visual**: Mengikuti bahasa visual *warm brown*, *golden/yellow*, *cream*, dan *white* sesuai panduan mockup `design_web/`.
-2. **Landing Page (`/`)**: Hero modern, fitur formulasi nutrisi, biosekuriti 3 zona, manajemen kandang closed-house, alur kerja, dan CTA pendaftaran.
-3. **Pusat Riset & Edukasi (`/riset`)**: Mengikuti `design_web/Riset.png` dengan filter pencarian domain, wawasan biologis (5 kartu fakta unik ayam petelur), dan *Research Library* dengan tombol unduh PDF peer-reviewed.
-4. **Halaman Tentang Kami (`/about`)**: Mengikuti `design_web/About.png` dengan 2 kartu Visi & Misi komprehensif, arah landasan kerja, dan kartu profil Dewan Pakar Riset.
-5. **Autentikasi Terpisah USER & ADMIN**:
-   - **Login Peternak (`/login`)**: Tampilan split-layout sesuai `design_web/Login.png`.
-   - **Registrasi Akun (`/register`)**: Card terpusat sesuai `design_web/Daftar Akun.png`. Otomatis menetapkan role `USER` demi keamanan.
-   - **Login Administrator (`/admin/login`)**: Khusus login pengelola dengan verifikasi ketat *server-side* terhadap kolom `profiles.role`.
-6. **Dashboard Peternak (`/dashboard`)**: Ucapan selamat datang personal, tombol aksi *"Tanya ChickyAI"*, riwayat percakapan, dan 8 topik populer (Nutrisi, Penyakit, Biosekuriti, Broiler, Layer, Produksi Telur, Kandang, Kesehatan).
-7. **Ruang Chatbot Interaktif (`/chat`)**: Sidebar percakapan, balon obrolan dengan *greeting* ramah, indikator *loading*, dan kartu rujukan dokumen ilmiah (*source cards*).
-8. **Floating Robot Chicken Chatbot**: Mascot robot ayam di pojok kanan bawah yang dapat diklik untuk membuka jendela obrolan cepat (*quick-drawer*) di seluruh halaman.
-9. **Admin Panel (`/admin`)**: Mengikuti `design_web/Admin.png` lengkap dengan:
-   - Metrik statistik platform (Pengunjung aktif, Unduhan riset PDF, dsb.)
-   - Grafik batang interaktif kunjungan vs unduhan
-   - Formulir unggah dokumen PDF riset (*drag & drop*)
-   - Tabel arsip PDF terunggah beserta aksi dan penomoran halaman
-10. **Admin Sub-Pages**: `/admin/documents` (manajemen dokumen RAG), `/admin/users` (manajemen aktivasi pengguna), `/admin/conversations` (log obrolan), `/admin/analytics`, dan `/admin/settings`.
+1. **Beranda & Edukasi Peternakan (`/`)**
+   - Eksplorasi pilar riset: formulasi nutrisi, biosekuriti 3 zona, manajemen mikroklimat kandang *closed-house*, dan alur kerja terpadu.
+
+2. **Pusat Riset & Perpustakaan Ilmiah (`/riset`)**
+   - Filter pencarian berbasis domain peternakan (Nutrisi, Penyakit, Manajemen Kandang, IoT).
+   - Wawasan biologis & fisiologi komparatif ayam petelur.
+   - Pustaka dokumen ilmiah (*Research Library*) dengan akses unduh PDF peer-reviewed.
+
+3. **Tentang Kami (`/about`)**
+   - Visi & misi hilirisasi teknologi peternakan.
+   - Dewan pakar & tim peneliti Fakultas Peternakan Universitas Brawijaya.
+
+4. **Sistem Autentikasi Pengguna & Pengelola**
+   - **Login & Registrasi Pengguna (`/login`, `/register`)**: Akses khusus peternak dan praktisi lapangan.
+   - **Portal Pengelola / Administrator (`/admin/login`)**: Verifikasi peran berbasis server untuk keamanan akses manajemen data.
+
+5. **Dashboard Peternak (`/dashboard`)**
+   - Navigasi cepat topik populer peternakan (Nutrisi, Penyakit, Biosekuriti, Broiler, Layer, Produksi Telur, Kandang, Kesehatan).
+   - Riwayat konsultasi dan akses langsung ke asisten riset.
+
+6. **Asisten Cerdas Interaktif ChickAI (`/chat`)**
+   - Tanya jawab berbasis literatur dan rujukan ilmiah peternakan.
+   - Menampilkan referensi dokumen terkait (*citations*) pada setiap jawaban.
+
+7. **Floating Assistant Mascot**
+   - Widget obrolan cepat (*quick-drawer*) di seluruh halaman untuk kemudahan konsultasi kapan saja.
+
+8. **Panel Pengelola / Admin (`/admin`)**
+   - Metrik analitik platform dan rekap tren kunjungan vs unduhan.
+   - Modul unggah dan manajemen dokumen PDF riset (*drag & drop*).
+   - Manajemen aktivasi pengguna dan pemantauan sistem.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- **Frontend**: Next.js (App Router), React 19, TypeScript, Tailwind CSS, Lucide React, Zod
-- **Backend & API**: Next.js Route Handlers (`/api/chat`), Server Actions & Service Modules
-- **Database & Auth**: Supabase PostgreSQL dengan Row-Level Security (RLS) & Supabase Auth
-- **AI / RAG**: Dify Cloud API abstraction layer dengan simulasi otomatis (*mock fallback*)
-- **Deployment**: Vercel Ready
+- **Framework**: Next.js (App Router), React, TypeScript
+- **Styling**: Tailwind CSS
+- **Iconography**: Lucide React
+- **Database & Auth**: Supabase (PostgreSQL, Row-Level Security, Auth)
+- **AI / RAG Integration**: Dify Cloud API / RAG Services dengan fallback mode lokal
+- **Validasi Data**: Zod
 
 ---
 
-## 💻 Menjalankan di Komputer Lokal
+## Panduan Menjalankan Aplikasi
 
-### 1. Instalasi Dependensi
+### 1. Instal Dependensi
 ```bash
 npm install
 ```
 
 ### 2. Konfigurasi Lingkungan (`.env.local`)
-File `.env.local` sudah dikonfigurasikan dengan **Demo Mode** aktif:
+Salin file `.env.example` ke `.env.local`:
+```bash
+cp .env.example .env.local
+```
+
+Pengaturan lingkungan dasar:
 ```env
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_APP_NAME="ChickyAI"
+NEXT_PUBLIC_APP_NAME="TanyaTernak"
 NEXT_PUBLIC_DEMO_MODE=true
 
-# Supabase (Masukkan kredensial asli saat integrasi cloud)
+# Supabase (Kredensial database & autentikasi)
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
-# Dify RAG
+# Integrasi Dify RAG
 DIFY_BASE_URL=https://api.dify.ai/v1
 DIFY_CHAT_API_KEY=your-dify-chat-key
 DIFY_KNOWLEDGE_API_KEY=your-dify-knowledge-key
@@ -67,9 +87,9 @@ DIFY_MOCK_MODE=true
 ```bash
 npm run dev
 ```
-Buka browser di [http://localhost:3000](http://localhost:3000).
+Buka peramban di [http://localhost:3000](http://localhost:3000).
 
-### 4. Menguji Lint & Build Produksi
+### 4. Validasi Lint & Build
 ```bash
 npm run lint
 npm run build
@@ -77,31 +97,28 @@ npm run build
 
 ---
 
-## 🔑 Akun Demo (Development Mode)
+## Akun Demo Pengujian
 
-| Tipe Akun | Email | Kata Sandi | Halaman Akses |
+Saat mode demo aktif (`NEXT_PUBLIC_DEMO_MODE=true`), akun berikut dapat digunakan untuk pengujian:
+
+| Peran | Email | Kata Sandi | Tujuan Halaman |
 |---|---|---|---|
-| **User (Peternak)** | `user@demo.local` | `demo1234` | `/login` → diarahkan ke `/dashboard` |
-| **Admin** | `admin@demo.local` | `admin1234` | `/admin/login` → diarahkan ke `/admin` |
+| **Peternak (User)** | `user@demo.local` | `demo1234` | `/login` → `/dashboard` |
+| **Administrator** | `admin@demo.local` | `admin1234` | `/admin/login` → `/admin` |
 
-*Catatan: Tombol "Isi Otomatis" tersedia pada halaman login untuk memudahkan pengujian.*
-
----
-
-## 🗄️ Database Supabase & Migrasi
-
-Skema migrasi database SQL tersedia lengkap di:
-- `supabase/migrations/20260930_initial_schema.sql` (Tabel `profiles`, `conversations`, `messages`, `documents`, Trigger `handle_new_user`, dan RLS Policies).
-- `supabase/seed.sql` (Data awal jurnal penelitian unggas).
-- `supabase/README.md` (Panduan konfigurasi Supabase).
+*Tersedia tombol pengisian otomatis pada formulir login untuk mempermudah demonstrasi.*
 
 ---
 
-## 🤖 Abstraksi Dify RAG (Fase Lanjutan)
+## Basis Data & Migrasi
 
-Modul Dify telah diisolasi pada lapisan server-side:
-- `src/lib/dify/client.ts` — Client HTTP dengan perlindungan token rahasia
-- `src/lib/dify/chat.ts` — `sendChatMessage()` dengan *fallback* jawaban cerdas peternakan ayam saat mock mode aktif
-- `src/lib/dify/knowledge.ts` — Stub `uploadKnowledgeDocument()`, `deleteKnowledgeDocument()`, `getDocumentStatus()`
-- `src/lib/dify/types.ts` — Definisi tipe respons Dify Cloud
-- `src/app/api/chat/route.ts` — Route handler POST tanpa mengekspos API key ke browser client
+Skema database PostgreSQL tersedia pada direktori `supabase/`:
+- `supabase/migrations/20260930_initial_schema.sql`: Definisi tabel, relasi, indeks, dan aturan Row-Level Security (RLS).
+- `supabase/seed.sql`: Data awal dokumen dan pustaka riset peternakan.
+- `supabase/README.md`: Panduan implementasi pada dashboard Supabase.
+
+---
+
+## Lisensi & Penghargaan
+
+Aplikasi ini dikembangkan di bawah naungan Program HIBAH Fakultas Peternakan Universitas Brawijaya (FAPET UB) untuk kemajuan teknologi dan agribisnis peternakan nasional.

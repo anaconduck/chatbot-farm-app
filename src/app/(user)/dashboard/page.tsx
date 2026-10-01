@@ -59,7 +59,7 @@ export default function UserDashboardPage() {
       <Navbar />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 space-y-10">
-        {/* WELCOME BANNER matching Section P */}
+        {/* WELCOME BANNER */}
         <section className="bg-gradient-to-r from-[#4E2E1E] to-[#361D10] text-white rounded-3xl p-8 sm:p-10 shadow-lg relative overflow-hidden">
           <div className="relative z-10 max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold border border-white/20 text-[#FAF7F2]">
@@ -81,7 +81,7 @@ export default function UserDashboardPage() {
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#DE992B] hover:bg-[#C8851E] text-white font-bold text-sm shadow-md transition-all active:scale-95"
               >
                 <Bot className="w-5 h-5" />
-                <span>Tanya ChickyAI</span>
+                <span>Tanya ChickAI</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
@@ -99,7 +99,7 @@ export default function UserDashboardPage() {
           </div>
         </section>
 
-        {/* TOPIK POPULER SECTION matching Section P */}
+        {/* TOPIK POPULER SECTION */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl sm:text-2xl font-bold text-[#361D10]">
@@ -136,7 +136,7 @@ export default function UserDashboardPage() {
           </div>
         </section>
 
-        {/* PERCAKAPAN TERAKHIR SECTION matching Section P */}
+        {/* PERCAKAPAN TERAKHIR SECTION */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl sm:text-2xl font-bold text-[#361D10]">

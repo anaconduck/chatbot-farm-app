@@ -241,7 +241,7 @@ export default function AdminDocumentsPage() {
         </div>
       </main>
 
-      {/* Upload PDF Modal per Section T */}
+      {/* Upload PDF Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in">
           <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 border border-[#E8DCCF] shadow-2xl">

@@ -125,7 +125,7 @@ export default function AdminUsersPage() {
           </span>
         </div>
 
-        {/* Table per Section U */}
+        {/* Users Table */}
         <div className="bg-white rounded-3xl border border-[#E8DCCF] overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">

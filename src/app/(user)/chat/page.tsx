@@ -297,7 +297,7 @@ function ChatInner() {
                   <div className="w-9 h-9 rounded-2xl bg-[#FAF7F2] border border-[#DE992B]/40 p-1 flex items-center justify-center shrink-0 shadow-xs">
                     <Image
                       src="/images/chatbot/cowboy-robot.png"
-                      alt="ChickyAI Avatar"
+                      alt="ChickAI Avatar"
                       width={28}
                       height={28}
                       className="object-contain animate-bounce"
@@ -305,7 +305,7 @@ function ChatInner() {
                   </div>
                   <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-3xl rounded-bl-sm p-4 text-xs text-[#6A5A50] flex items-center gap-2.5">
                     <Loader2 className="w-4 h-4 animate-spin text-[#DE992B]" />
-                    <span>ChickyAI sedang membaca indeks dokumen riset peternakan...</span>
+                    <span>ChickAI sedang membaca indeks dokumen riset peternakan...</span>
                   </div>
                 </div>
               )}

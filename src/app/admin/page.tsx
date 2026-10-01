@@ -80,7 +80,7 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
-      {/* Top Bar matching Admin.png */}
+      {/* Top Bar */}
       <header className="sticky top-0 z-30 w-full bg-white border-b border-[#E8DCCF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <Logo />
@@ -104,7 +104,7 @@ export default function AdminDashboardPage() {
       {/* Admin Sub-Navbar / Navigation Tabs */}
       <div className="bg-[#FAF7F2] border-b border-[#E8DCCF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
-          {/* Header Title with Badge matching Admin.png */}
+          {/* Header Title with Badge */}
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-[#4A2D1B] text-white flex items-center justify-center">
               <ShieldCheck className="w-5 h-5 text-[#DE992B]" />
@@ -121,7 +121,7 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
-          {/* Quick Actions matching Admin.png */}
+          {/* Quick Actions */}
           <div className="flex items-center gap-2 text-xs">
             <button className="px-3 py-2 rounded-xl bg-white border border-[#E2D5C7] text-[#5A483E] hover:border-[#4A2D1B] flex items-center gap-1.5 font-medium transition-colors">
               <Calendar className="w-3.5 h-3.5 text-[#DE992B]" />
@@ -168,7 +168,7 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* STATISTIK PLATFORM & RISET SECTION matching Admin.png */}
+        {/* STATISTIK PLATFORM & RISET SECTION */}
         <section className="space-y-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold text-[#361D10]">
@@ -240,7 +240,7 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
-          {/* BAR CHART SECTION matching Admin.png */}
+          {/* BAR CHART SECTION */}
           <div className="bg-white rounded-3xl p-6 border border-[#E8DCCF] shadow-xs space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
@@ -265,7 +265,7 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Interactive Bars matching Admin.png */}
+            {/* Interactive Bars */}
             <div className="pt-6 pb-2 px-2 flex items-end justify-between gap-4 h-56 border-b border-[#F1E8DF]">
               {MOCK_ADMIN_STATS.monthlyTrends.map((trend, idx) => (
                 <div key={idx} className="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
@@ -305,7 +305,7 @@ export default function AdminDashboardPage() {
           </div>
         </section>
 
-        {/* UNGGAH DOKUMEN PDF RISET & LAPORAN matching Admin.png */}
+        {/* UNGGAH DOKUMEN PDF RISET & LAPORAN */}
         <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8DCCF] shadow-xs space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#F1E8DF] pb-4">
             <div className="flex items-center gap-3">
@@ -328,7 +328,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <form onSubmit={handleUploadSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left Upload Dropzone matching Admin.png */}
+            {/* Left Upload Dropzone */}
             <div className="lg:col-span-5 border-2 border-dashed border-[#DFD3C5] hover:border-[#DE992B] rounded-2xl p-6 flex flex-col items-center justify-center text-center space-y-3 bg-[#FAF7F2]/40 transition-colors cursor-pointer min-h-[260px]">
               <div className="w-14 h-14 rounded-2xl bg-white border border-[#E2D5C7] flex items-center justify-center text-[#DE992B] shadow-xs">
                 <FileText className="w-7 h-7" />
@@ -358,7 +358,7 @@ export default function AdminDashboardPage() {
               )}
             </div>
 
-            {/* Right Form Fields matching Admin.png */}
+            {/* Right Form Fields */}
             <div className="lg:col-span-7 space-y-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-[#361D10]">
@@ -421,7 +421,7 @@ export default function AdminDashboardPage() {
                 />
               </div>
 
-              {/* Golden Submit Button matching Admin.png */}
+              {/* Submit Button */}
               <div className="flex justify-end pt-2">
                 <button
                   type="submit"
@@ -435,7 +435,7 @@ export default function AdminDashboardPage() {
           </form>
         </section>
 
-        {/* DAFTAR DOKUMEN PDF TERUNGGAH TABLE matching Admin.png */}
+        {/* DAFTAR DOKUMEN PDF TERUNGGAH TABLE */}
         <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8DCCF] shadow-xs space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
@@ -544,7 +544,7 @@ export default function AdminDashboardPage() {
             </table>
           </div>
 
-          {/* Pagination matching Admin.png */}
+          {/* Pagination */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-[#F1E8DF] text-xs text-[#7A6A60]">
             <div>
               Menampilkan 1 - {filteredDocs.length} dari total 42 dokumen publikasi riset

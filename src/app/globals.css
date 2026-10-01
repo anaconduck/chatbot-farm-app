@@ -26,7 +26,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom utility classes matching the design */
 .bg-cream {
   background-color: #FAF7F2;
 }
@@ -35,22 +34,27 @@ body {
   background-color: #FDFBF8;
 }
 
+.bg-brand-brown,
 .bg-chicky-brown {
   background-color: #54321D;
 }
 
+.bg-brand-gold,
 .bg-chicky-gold {
   background-color: #F3AC3C;
 }
 
+.text-brand-brown,
 .text-chicky-brown {
   color: #54321D;
 }
 
+.text-brand-gold,
 .text-chicky-gold {
   color: #C98218;
 }
 
+.border-brand-border,
 .border-chicky-border {
   border-color: #E8DCCF;
 }

@@ -13,7 +13,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const roleCookie = request.cookies.get("chickyai_role")?.value;
+  const roleCookie =
+    request.cookies.get("tanyaternak_role")?.value ||
+    request.cookies.get("chickyai_role")?.value;
 
   // 1. ADMIN ROUTES PROTECTION (/admin/* except /admin/login)
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {

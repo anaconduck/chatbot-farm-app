@@ -36,9 +36,7 @@ export const Navbar: React.FC = () => {
             <Logo />
           </div>
 
-          {/* Desktop Navigation Links: 3 Menu Centered (Beranda, Riset & Edukasi, About) */}
           <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2 z-0">
-            {/* 1. Beranda */}
             <Link
               href="/"
               className={`text-sm font-semibold transition-colors pb-1 relative ${
@@ -50,7 +48,6 @@ export const Navbar: React.FC = () => {
               Beranda
             </Link>
 
-            {/* 2. Riset & Edukasi */}
             <Link
               href="/riset"
               className={`text-sm font-semibold transition-colors pb-1 relative ${
@@ -62,7 +59,6 @@ export const Navbar: React.FC = () => {
               Riset & Edukasi
             </Link>
 
-            {/* 3. Tentang */}
             <Link
               href="/about"
               className={`text-sm font-semibold transition-colors pb-1 relative ${

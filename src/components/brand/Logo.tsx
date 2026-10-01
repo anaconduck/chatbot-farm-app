@@ -27,7 +27,6 @@ export const Logo: React.FC<LogoProps> = ({
 
   const content = (
     <div className={`flex items-center gap-2.5 select-none ${className}`}>
-      {/* Official TanyaTernak Logo */}
       <div className={`relative ${iconDimensions.box} flex items-center justify-center shrink-0`}>
         <Image
           src="/images/logo/logo1.png?v=3"

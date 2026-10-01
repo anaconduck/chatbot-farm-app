@@ -5,7 +5,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="w-full bg-[#EFEAE2] border-t border-[#E3D9CC] py-10 text-sm text-[#736357]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center space-y-3">
-        {/* Logo Universitas Brawijaya - Centered alone, nothing beside it */}
+        {/* Logo Universitas Brawijaya */}
         <div className="w-14 h-14 relative flex items-center justify-center">
           <Image
             src="/images/logo/universitas-brawijaya.svg"

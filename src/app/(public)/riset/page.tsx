@@ -65,7 +65,7 @@ export default function RisetPage() {
 
         {/* SEARCH & DOMAIN FILTER SECTION */}
         <section className="space-y-5">
-          {/* Search Box matching Riset.png */}
+          {/* Search Box */}
           <div className="flex flex-col sm:flex-row items-stretch gap-3">
             <div className="relative flex-1">
               <Search className="w-5 h-5 text-[#8A7A70] absolute left-4 top-1/2 -translate-y-1/2" />
@@ -121,7 +121,7 @@ export default function RisetPage() {
           </div>
         )}
 
-        {/* TAHUKAH ANDA? FAKTA UNIK SECTION matching Riset.png */}
+        {/* TAHUKAH ANDA? FAKTA UNIK SECTION */}
         <section className="space-y-6 pt-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
             <div>
@@ -173,7 +173,7 @@ export default function RisetPage() {
           </div>
         </section>
 
-        {/* RESEARCH LIBRARY SECTION matching Riset.png */}
+        {/* RESEARCH LIBRARY SECTION */}
         <section className="space-y-6 pt-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -206,7 +206,7 @@ export default function RisetPage() {
                     </span>
 
                     <span className="text-[11px] text-[#8C7B71]">
-                      Doi: 10.1016/j.chickyai.{doc.publication_year || "2025"}.0{doc.id.charCodeAt(0) % 9}
+                      Doi: 10.1016/j.tanyaternak.{doc.publication_year || "2025"}.0{doc.id.charCodeAt(0) % 9}
                     </span>
                   </div>
 
@@ -219,13 +219,13 @@ export default function RisetPage() {
                   </p>
 
                   <div className="flex flex-wrap items-center gap-4 text-xs text-[#7A6A60] pt-1">
-                    <span>✍️ {doc.author || "Peneliti ChickyAI"}</span>
+                    <span>✍️ {doc.author || "Peneliti TanyaTernak"}</span>
                     <span>📅 Tahun {doc.publication_year || 2025}</span>
                     <span>📥 {doc.download_count?.toLocaleString("id-ID") || 0} Unduhan</span>
                   </div>
                 </div>
 
-                {/* Right Action Buttons matching Riset.png */}
+                {/* Action Buttons */}
                 <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-3 shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-[#F1E7DD]">
                   <span className="text-[11px] font-semibold text-[#8C7A70] flex items-center gap-1">
                     <FileText className="w-3.5 h-3.5 text-[#DE992B]" />

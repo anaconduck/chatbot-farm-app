@@ -43,3 +43,7 @@ design_web/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ai agent files
+AGENTS.md
+CLAUDE.md

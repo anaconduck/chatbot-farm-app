@@ -37,7 +37,6 @@ export default function HomePage() {
                 Didukung repositori jurnal ilmiah dan panduan veteriner terverifikasi.
               </p>
 
-              {/* Main CTAs per brief Section O */}
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link
                   href="/chat"
@@ -57,7 +56,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Hero Visual: Reverted to 5 cols and shifted higher up per user instruction */}
             <div className="lg:col-span-5 relative -mt-6 sm:-mt-10 lg:-mt-14">
               <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group">
                 <Image
@@ -88,7 +86,6 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Feature 1 */}
               <div className="bg-[#FAF7F2] rounded-2xl p-7 border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-[#FFF3D6] text-[#DE992B] border border-[#F3DB9A] flex items-center justify-center">
                   <Layers className="w-6 h-6" />
@@ -101,7 +98,6 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Feature 2 */}
               <div className="bg-[#FAF7F2] rounded-2xl p-7 border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-[#EAF5EA] text-[#2E7D32] border border-[#C8E6C9] flex items-center justify-center">
                   <ShieldCheck className="w-6 h-6" />
@@ -114,7 +110,6 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Feature 3 */}
               <div className="bg-[#FAF7F2] rounded-2xl p-7 border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-[#F0EAE1] text-[#4A2D1B] border border-[#D5C7B7] flex items-center justify-center">
                   <Cpu className="w-6 h-6" />

@@ -1,5 +1,5 @@
 -- ====================================================================
--- ChickyAI - Database Seed File
+-- TanyaTernak - Database Seed File
 -- Run this in the Supabase SQL Editor or via Supabase CLI
 -- ====================================================================
 

@@ -1,4 +1,4 @@
-# ChickyAI - Supabase Database & Auth Setup Guide
+# TanyaTernak - Supabase Database & Auth Setup Guide
 
 ## 1. Quick Start with Supabase Dashboard
 

@@ -53,7 +53,10 @@ function LoginInner() {
     // Check if role is admin or user
     const roleCookie = document.cookie
       .split("; ")
-      .find((row) => row.startsWith("chickyai_role="))
+      .find(
+        (row) =>
+          row.startsWith("tanyaternak_role=") || row.startsWith("chickyai_role=")
+      )
       ?.split("=")[1];
 
     if (roleCookie === "ADMIN") {
@@ -71,7 +74,7 @@ function LoginInner() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
-      {/* Top Simple Brand Bar matching Login.png */}
+      {/* Header */}
       <header className="w-full px-6 py-4 flex items-center justify-between border-b border-[#EADBCE]/50">
         <Logo />
         <Link
@@ -82,10 +85,10 @@ function LoginInner() {
         </Link>
       </header>
 
-      {/* Main Split Container matching Login.png */}
+      {/* Main Container */}
       <main className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <div className="w-full max-w-5xl bg-white rounded-3xl border border-[#E8DCCF] shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[580px]">
-          {/* Left Panel: Dark Brown with Poultry Image matching Login.png */}
+          {/* Left Panel */}
           <div className="lg:col-span-6 bg-[#4A2D1B] p-8 sm:p-10 flex flex-col justify-between text-white relative overflow-hidden">
             <div className="space-y-4 relative z-10">
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#FAF7F2]">
@@ -96,7 +99,7 @@ function LoginInner() {
               </p>
             </div>
 
-            {/* Farm Photo with rounded corners matching Login.png */}
+            {/* Farm Photo */}
             <div className="my-6 relative aspect-16/11 rounded-2xl overflow-hidden border-2 border-white/20 shadow-lg">
               <Image
                 src="/images/farm/modern-poultry-farm.jpg"
@@ -113,7 +116,7 @@ function LoginInner() {
             </div>
           </div>
 
-          {/* Right Panel: Login Form matching Login.png */}
+          {/* Right Panel */}
           <div className="lg:col-span-6 bg-[#FAF7F2]/40 p-8 sm:p-12 flex flex-col justify-center space-y-6">
             <div className="space-y-2">
               <h1 className="text-2xl sm:text-3xl font-black text-[#361D10]">
@@ -217,7 +220,7 @@ function LoginInner() {
                 </label>
               </div>
 
-              {/* Submit Button matching Login.png */}
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isLoading}

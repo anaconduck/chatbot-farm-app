@@ -54,7 +54,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Check saved session in local storage or Supabase
     const initAuth = async () => {
       try {
-        const storedDemo = typeof window !== "undefined" ? localStorage.getItem("chickyai_demo_user") : null;
+        const storedDemo =
+          typeof window !== "undefined"
+            ? localStorage.getItem("tanyaternak_demo_user") ||
+              localStorage.getItem("chickyai_demo_user")
+            : null;
         if (storedDemo) {
           try {
             const parsed = JSON.parse(storedDemo);
@@ -62,6 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setIsLoading(false);
             return;
           } catch {
+            localStorage.removeItem("tanyaternak_demo_user");
             localStorage.removeItem("chickyai_demo_user");
           }
         }
@@ -112,9 +117,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       setUser(demoProfile);
-      localStorage.setItem("chickyai_demo_user", JSON.stringify(demoProfile));
-      // Set cookie for Next.js routing if needed
-      document.cookie = `chickyai_role=${demoProfile.role}; path=/; max-age=86400; SameSite=Lax`;
+      localStorage.setItem("tanyaternak_demo_user", JSON.stringify(demoProfile));
+      document.cookie = `tanyaternak_role=${demoProfile.role}; path=/; max-age=86400; SameSite=Lax`;
 
       setIsLoading(false);
       return { success: true };
@@ -154,7 +158,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         setUser(profile as Profile);
-        document.cookie = `chickyai_role=${profile.role}; path=/; max-age=86400; SameSite=Lax`;
+        document.cookie = `tanyaternak_role=${profile.role}; path=/; max-age=86400; SameSite=Lax`;
         setIsLoading(false);
         return { success: true };
       }
@@ -181,8 +185,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         };
 
         setUser(syntheticProfile);
-        localStorage.setItem("chickyai_demo_user", JSON.stringify(syntheticProfile));
-        document.cookie = `chickyai_role=${fallbackRole}; path=/; max-age=86400; SameSite=Lax`;
+        localStorage.setItem("tanyaternak_demo_user", JSON.stringify(syntheticProfile));
+        document.cookie = `tanyaternak_role=${fallbackRole}; path=/; max-age=86400; SameSite=Lax`;
         setIsLoading(false);
         return { success: true };
       }
@@ -234,8 +238,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         updated_at: new Date().toISOString(),
       };
       setUser(newProfile);
-      localStorage.setItem("chickyai_demo_user", JSON.stringify(newProfile));
-      document.cookie = `chickyai_role=USER; path=/; max-age=86400; SameSite=Lax`;
+      localStorage.setItem("tanyaternak_demo_user", JSON.stringify(newProfile));
+      document.cookie = `tanyaternak_role=USER; path=/; max-age=86400; SameSite=Lax`;
     }
 
     setIsLoading(false);
@@ -249,7 +253,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Ignored
     }
     setUser(null);
+    localStorage.removeItem("tanyaternak_demo_user");
     localStorage.removeItem("chickyai_demo_user");
+    document.cookie = "tanyaternak_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "chickyai_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     router.push("/login");
   };

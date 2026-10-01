@@ -71,7 +71,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
-      {/* Top Header matching Daftar Akun.png */}
+      {/* Header */}
       <header className="w-full px-6 py-4 flex items-center justify-between border-b border-[#EADBCE]/50">
         <div className="flex items-center gap-4">
           <Logo />
@@ -85,7 +85,7 @@ export default function RegisterPage() {
         </Link>
       </header>
 
-      {/* Centered Register Card matching Daftar Akun.png */}
+      {/* Register Form Card */}
       <main className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <div className="w-full max-w-2xl bg-white rounded-3xl border border-[#E8DCCF] shadow-lg p-7 sm:p-10 space-y-6">
           <div className="space-y-1">
@@ -220,7 +220,7 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* Golden Submit Button matching Daftar Akun.png */}
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={isLoading}

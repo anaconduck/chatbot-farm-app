@@ -1,5 +1,5 @@
 -- ====================================================================
--- ChickyAI - Database Schema Migration
+-- TanyaTernak - Database Schema Migration
 -- Migration: 20260930_initial_schema.sql
 -- ====================================================================
 
