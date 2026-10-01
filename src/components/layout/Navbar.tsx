@@ -75,13 +75,6 @@ export const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-4 z-10">
             {user ? (
               <div className="flex items-center gap-3">
-                <Link
-                  href="/dashboard"
-                  className="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#4A2D1B] hover:bg-[#EADBCE]/50 transition-colors flex items-center gap-1.5 border border-[#EADBCE]"
-                >
-                  <LayoutDashboard className="w-3.5 h-3.5 text-[#DE992B]" />
-                  Dashboard
-                </Link>
                 {role === "ADMIN" && (
                   <Link
                     href="/admin"
@@ -91,12 +84,18 @@ export const Navbar: React.FC = () => {
                     Admin
                   </Link>
                 )}
-                <div className="text-right">
-                  <p className="text-xs font-bold text-[#4A2D1B]">{user.full_name}</p>
+                <Link
+                  href="/dashboard"
+                  className="text-right group hover:opacity-85 transition-opacity"
+                  title="Buka Dashboard"
+                >
+                  <p className="text-xs font-bold text-[#4A2D1B] group-hover:text-[#DE992B] transition-colors">
+                    {user.full_name}
+                  </p>
                   <span className="text-[10px] px-1.5 py-0.5 rounded font-semibold bg-[#EADBCE] text-[#5A3825]">
                     {user.role}
                   </span>
-                </div>
+                </Link>
                 <button
                   onClick={() => logout()}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#4A2D1B] hover:bg-[#382112] text-white text-xs font-medium transition-all shadow-sm active:scale-95"
@@ -201,9 +200,13 @@ export const Navbar: React.FC = () => {
           <div className="pt-3 border-t border-[#EADBCE]">
             {user ? (
               <div className="space-y-3">
-                <div className="text-xs text-[#7A6B62]">
-                  Login sebagai: <span className="font-bold text-[#4A2D1B]">{user.full_name}</span> ({user.role})
-                </div>
+                <Link
+                  href="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-xs text-[#7A6B62] hover:text-[#4A2D1B]"
+                >
+                  Login sebagai: <span className="font-bold text-[#4A2D1B] underline decoration-[#DE992B]/50">{user.full_name}</span> ({user.role})
+                </Link>
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);

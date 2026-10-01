@@ -2,36 +2,18 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { useAuth } from "@/lib/auth/context";
 import {
-  Bot,
   MessageSquare,
   ArrowRight,
   Sparkles,
-  Layers,
-  Thermometer,
-  ShieldCheck,
-  Egg,
-  HeartPulse,
   Calendar,
 } from "lucide-react";
 
 export default function UserDashboardPage() {
   const { user } = useAuth();
-
-  const topics = [
-    { name: "Nutrisi", icon: Layers, query: "Formulasi nutrisi dan rasio protein ayam layer" },
-    { name: "Penyakit", icon: HeartPulse, query: "Pencegahan dan pengobatan penyakit Coryza dan ND" },
-    { name: "Biosecurity", icon: ShieldCheck, query: "Penerapan standar biosekuriti 3 zona kandang" },
-    { name: "Broiler", icon: Bot, query: "Panduan manajemen pemeliharaan ayam pedaging broiler" },
-    { name: "Layer", icon: Egg, query: "Siklus puncak produksi telur ayam ras petelur layer" },
-    { name: "Produksi Telur", icon: Sparkles, query: "Faktor penyebab penurunan produksi telur harian" },
-    { name: "Manajemen Kandang", icon: Thermometer, query: "Pengaturan kecepatan angin dan cooling pad kandang closed house" },
-    { name: "Kesehatan Ayam", icon: HeartPulse, query: "Jadwal vaksinasi wajib unggas petelur komersial" },
-  ];
 
   const recentConversations = [
     {
@@ -61,7 +43,7 @@ export default function UserDashboardPage() {
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 space-y-10">
         {/* WELCOME BANNER */}
         <section className="bg-gradient-to-r from-[#4E2E1E] to-[#361D10] text-white rounded-3xl p-8 sm:p-10 shadow-lg relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl space-y-4">
+          <div className="relative z-10 max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold border border-white/20 text-[#FAF7F2]">
               <Sparkles className="w-3.5 h-3.5 text-[#DE992B]" />
               Portal Peternak Terverifikasi
@@ -74,65 +56,6 @@ export default function UserDashboardPage() {
             <p className="text-sm sm:text-base text-[#D8C7B8] leading-relaxed">
               Apa yang ingin Anda ketahui tentang peternakan ayam hari ini? Tanyakan segala hal mulai dari pakan hingga mitigasi mikroklimat kandang.
             </p>
-
-            <div className="pt-2">
-              <Link
-                href="/chat"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#DE992B] hover:bg-[#C8851E] text-white font-bold text-sm shadow-md transition-all active:scale-95"
-              >
-                <Bot className="w-5 h-5" />
-                <span>Tanya ChickAI</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Decorative Mascot in Corner */}
-          <div className="hidden lg:block absolute right-8 bottom-0 w-52 h-52 pointer-events-none opacity-90">
-            <Image
-              src="/images/chatbot/cowboy-robot.png"
-              alt="Mascot"
-              width={200}
-              height={200}
-              className="object-contain drop-shadow-xl"
-            />
-          </div>
-        </section>
-
-        {/* TOPIK POPULER SECTION */}
-        <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl sm:text-2xl font-bold text-[#361D10]">
-              Topik Populer
-            </h2>
-            <span className="text-xs text-[#7A6A60]">
-              Pilih topik untuk memulai pertanyaan cepat
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {topics.map((t, idx) => {
-              const Icon = t.icon;
-              return (
-                <Link
-                  key={idx}
-                  href={`/chat?prompt=${encodeURIComponent(t.query)}`}
-                  className="bg-white rounded-2xl p-5 border border-[#E8DCCF] shadow-xs hover:shadow-md hover:border-[#DE992B] transition-all flex flex-col justify-between space-y-3 group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#FAF4EB] text-[#DE992B] group-hover:bg-[#DE992B] group-hover:text-white transition-colors flex items-center justify-center">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-sm text-[#361D10] group-hover:text-[#4A2D1B]">
-                      {t.name}
-                    </h3>
-                    <p className="text-[11px] text-[#8C7B71] mt-0.5 line-clamp-1">
-                      {t.query}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
           </div>
         </section>
 
