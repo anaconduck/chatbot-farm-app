@@ -15,9 +15,9 @@ export const metadata: Metadata = {
   description:
     "Platform chatbot berbasis RAG dan repositori riset agribisnis peternakan unggas Indonesia. Didukung Program HIBAH Fakultas Peternakan Universitas Brawijaya.",
   icons: {
-    icon: "/images/logo/logo1.png",
-    shortcut: "/images/logo/logo1.png",
-    apple: "/images/logo/logo1.png",
+    icon: "/images/logo/logo1.png?v=3",
+    shortcut: "/images/logo/logo1.png?v=3",
+    apple: "/images/logo/logo1.png?v=3",
   },
   keywords: [
     "TanyaTernak",

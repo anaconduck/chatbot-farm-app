@@ -14,9 +14,9 @@ export const Logo: React.FC<LogoProps> = ({
   href = "/",
 }) => {
   const iconDimensions = {
-    sm: { box: "w-7 h-7", img: 28 },
-    md: { box: "w-9 h-9", img: 36 },
-    lg: { box: "w-12 h-12", img: 48 },
+    sm: { box: "w-8 h-8", img: 32 },
+    md: { box: "w-10 h-10", img: 40 },
+    lg: { box: "w-14 h-14", img: 56 },
   }[size];
 
   const textDimensions = {
@@ -30,12 +30,13 @@ export const Logo: React.FC<LogoProps> = ({
       {/* Official TanyaTernak Logo */}
       <div className={`relative ${iconDimensions.box} flex items-center justify-center shrink-0`}>
         <Image
-          src="/images/logo/logo1.png"
+          src="/images/logo/logo1.png?v=3"
           alt="TanyaTernak Logo"
           width={iconDimensions.img}
           height={iconDimensions.img}
           className="object-contain"
           priority
+          unoptimized
         />
       </div>
 

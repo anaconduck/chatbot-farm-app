@@ -22,12 +22,23 @@ export const FloatingChatbot: React.FC = () => {
   ]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const prevMessagesLength = useRef(messages.length);
 
+  // When drawer opens, always scroll to top so user reads from the beginning
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = 0;
+    }
+  }, [isOpen]);
+
+  // When new messages are sent or received, scroll smoothly to bottom
+  useEffect(() => {
+    if (messages.length > prevMessagesLength.current) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages, isOpen]);
+    prevMessagesLength.current = messages.length;
+  }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -102,7 +113,6 @@ export const FloatingChatbot: React.FC = () => {
                   height={32}
                   className="object-contain"
                 />
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#4E2E1E]" />
               </div>
               <div>
                 <h4 className="font-bold text-sm leading-tight text-[#FAF7F2]">
@@ -135,7 +145,10 @@ export const FloatingChatbot: React.FC = () => {
           </div>
 
           {/* Messages Body */}
-          <div className="flex-1 p-3.5 overflow-y-auto space-y-3.5 bg-[#FAF7F2]/60 text-xs sm:text-sm">
+          <div
+            ref={messagesContainerRef}
+            className="flex-1 p-3.5 overflow-y-auto space-y-3.5 bg-[#FAF7F2]/60 text-xs sm:text-sm"
+          >
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -264,8 +277,6 @@ export const FloatingChatbot: React.FC = () => {
             height={38}
             className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
           />
-          {/* Notification status dot */}
-          <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#54321D]" />
         </div>
       </button>
     </div>
