@@ -14,7 +14,6 @@ import {
   ArrowRight,
   AlertCircle,
   Loader2,
-  Sparkles,
 } from "lucide-react";
 
 function LoginInner() {
@@ -22,7 +21,7 @@ function LoginInner() {
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("redirect") || "/dashboard";
 
-  const { login, isDemo } = useAuth();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -64,12 +63,6 @@ function LoginInner() {
     } else {
       router.push(redirectUrl);
     }
-  };
-
-  const handleFillDemoUser = () => {
-    setEmail("user@demo.local");
-    setPassword("demo1234");
-    setErrorMessage(null);
   };
 
   return (
@@ -126,28 +119,6 @@ function LoginInner() {
                 Akses portal operasional agribisnis, riset pakan, dan analitik produksi.
               </p>
             </div>
-
-            {/* Demo Helper Banner */}
-            {isDemo && (
-              <div className="bg-[#FFF4E0] border border-[#F3DB9A] rounded-xl p-3 flex items-center justify-between gap-2 text-xs text-[#8A560D]">
-                <div>
-                  <span className="font-bold flex items-center gap-1">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    Demo Mode Aktif:
-                  </span>
-                  <p className="text-[11px] text-[#A66F17]">
-                    Gunakan <strong>user@demo.local</strong> untuk akses peternak.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleFillDemoUser}
-                  className="px-2.5 py-1 rounded bg-[#DE992B] hover:bg-[#C8851E] text-white font-semibold text-[11px] shrink-0 transition-all shadow-xs"
-                >
-                  Isi Otomatis
-                </button>
-              </div>
-            )}
 
             {errorMessage && (
               <div className="bg-[#FDE8E8] border border-[#F8B4B4] text-[#9B1C1C] px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-2">

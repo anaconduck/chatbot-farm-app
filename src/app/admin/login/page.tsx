@@ -14,12 +14,11 @@ import {
   EyeOff,
   ArrowRight,
   Loader2,
-  Sparkles,
 } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const { login, isDemo } = useAuth();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,12 +50,6 @@ export default function AdminLoginPage() {
     router.push("/admin");
   };
 
-  const handleFillDemoAdmin = () => {
-    setEmail("admin@demo.local");
-    setPassword("admin1234");
-    setErrorMessage(null);
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F2EC]">
       <header className="w-full px-6 py-4 flex items-center justify-between border-b border-[#E3D7C9]">
@@ -82,26 +75,6 @@ export default function AdminLoginPage() {
               Manajemen dokumen riset ilmiah, basis pengetahuan, dan akun pengguna TanyaTernak.
             </p>
           </div>
-
-          {/* Demo Admin Helper */}
-          {isDemo && (
-            <div className="bg-[#FFF4E0] border border-[#F3DB9A] rounded-xl p-3 flex items-center justify-between gap-2 text-xs text-[#8A560D]">
-              <div>
-                <span className="font-bold flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Akun Demo Admin:
-                </span>
-                <p className="text-[11px] text-[#A66F17]">admin@demo.local</p>
-              </div>
-              <button
-                type="button"
-                onClick={handleFillDemoAdmin}
-                className="px-2.5 py-1 rounded bg-[#4E2E1E] hover:bg-[#361D10] text-white font-semibold text-[11px] shrink-0 transition-all shadow-xs"
-              >
-                Isi Otomatis
-              </button>
-            </div>
-          )}
 
           {errorMessage && (
             <div className="bg-[#FDE8E8] border border-[#F8B4B4] text-[#9B1C1C] px-3.5 py-3 rounded-xl text-xs flex items-start gap-2.5">
