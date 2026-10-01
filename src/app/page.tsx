@@ -20,8 +20,8 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden py-14 sm:py-20 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <section className="relative overflow-hidden pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Copy */}
             <div className="lg:col-span-7 space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#361D10] leading-[1.15] tracking-tight">
@@ -83,26 +83,6 @@ export default function HomePage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-                {/* Floating Preview Card */}
-                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-lg space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-bold text-[#4A2D1B]">
-                    <div className="w-6 h-6 rounded-lg bg-[#FAF7F2] p-0.5 border border-[#DE992B]/40 flex items-center justify-center">
-                      <Image
-                        src="/images/chatbot/cowboy-robot.png"
-                        alt="Chicky"
-                        width={20}
-                        height={20}
-                        className="object-contain"
-                      />
-                    </div>
-                    <span>ChickyAI Rekomendasi Pakan:</span>
-                  </div>
-                  <p className="text-xs text-[#5D4E44] italic">
-                    &ldquo;Rasio kalsium 3.8% pada umur 32 minggu memaksimalkan ketebalan kerabang telur tanpa mengganggu absorpsi fosfor.&rdquo;
-                  </p>
-                </div>
               </div>
             </div>
           </div>

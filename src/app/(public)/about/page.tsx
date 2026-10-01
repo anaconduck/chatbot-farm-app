@@ -22,7 +22,7 @@ export default function AboutPage() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="pt-6 sm:pt-8 lg:pt-10 pb-10 sm:pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
@@ -63,10 +63,6 @@ export default function AboutPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-xl border border-white/40 text-xs text-[#4A2D1B] font-medium">
-                  🌱 Fasilitas Closed-House Unggas Terintegrasi IoT & Riset Pakan
-                </div>
               </div>
             </div>
           </div>

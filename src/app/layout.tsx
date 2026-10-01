@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   title: "ChickyAI — Asisten Cerdas Peternakan Ayam & Arsip Sains",
   description:
     "Platform chatbot berbasis RAG dan pusat riset peternakan unggas modern Indonesia. Jawaban berbasis dokumen ilmiah pakan, penyakit, dan kandang.",
+  icons: {
+    icon: "/images/logo/emblem.png",
+    shortcut: "/images/logo/emblem.png",
+    apple: "/images/logo/emblem.png",
+  },
   keywords: [
     "ChickyAI",
     "Peternakan Ayam",
