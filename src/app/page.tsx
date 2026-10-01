@@ -20,8 +20,8 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden pt-12 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <section className="relative overflow-hidden pt-12 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left Copy */}
             <div className="lg:col-span-7 space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#361D10] leading-[1.15] tracking-tight">
@@ -33,7 +33,7 @@ export default function HomePage() {
 
               <p className="text-base sm:text-lg text-[#6A5A50] leading-relaxed max-w-2xl">
                 Tingkatkan efisiensi pakan, kendalikan mikroklimat kandang closed-house,
-                dan perkuat biosekuriti peternakan ayam Anda bersama ChickyAI.
+                dan perkuat biosekuriti peternakan ayam Anda bersama AgroLivestock AI.
                 Didukung repositori jurnal ilmiah dan panduan veteriner terverifikasi.
               </p>
 
@@ -55,25 +55,9 @@ export default function HomePage() {
                   <span>Pelajari Lebih Lanjut</span>
                 </Link>
               </div>
-
-              {/* Trust Badges */}
-              <div className="pt-6 border-t border-[#EADECE] grid grid-cols-3 gap-4 text-left">
-                <div>
-                  <div className="text-2xl font-black text-[#361D10]">45+</div>
-                  <div className="text-xs text-[#7A6A60] font-medium">Jurnal Ilmiah Unggas</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-black text-[#DE992B]">24/7</div>
-                  <div className="text-xs text-[#7A6A60] font-medium">Asisten Cerdas Aktif</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-black text-[#2E7D32]">100%</div>
-                  <div className="text-xs text-[#7A6A60] font-medium">Rujukan Terverifikasi</div>
-                </div>
-              </div>
             </div>
 
-            {/* Right Hero Visual */}
+            {/* Right Hero Visual: Centered with the text block */}
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group">
                 <Image
@@ -86,6 +70,22 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+
+          {/* Trust Badges - positioned below hero grid */}
+          <div className="pt-6 border-t border-[#EADECE] grid grid-cols-3 gap-6 max-w-2xl text-left">
+            <div>
+              <div className="text-2xl font-black text-[#361D10]">45+</div>
+              <div className="text-xs text-[#7A6A60] font-medium">Jurnal Ilmiah Unggas</div>
+            </div>
+            <div>
+              <div className="text-2xl font-black text-[#DE992B]">24/7</div>
+              <div className="text-xs text-[#7A6A60] font-medium">Asisten Cerdas Aktif</div>
+            </div>
+            <div>
+              <div className="text-2xl font-black text-[#2E7D32]">100%</div>
+              <div className="text-xs text-[#7A6A60] font-medium">Rujukan Terverifikasi</div>
+            </div>
+          </div>
         </section>
 
         {/* FEATURES SECTION */}
@@ -93,7 +93,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF4EB] border border-[#F3E2CB] text-[11px] font-bold text-[#966318] uppercase">
-                FITUR UTAMA CHICKYAI
+                FITUR UTAMA AGROLIVESTOCK AI
               </div>
               <h2 className="text-3xl font-extrabold text-[#361D10]">
                 Solusi Cerdas untuk Setiap Aspek Peternakan Anda
@@ -153,7 +153,7 @@ export default function HomePage() {
               ALUR KERJA
             </div>
             <h2 className="text-3xl font-extrabold text-[#361D10]">
-              Bagaimana ChickyAI Bekerja
+              Bagaimana AgroLivestock AI Bekerja
             </h2>
             <p className="text-sm text-[#6C5D53]">
               Tiga langkah mudah untuk mendapatkan insight ilmiah secara instan
@@ -193,30 +193,28 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CTA SECTION */}
-        <section className="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-[#4E2E1E] via-[#3B1F10] to-[#261208] text-white rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-xl relative overflow-hidden">
-            <div className="relative z-10 max-w-2xl mx-auto space-y-4">
-              <h2 className="text-3xl sm:text-4xl font-black">
-                Mulai Konsultasi Peternakan Ayam Hari Ini
-              </h2>
-              <p className="text-sm sm:text-base text-[#DBCBC0] leading-relaxed">
-                Bergabunglah dengan ribuan peternak dan praktisi unggas modern yang memanfaatkan kecerdasan buatan untuk hasil panen optimal.
-              </p>
-              <div className="pt-2 flex flex-wrap justify-center gap-4">
-                <Link
-                  href="/register"
-                  className="px-8 py-3.5 rounded-xl bg-[#DE992B] hover:bg-[#C8851E] text-white font-bold text-sm shadow-md transition-all active:scale-95"
-                >
-                  Daftar Akun Gratis
-                </Link>
-                <Link
-                  href="/riset"
-                  className="px-8 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
-                >
-                  Buka Repositori Riset
-                </Link>
+        {/* ACKNOWLEDGEMENTS SECTION - HIBAH FAPET UNIVERSITAS BRAWIJAYA */}
+        <section className="pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#E6DAD0] shadow-sm flex flex-col md:flex-row items-center gap-6 sm:gap-8">
+            <div className="shrink-0 p-3 rounded-2xl bg-[#FAF7F2] border border-[#EADBCE] shadow-xs flex items-center justify-center">
+              <Image
+                src="/images/logo/universitas-brawijaya.svg"
+                alt="Logo Universitas Brawijaya"
+                width={76}
+                height={76}
+                className="object-contain"
+              />
+            </div>
+            <div className="space-y-2 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#EBF2FA] text-[#1D4E89] border border-[#C5D8EE] text-[11px] font-bold tracking-wide uppercase">
+                Program Hibah Fapet UB
               </div>
+              <h3 className="text-xl sm:text-2xl font-black text-[#361D10]">
+                Didukung oleh Program HIBAH Fakultas Peternakan Universitas Brawijaya
+              </h3>
+              <p className="text-xs sm:text-sm text-[#6C5D53] leading-relaxed max-w-3xl">
+                Pengembangan platform riset dan konsultasi kecerdasan buatan terapan ini didanai melalui Program HIBAH Fakultas Peternakan Universitas Brawijaya (Fapet UB) dalam upaya hilirisasi keilmuan veteriner dan inovasi teknologi agribisnis peternakan nasional.
+              </p>
             </div>
           </div>
         </section>

@@ -40,7 +40,7 @@ export default function AdminDocumentsPage() {
     const newDoc = {
       id: `doc-${Date.now()}`,
       title: title.endsWith(".pdf") ? title : `${title.replace(/\s+/g, "_")}.pdf`,
-      author: author || user?.full_name || "Admin ChickyAI",
+      author: author || user?.full_name || "Admin AgroLivestock AI",
       publication_year: parseInt(year, 10) || 2025,
       category,
       description,
@@ -136,7 +136,7 @@ export default function AdminDocumentsPage() {
               Arsip & Manajemen Dokumen RAG
             </h1>
             <p className="text-xs text-[#7A6A60]">
-              Kelola status indexing berkas PDF yang digunakan chatbot ChickyAI untuk menjawab peternak.
+              Kelola status indexing berkas PDF yang digunakan chatbot AgroLivestock AI untuk menjawab peternak.
             </p>
           </div>
 

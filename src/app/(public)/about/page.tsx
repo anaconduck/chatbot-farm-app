@@ -31,7 +31,7 @@ export default function AboutPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-[#6A5A50] leading-relaxed max-w-2xl">
-                ChickyAI hadir sebagai jembatan ilmu pengetahuan antara riset akademis,
+                AgroLivestock AI hadir sebagai jembatan ilmu pengetahuan antara riset akademis,
                 keilmuan veteriner, dan operasional peternakan lapangan melalui kecerdasan
                 buatan (AI) yang kredibel dan berbasis literatur ilmiah.
               </p>
@@ -41,7 +41,7 @@ export default function AboutPage() {
                   href="/chat"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#4A2D1B] hover:bg-[#382112] text-white font-semibold text-sm shadow-md transition-all active:scale-95"
                 >
-                  <span>Mulai Konsultasi Chicky</span>
+                  <span>Mulai Konsultasi AI</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link

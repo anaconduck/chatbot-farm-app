@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MOCK_FACTS, MOCK_DOCUMENTS } from "@/lib/mock-data";
@@ -13,7 +12,6 @@ import {
   Download,
   Eye,
   CheckCircle,
-  Bot,
 } from "lucide-react";
 
 export default function RisetPage() {
@@ -255,25 +253,6 @@ export default function RisetPage() {
               </div>
             ))}
           </div>
-        </section>
-
-        {/* BOTTOM PROMPT BANNER */}
-        <section className="bg-gradient-to-r from-[#4E2E1E] to-[#361D10] text-white rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-bold">
-              Butuh Penjelasan Spesifik Seputar Formula & Penyakit?
-            </h3>
-            <p className="text-sm text-[#D9C8BC] max-w-xl">
-              Tanyakan langsung ke asisten cerdas ChickyAI. AI akan membaca ratusan halaman dokumen riset dan merangkum jawaban terbaik untuk Anda.
-            </p>
-          </div>
-          <Link
-            href="/chat"
-            className="px-6 py-3.5 rounded-xl bg-[#DE992B] hover:bg-[#C8851E] text-white text-sm font-bold flex items-center gap-2 shrink-0 shadow-md transition-all active:scale-95"
-          >
-            <Bot className="w-5 h-5" />
-            <span>Tanya Chicky Sekarang</span>
-          </Link>
         </section>
       </main>
 

@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Send, X, Maximize2, Loader2, Sparkles, BookOpen } from "lucide-react";
+import { Send, X, Maximize2, Loader2, BookOpen } from "lucide-react";
 import type { ChatMessage } from "@/types";
 
 export const FloatingChatbot: React.FC = () => {
@@ -16,7 +16,7 @@ export const FloatingChatbot: React.FC = () => {
       conversation_id: "quick-chat",
       role: "assistant",
       content:
-        "Hai 👋 Selamat datang di ChickyAI!\n\nSaya siap membantu menjawab pertanyaan mengenai peternakan ayam berdasarkan buku dan dokumen yang tersedia.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
+        "Hai 👋 Selamat datang di AgroLivestock AI!\n\nSaya siap membantu menjawab pertanyaan mengenai riset dan agribisnis peternakan unggas berdasarkan literatur ilmiah terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
       created_at: new Date().toISOString(),
     },
   ]);
@@ -106,11 +106,11 @@ export const FloatingChatbot: React.FC = () => {
               </div>
               <div>
                 <h4 className="font-bold text-sm leading-tight text-[#FAF7F2]">
-                  ChickyAI Assistant
+                  AgroLivestock AI Assistant
                 </h4>
-                <p className="text-[11px] text-[#D8C7B8] flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-[#DE992B]" />
-                  Dokumen Peternakan Ayam
+                <p className="text-[11px] text-[#D8C7B8] flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Asisten Riset & Agribisnis
                 </p>
               </div>
             </div>
@@ -253,19 +253,19 @@ export const FloatingChatbot: React.FC = () => {
       {/* Collapsed Button: Square/Rounded button in the corner matching user instruction */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative w-14 h-14 rounded-2xl bg-gradient-to-br from-[#965A2E] to-[#54321D] p-1 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#FAF7F2]"
-        aria-label="Buka Chatbot ChickyAI"
+        className="group relative w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-2xl bg-gradient-to-br from-[#965A2E] to-[#54321D] p-1.5 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#FAF7F2]"
+        aria-label="Buka Chatbot AgroLivestock AI"
       >
         <div className="w-full h-full rounded-xl bg-[#613619] flex items-center justify-center relative overflow-hidden">
           <Image
             src="/images/chatbot/cowboy-robot.png"
-            alt="ChickyAI Mascot"
-            width={44}
-            height={44}
+            alt="AgroLivestock AI Mascot"
+            width={52}
+            height={52}
             className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
           />
           {/* Notification status dot */}
-          <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#54321D]" />
+          <span className="absolute top-1.5 right-1.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#54321D]" />
         </div>
       </button>
     </div>

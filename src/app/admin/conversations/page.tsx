@@ -101,7 +101,7 @@ export default function AdminConversationsPage() {
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div>
           <h1 className="text-2xl font-black text-[#361D10]">
-            Log Percakapan Chatbot ChickyAI
+            Log Percakapan Chatbot AgroLivestock AI
           </h1>
           <p className="text-xs text-[#7A6A60]">
             Analisis riwayat interaksi peternak dengan model RAG untuk perbaikan kualitas dokumen.

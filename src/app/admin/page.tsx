@@ -45,7 +45,7 @@ export default function AdminDashboardPage() {
     const newDoc = {
       id: `doc-${Date.now()}`,
       title: title.endsWith(".pdf") ? title : `${title.replace(/\s+/g, "_")}.pdf`,
-      author: user?.full_name || "Admin ChickyAI",
+      author: user?.full_name || "Admin AgroLivestock AI",
       publication_year: new Date().getFullYear(),
       category: category,
       description: abstractText || "Dokumen teknis terverifikasi untuk peternakan unggas.",
@@ -112,7 +112,7 @@ export default function AdminDashboardPage() {
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-lg font-extrabold text-[#361D10]">
-                  Panel Pengelola ChickyAI
+                  Panel Pengelola AgroLivestock AI
                 </h1>
                 <span className="px-2 py-0.5 rounded-full bg-[#EAF5EA] text-[#2E7D32] border border-[#C6E6C7] text-[10px] font-bold">
                   ● ADMIN TERVERIFIKASI

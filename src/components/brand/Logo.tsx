@@ -41,10 +41,10 @@ export const Logo: React.FC<LogoProps> = ({
 
       <div className="flex flex-col">
         <span className={`font-extrabold ${textDimensions} tracking-tight text-[#4A2D1B] leading-none`}>
-          Chicky<span className="text-[#DE992B]">AI</span>
+          AgroLivestock<span className="text-[#DE992B]">AI</span>
         </span>
         <span className="text-[9px] font-semibold text-[#8C7B71] tracking-widest uppercase mt-0.5">
-          Poultry AI Partner
+          Agribisnis Peternakan Cerdas
         </span>
       </div>
     </div>

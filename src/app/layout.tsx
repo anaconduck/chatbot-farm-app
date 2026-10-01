@@ -11,16 +11,18 @@ const jakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "ChickyAI — Asisten Cerdas Peternakan Ayam & Arsip Sains",
+  title: "AgroLivestock AI — Riset & Asisten Cerdas Agribisnis Peternakan",
   description:
-    "Platform chatbot berbasis RAG dan pusat riset peternakan unggas modern Indonesia. Jawaban berbasis dokumen ilmiah pakan, penyakit, dan kandang.",
+    "Platform chatbot berbasis RAG dan repositori riset agribisnis peternakan unggas Indonesia. Didukung Program HIBAH Fakultas Peternakan Universitas Brawijaya.",
   icons: {
     icon: "/images/logo/emblem.png",
     shortcut: "/images/logo/emblem.png",
     apple: "/images/logo/emblem.png",
   },
   keywords: [
-    "ChickyAI",
+    "AgroLivestock AI",
+    "Agribisnis Peternakan",
+    "Fapet Universitas Brawijaya",
     "Peternakan Ayam",
     "Ayam Petelur",
     "Layer",
