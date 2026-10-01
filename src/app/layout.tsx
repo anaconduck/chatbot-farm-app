@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth/context";
 import { FloatingChatbot } from "@/components/chatbot/FloatingChatbot";
+import { Analytics } from "@vercel/analytics/react";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
           {children}
           <FloatingChatbot />
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
