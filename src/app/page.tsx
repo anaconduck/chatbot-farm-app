@@ -20,8 +20,8 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <section className="relative overflow-hidden pt-12 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             {/* Left Copy */}
             <div className="lg:col-span-7 space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#361D10] leading-[1.15] tracking-tight">

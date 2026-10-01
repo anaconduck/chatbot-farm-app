@@ -19,7 +19,7 @@ import {
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
-  const { user, role, logout, isDemo } = useAuth();
+  const { user, role, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isActive = (path: string) => {
@@ -30,19 +30,14 @@ export const Navbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-40 w-full bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#EADBCE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="relative flex items-center justify-between h-20">
           {/* Brand Logo */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 z-10">
             <Logo />
-            {isDemo && (
-              <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#FFF3D6] text-[#A36D16] border border-[#F3DB9A]">
-                Demo Mode
-              </span>
-            )}
           </div>
 
-          {/* Desktop Navigation Links: Beranda -> Riset & Edukasi -> [User links] -> About */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation Links: 3 Menu Centered (Beranda, Riset & Edukasi, About) */}
+          <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2 z-0">
             {/* 1. Beranda */}
             <Link
               href="/"
@@ -67,50 +62,7 @@ export const Navbar: React.FC = () => {
               Riset & Edukasi
             </Link>
 
-            {/* Logged in User links */}
-            {user && (
-              <>
-                <Link
-                  href="/dashboard"
-                  className={`text-sm font-semibold transition-colors pb-1 flex items-center gap-1.5 ${
-                    isActive("/dashboard")
-                      ? "text-[#4A2D1B] border-b-2 border-[#4A2D1B]"
-                      : "text-[#6E5D52] hover:text-[#4A2D1B]"
-                  }`}
-                >
-                  <LayoutDashboard className="w-4 h-4 text-[#DE992B]" />
-                  Dashboard
-                </Link>
-
-                <Link
-                  href="/chat"
-                  className={`text-sm font-semibold transition-colors pb-1 flex items-center gap-1.5 ${
-                    isActive("/chat")
-                      ? "text-[#4A2D1B] border-b-2 border-[#4A2D1B]"
-                      : "text-[#6E5D52] hover:text-[#4A2D1B]"
-                  }`}
-                >
-                  <Bot className="w-4 h-4 text-[#DE992B]" />
-                  Chat Chicky
-                </Link>
-              </>
-            )}
-
-            {role === "ADMIN" && (
-              <Link
-                href="/admin"
-                className={`text-sm font-semibold transition-colors pb-1 flex items-center gap-1.5 ${
-                  isActive("/admin")
-                    ? "text-[#4A2D1B] border-b-2 border-[#4A2D1B]"
-                    : "text-[#6E5D52] hover:text-[#4A2D1B]"
-                }`}
-              >
-                <ShieldCheck className="w-4 h-4 text-[#DE992B]" />
-                Admin Panel
-              </Link>
-            )}
-
-            {/* 3. About (ditaruh terakhir sesuai instruksi) */}
+            {/* 3. About */}
             <Link
               href="/about"
               className={`text-sm font-semibold transition-colors pb-1 relative ${
@@ -124,9 +76,25 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Right Action / Auth */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4 z-10">
             {user ? (
               <div className="flex items-center gap-3">
+                <Link
+                  href="/dashboard"
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#4A2D1B] hover:bg-[#EADBCE]/50 transition-colors flex items-center gap-1.5 border border-[#EADBCE]"
+                >
+                  <LayoutDashboard className="w-3.5 h-3.5 text-[#DE992B]" />
+                  Dashboard
+                </Link>
+                {role === "ADMIN" && (
+                  <Link
+                    href="/admin"
+                    className="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#4A2D1B] hover:bg-[#EADBCE]/50 transition-colors flex items-center gap-1.5 border border-[#EADBCE]"
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#DE992B]" />
+                    Admin
+                  </Link>
+                )}
                 <div className="text-right">
                   <p className="text-xs font-bold text-[#4A2D1B]">{user.full_name}</p>
                   <span className="text-[10px] px-1.5 py-0.5 rounded font-semibold bg-[#EADBCE] text-[#5A3825]">
@@ -135,7 +103,7 @@ export const Navbar: React.FC = () => {
                 </div>
                 <button
                   onClick={() => logout()}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#4A2D1B] hover:bg-[#382112] text-white text-sm font-medium transition-all shadow-sm active:scale-95"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#4A2D1B] hover:bg-[#382112] text-white text-xs font-medium transition-all shadow-sm active:scale-95"
                 >
                   <span>Logout</span>
                   <LogOut className="w-4 h-4" />
