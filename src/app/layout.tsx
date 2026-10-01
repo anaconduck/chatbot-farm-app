@@ -15,9 +15,13 @@ export const metadata: Metadata = {
   description:
     "Platform chatbot berbasis RAG dan repositori riset agribisnis peternakan unggas Indonesia. Didukung Program HIBAH Fakultas Peternakan Universitas Brawijaya.",
   icons: {
-    icon: "/images/logo/logo1.png?v=3",
-    shortcut: "/images/logo/logo1.png?v=3",
-    apple: "/images/logo/logo1.png?v=3",
+    icon: [
+      { url: "/favicon.ico?v=5" },
+      { url: "/favicon-32x32.png?v=5", sizes: "32x32", type: "image/png" },
+      { url: "/images/logo/logo1.png?v=5", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico?v=5",
+    apple: "/images/logo/logo1.png?v=5",
   },
   keywords: [
     "TanyaTernak",
@@ -40,6 +44,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className={`${jakartaSans.variable} font-sans`}>
+      <head>
+        <link rel="icon" href="/favicon.ico?v=5" sizes="any" />
+        <link rel="icon" href="/favicon-32x32.png?v=5" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/images/logo/logo1.png?v=5" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/logo/logo1.png?v=5" />
+      </head>
       <body className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#2C1D13] antialiased selection:bg-[#DE992B]/20 selection:text-[#4E2E1E]">
         <AuthProvider>
           {children}
