@@ -15,7 +15,7 @@ export async function sendChatMessage(payload: DifyChatMessagePayload): Promise<
   if (env.DIFY_MOCK_MODE || !difyClient.isConfigured) {
     const q = payload.query.toLowerCase();
     let answer =
-      "Berdasarkan literatur agribisnis peternakan yang tersedia di AgroLivestock AI, manajemen pakan, biosekuriti, dan mikroklimat kandang closed-house sangat krusial untuk menjaga rasio FCR optimal dan meminimalkan resiko stres panas (heat stress).";
+      "Berdasarkan literatur agribisnis peternakan yang tersedia di PoultryMind, manajemen pakan, biosekuriti, dan mikroklimat kandang closed-house sangat krusial untuk menjaga rasio FCR optimal dan meminimalkan resiko stres panas (heat stress).";
 
     if (q.includes("pakan") || q.includes("nutrisi")) {
       answer =
@@ -29,7 +29,7 @@ export async function sendChatMessage(payload: DifyChatMessagePayload): Promise<
     }
 
     return {
-      answer: `[Simulasi AgroLivestock AI] ${answer}`,
+      answer: `[Simulasi PoultryMind] ${answer}`,
       conversation_id: payload.conversation_id || `conv-${Date.now()}`,
       message_id: `msg-${Date.now()}`,
       sources: [

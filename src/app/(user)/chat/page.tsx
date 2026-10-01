@@ -37,7 +37,7 @@ function ChatInner() {
       conversation_id: "c-1",
       role: "assistant",
       content:
-        "Hai 👋 Selamat datang di AgroLivestock AI!\n\nSaya siap membantu menjawab pertanyaan mengenai riset dan agribisnis peternakan unggas berdasarkan literatur ilmiah terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
+        "Hai 👋 Selamat datang di PoultryMind!\n\nSaya siap membantu menjawab pertanyaan mengenai riset dan agribisnis peternakan unggas berdasarkan literatur ilmiah terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
       created_at: new Date().toISOString(),
     },
   ]);

@@ -29,7 +29,7 @@ export default function AboutPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-[#6A5A50] leading-relaxed max-w-2xl">
-                AgroLivestock AI hadir sebagai jembatan ilmu pengetahuan antara riset akademis,
+                PoultryMind hadir sebagai jembatan ilmu pengetahuan antara riset akademis,
                 keilmuan veteriner, dan operasional peternakan lapangan melalui kecerdasan
                 buatan (AI) yang kredibel dan berbasis literatur ilmiah.
               </p>

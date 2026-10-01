@@ -11,7 +11,7 @@ const jakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "AgroLivestock AI — Riset & Asisten Cerdas Agribisnis Peternakan",
+  title: "PoultryMind",
   description:
     "Platform chatbot berbasis RAG dan repositori riset agribisnis peternakan unggas Indonesia. Didukung Program HIBAH Fakultas Peternakan Universitas Brawijaya.",
   icons: {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     apple: "/images/logo/emblem.png",
   },
   keywords: [
-    "AgroLivestock AI",
+    "PoultryMind",
     "Agribisnis Peternakan",
     "Fapet Universitas Brawijaya",
     "Peternakan Ayam",

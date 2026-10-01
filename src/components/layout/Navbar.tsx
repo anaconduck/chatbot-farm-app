@@ -62,7 +62,7 @@ export const Navbar: React.FC = () => {
               Riset & Edukasi
             </Link>
 
-            {/* 3. About */}
+            {/* 3. Tentang */}
             <Link
               href="/about"
               className={`text-sm font-semibold transition-colors pb-1 relative ${
@@ -71,7 +71,7 @@ export const Navbar: React.FC = () => {
                   : "text-[#6E5D52] hover:text-[#4A2D1B]"
               }`}
             >
-              About
+              Tentang
             </Link>
           </nav>
 
@@ -177,7 +177,7 @@ export const Navbar: React.FC = () => {
                 className="flex items-center gap-2 py-2 px-3 rounded-lg text-sm font-medium text-[#4A2D1B] hover:bg-[#EADBCE]/40"
               >
                 <Bot className="w-4 h-4 text-[#DE992B]" />
-                Chatbot AgroLivestock AI
+                Chatbot PoultryMind
               </Link>
             </>
           )}
@@ -199,7 +199,7 @@ export const Navbar: React.FC = () => {
             className="flex items-center gap-2 py-2 px-3 rounded-lg text-sm font-medium text-[#4A2D1B] hover:bg-[#EADBCE]/40"
           >
             <Info className="w-4 h-4 text-[#DE992B]" />
-            About
+            Tentang
           </Link>
 
           <div className="pt-3 border-t border-[#EADBCE]">

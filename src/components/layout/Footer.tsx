@@ -22,13 +22,13 @@ export const Footer: React.FC = () => {
             Program Hibah Fakultas Peternakan Universitas Brawijaya (FAPET UB)
           </p>
           <p className="text-[11px] sm:text-xs text-[#7A6A5E] leading-relaxed max-w-xl mx-auto">
-            Hilirisasi Riset Ilmiah & Kecerdasan Buatan (AI) Terapan untuk Agribisnis Peternakan Unggas Nasional
+            Hilirisasi Riset Ilmiah & Kecerdasan Buatan (AI) Terapan untuk Agribisnis Peternakan
           </p>
         </div>
 
         {/* Copyright */}
         <div className="pt-2 text-center text-[11px] sm:text-xs text-[#8A7A6E]">
-          © 2026 AgroLivestock AI. Fakultas Peternakan Universitas Brawijaya.
+          © 2026 PoultryMind. Fakultas Peternakan Universitas Brawijaya.
         </div>
       </div>
     </footer>

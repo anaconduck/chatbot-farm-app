@@ -1,6 +1,6 @@
-# ChickyAI — Asisten Cerdas Peternakan Ayam & Pusat Riset Sains
+# PoultryMind — Platform Riset & Asisten Cerdas Peternakan Unggas
 
-ChickyAI adalah platform chatbot cerdas berbasis RAG (*Retrieval-Augmented Generation*) dan repositori riset untuk bidang peternakan ayam (layer & broiler). Aplikasi dibangun dengan **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, **Supabase (PostgreSQL & Auth)**, dan dirancang siap terintegrasi dengan **Dify Cloud API**.
+PoultryMind adalah platform chatbot cerdas berbasis RAG (*Retrieval-Augmented Generation*) dan repositori riset untuk bidang peternakan ayam (layer & broiler). Aplikasi didanai oleh Program HIBAH Fakultas Peternakan Universitas Brawijaya (FAPET UB) dan dibangun dengan **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, **Supabase (PostgreSQL & Auth)**, serta siap terintegrasi dengan **Dify Cloud API**.
 
 ---
 

@@ -16,7 +16,7 @@ export const FloatingChatbot: React.FC = () => {
       conversation_id: "quick-chat",
       role: "assistant",
       content:
-        "Hai 👋 Selamat datang di AgroLivestock AI!\n\nSaya siap membantu menjawab pertanyaan mengenai riset dan agribisnis peternakan unggas berdasarkan literatur ilmiah terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
+        "Hai 👋 Selamat datang di PoultryMind!\n\nSaya siap membantu menjawab pertanyaan mengenai riset dan agribisnis peternakan unggas berdasarkan literatur ilmiah terverifikasi.\n\nSilakan tanyakan apa saja yang ingin Anda ketahui.",
       created_at: new Date().toISOString(),
     },
   ]);
@@ -106,7 +106,7 @@ export const FloatingChatbot: React.FC = () => {
               </div>
               <div>
                 <h4 className="font-bold text-sm leading-tight text-[#FAF7F2]">
-                  AgroLivestock AI Assistant
+                  PoultryMind Assistant
                 </h4>
                 <p className="text-[11px] text-[#D8C7B8] flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -254,12 +254,12 @@ export const FloatingChatbot: React.FC = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#965A2E] to-[#54321D] p-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#FAF7F2]"
-        aria-label="Buka Chatbot AgroLivestock AI"
+        aria-label="Buka Chatbot PoultryMind"
       >
         <div className="w-full h-full rounded-xl bg-[#613619] flex items-center justify-center relative overflow-hidden">
           <Image
             src="/images/chatbot/cowboy-robot.png"
-            alt="AgroLivestock AI Mascot"
+            alt="PoultryMind Mascot"
             width={38}
             height={38}
             className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
