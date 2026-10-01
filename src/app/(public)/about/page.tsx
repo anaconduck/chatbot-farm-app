@@ -4,7 +4,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MOCK_TEAM } from "@/lib/mock-data";
 import {
-  BookOpen,
   Cpu,
   GraduationCap,
   Microscope,
@@ -19,9 +18,9 @@ export default function AboutPage() {
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
       <Navbar />
 
-      <main className="flex-1 pb-16">
+      <main className="flex-1">
         {/* EDITORIAL HEADER / INTRO */}
-        <section className="pt-10 sm:pt-14 pb-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+        <section className="pt-8 sm:pt-12 pb-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] tracking-wider uppercase">
             <GraduationCap className="w-3.5 h-3.5 text-[#DE992B]" />
             Program Riset & Hilirisasi FAPET UB
@@ -37,7 +36,7 @@ export default function AboutPage() {
         </section>
 
         {/* NARRATIVE SECTION: LATAR BELAKANG & CERITA KAMI */}
-        <section className="py-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-6 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#E8DCCF] shadow-xs space-y-8">
             <div className="space-y-4">
               <span className="text-xs font-bold uppercase tracking-wider text-[#DE992B] block">
@@ -85,7 +84,7 @@ export default function AboutPage() {
         </section>
 
         {/* VISI & MISI KAMI */}
-        <section className="py-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-6 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Visi */}
             <div className="bg-white rounded-3xl p-8 border border-[#E8DCCF] shadow-xs space-y-4 flex flex-col justify-between">
@@ -132,54 +131,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* NILAI UTAMA / PRINSIP KERJA */}
-        <section className="py-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#E8DCCF] shadow-xs space-y-6">
-            <div className="space-y-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#DE992B] block">
-                Prinsip Kerja
-              </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#361D10]">
-                Nilai Utama Pengembanan Riset
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
-              <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E8DCCF] space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-[#EFE4D6] text-[#4A2D1B] flex items-center justify-center">
-                  <Microscope className="w-4 h-4" />
-                </div>
-                <h4 className="font-bold text-sm text-[#361D10]">Evidence-Based</h4>
-                <p className="text-xs text-[#6C5D53] leading-relaxed">
-                  Setiap rekomendasi nutrisi dan formulasi mengacu pada uji laboratorium dan literatur ilmiah teruji.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E8DCCF] space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-[#EFE4D6] text-[#4A2D1B] flex items-center justify-center">
-                  <BookOpen className="w-4 h-4" />
-                </div>
-                <h4 className="font-bold text-sm text-[#361D10]">Aplikatif & Terbuka</h4>
-                <p className="text-xs text-[#6C5D53] leading-relaxed">
-                  Dokumen riset dapat diunduh gratis dan diterjemahkan dalam bahasa yang mudah dipahami peternak.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E8DCCF] space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-[#EFE4D6] text-[#4A2D1B] flex items-center justify-center">
-                  <Cpu className="w-4 h-4" />
-                </div>
-                <h4 className="font-bold text-sm text-[#361D10]">Teknologi Presisi</h4>
-                <p className="text-xs text-[#6C5D53] leading-relaxed">
-                  Mengintegrasikan AI generasi terbaru untuk mempercepat pencarian data dan kalkulasi peternakan.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* TIM RISET & DEWAN PAKAR */}
-        <section className="py-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="pt-6 pb-8 sm:pb-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-2 mb-10">
             <span className="text-xs font-bold uppercase tracking-wider text-[#DE992B] block">
               Kolaborator Ahli
