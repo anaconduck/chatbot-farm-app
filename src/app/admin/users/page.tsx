@@ -1,39 +1,75 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { useAuth } from "@/lib/auth/context";
-import { MOCK_USERS, MockUserRecord } from "@/lib/mock-data";
 import {
   Users,
   Search,
-  Eye,
   CheckCircle,
   LogOut,
   Layers,
   FileText,
   Shield,
+  Loader2,
+  UserCheck,
 } from "lucide-react";
+
+interface UserItem {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  joinDate: string;
+}
 
 export default function AdminUsersPage() {
   const { user, logout } = useAuth();
-  const [users, setUsers] = useState<MockUserRecord[]>(MOCK_USERS);
+  const [users, setUsers] = useState<UserItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [actionNotice, setActionNotice] = useState<string | null>(null);
 
-  const toggleStatus = (id: string) => {
-    setUsers((prev) =>
-      prev.map((u) => {
-        if (u.id === id) {
-          const nextStatus = u.status === "Aktif" ? "Nonaktif" : "Aktif";
-          setActionNotice(`Status pengguna ${u.name} diubah menjadi ${nextStatus}.`);
-          setTimeout(() => setActionNotice(null), 3000);
-          return { ...u, status: nextStatus };
-        }
-        return u;
-      })
-    );
+  const loadUsers = async () => {
+    try {
+      const res = await fetch("/api/admin/users");
+      if (res.ok) {
+        const data = await res.json();
+        setUsers(data.users || []);
+      }
+    } catch (err) {
+      console.error("Gagal memuat pengguna:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  const toggleStatus = async (id: string, currentStatus: string) => {
+    const nextIsActive = currentStatus !== "Aktif";
+    try {
+      const res = await fetch("/api/admin/users", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, is_active: nextIsActive }),
+      });
+
+      if (res.ok) {
+        const nextStatus = nextIsActive ? "Aktif" : "Nonaktif";
+        setUsers((prev) =>
+          prev.map((u) => (u.id === id ? { ...u, status: nextStatus } : u))
+        );
+        setActionNotice(`Status pengguna berhasil diperbarui ke ${nextStatus}.`);
+        setTimeout(() => setActionNotice(null), 3000);
+      }
+    } catch (err: any) {
+      alert(`Gagal memperbarui status: ${err?.message}`);
+    }
   };
 
   const filteredUsers = users.filter(
@@ -50,7 +86,7 @@ export default function AdminUsersPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <Logo />
           <div className="flex items-center gap-3">
-            <span className="text-xs font-bold text-[#361D10]">{user?.full_name}</span>
+            <span className="text-xs font-bold text-[#361D10]">{user?.full_name || "Admin"}</span>
             <button
               onClick={() => logout()}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4A2D1B] text-white text-xs font-semibold"
@@ -98,108 +134,113 @@ export default function AdminUsersPage() {
         )}
 
         {/* Header */}
-        <div>
-          <h1 className="text-2xl font-black text-[#361D10]">
-            Daftar & Manajemen Pengguna
-          </h1>
-          <p className="text-xs text-[#7A6A60]">
-            Pantau akun terdaftar, status aktivasi peternak, dan hak akses peran sistem.
-          </p>
-        </div>
-
-        {/* Search */}
-        <div className="flex items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-[#E8DCCF]">
-          <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-[#8C7B71] absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Cari berdasarkan nama atau email pengguna..."
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#E2D5C7] text-xs text-[#361D10] outline-none"
-            />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-black text-[#361D10]">Manajemen Akun Terdaftar</h1>
+            <p className="text-xs text-[#7A6A60]">
+              Daftar pengguna dan peternak yang tersimpan di tabel Supabase profiles.
+            </p>
           </div>
 
-          <span className="text-xs text-[#7A6A60] font-medium">
-            Total Pengguna: <strong>{filteredUsers.length}</strong>
-          </span>
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <Search className="w-4 h-4 text-[#8C7B71] absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Cari nama, email..."
+                className="pl-9 pr-3 py-2 rounded-xl bg-white border border-[#E2D5C7] text-xs text-[#361D10] focus:border-[#4A2D1B] outline-none"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Users Table */}
-        <div className="bg-white rounded-3xl border border-[#E8DCCF] overflow-hidden shadow-xs">
+        <div className="bg-white rounded-3xl p-6 border border-[#E8DCCF] shadow-xs space-y-4">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#FAF7F2] text-[#7A6A60] font-bold uppercase tracking-wider border-b border-[#E8DCCF]">
+              <thead className="bg-[#FAF7F2] text-[#7A6A60] font-bold uppercase tracking-wider border-y border-[#E8DCCF]">
                 <tr>
-                  <th className="py-3.5 px-4">Name</th>
-                  <th className="py-3.5 px-3">Email</th>
-                  <th className="py-3.5 px-3">Role</th>
-                  <th className="py-3.5 px-3">Status</th>
-                  <th className="py-3.5 px-3">Joined At</th>
-                  <th className="py-3.5 px-3 text-right">Actions</th>
+                  <th className="py-3 px-4">Nama Lengkap</th>
+                  <th className="py-3 px-3">Email</th>
+                  <th className="py-3 px-3">Peran / Role</th>
+                  <th className="py-3 px-3">Status</th>
+                  <th className="py-3 px-3">Tanggal Bergabung</th>
+                  <th className="py-3 px-3 text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#F1E8DF]">
-                {filteredUsers.map((u) => (
-                  <tr key={u.id} className="hover:bg-[#FAF7F2]/60">
-                    <td className="py-4 px-4 font-bold text-[#361D10]">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-[#FAF4EB] border border-[#E0D4C5] text-[#4A2D1B] font-bold flex items-center justify-center shrink-0">
-                          {u.name.charAt(0)}
-                        </div>
-                        <div>
-                          <div>{u.name}</div>
-                          <div className="text-[10px] text-[#8C7B71] font-normal">{u.phone}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="py-4 px-3 text-[#5A483E]">{u.email}</td>
-                    <td className="py-4 px-3">
-                      <span
-                        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                          u.role === "ADMIN"
-                            ? "bg-[#4A2D1B] text-white"
-                            : "bg-[#FFF5E5] text-[#8C5D19]"
-                        }`}
-                      >
-                        {u.role === "ADMIN" && <Shield className="w-3 h-3 text-[#DE992B]" />}
-                        {u.role}
-                      </span>
-                    </td>
-                    <td className="py-4 px-3">
-                      <span
-                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-                          u.status === "Aktif"
-                            ? "bg-[#EAF5EA] text-[#2E7D32]"
-                            : "bg-rose-50 text-rose-600"
-                        }`}
-                      >
-                        ● {u.status}
-                      </span>
-                    </td>
-                    <td className="py-4 px-3 text-[#7A6A60]">{u.joinedAt}</td>
-                    <td className="py-4 px-3 text-right">
-                      <div className="inline-flex items-center gap-2">
-                        <button
-                          className="p-1.5 rounded-lg text-[#6C5D53] hover:text-[#4A2D1B] hover:bg-[#EADBCE]/50"
-                          title="View Profile"
-                        >
-                          <Eye className="w-3.5 h-3.5" />
-                        </button>
-                        <button
-                          onClick={() => toggleStatus(u.id)}
-                          className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all ${
-                            u.status === "Aktif"
-                              ? "border-rose-200 text-rose-600 hover:bg-rose-50"
-                              : "border-emerald-200 text-emerald-700 hover:bg-emerald-50"
-                          }`}
-                        >
-                          {u.status === "Aktif" ? "Deactivate" : "Activate"}
-                        </button>
+                {isLoading ? (
+                  <tr>
+                    <td colSpan={6} className="py-12 text-center text-[#7A6A60]">
+                      <div className="flex items-center justify-center gap-2">
+                        <Loader2 className="w-5 h-5 animate-spin text-[#DE992B]" />
+                        <span>Memuat data pengguna dari database...</span>
                       </div>
                     </td>
                   </tr>
-                ))}
+                ) : filteredUsers.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="py-16 text-center">
+                      <div className="flex flex-col items-center justify-center space-y-3">
+                        <div className="w-12 h-12 rounded-2xl bg-[#FAF4EB] text-[#DE992B] flex items-center justify-center">
+                          <UserCheck className="w-6 h-6" />
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm font-bold text-[#361D10]">Belum Ada Pengguna</p>
+                          <p className="text-xs text-[#8C7A70]">
+                            Data profil pengguna di database Supabase masih kosong.
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                  filteredUsers.map((u) => (
+                    <tr key={u.id} className="hover:bg-[#FAF7F2]/60 transition-colors">
+                      <td className="py-4 px-4 font-bold text-[#361D10] flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-full bg-[#FAF4EB] border border-[#E2D5C7] text-[#4A2D1B] flex items-center justify-center font-bold text-xs uppercase">
+                          {u.name.charAt(0)}
+                        </div>
+                        <span>{u.name}</span>
+                      </td>
+                      <td className="py-4 px-3 text-[#6A5A50]">{u.email}</td>
+                      <td className="py-4 px-3">
+                        <span
+                          className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-bold text-[10px] ${
+                            u.role === "Admin"
+                              ? "bg-[#FFF5E5] text-[#8C5D19] border border-[#F3E2CB]"
+                              : "bg-[#EBF3FF] text-[#1E56A0] border border-[#C5DCFF]"
+                          }`}
+                        >
+                          {u.role === "Admin" && <Shield className="w-3 h-3" />}
+                          {u.role}
+                        </span>
+                      </td>
+                      <td className="py-4 px-3">
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] ${
+                            u.status === "Aktif"
+                              ? "bg-[#EAF5EA] text-[#2E7D32]"
+                              : "bg-rose-50 text-rose-600"
+                          }`}
+                        >
+                          ● {u.status}
+                        </span>
+                      </td>
+                      <td className="py-4 px-3 text-[#7A6A60]">{u.joinDate}</td>
+                      <td className="py-4 px-3 text-right">
+                        <button
+                          onClick={() => toggleStatus(u.id, u.status)}
+                          className="px-2.5 py-1 rounded-lg border border-[#E2D5C7] hover:border-[#4A2D1B] text-[11px] font-semibold text-[#5A483E] transition-colors"
+                        >
+                          {u.status === "Aktif" ? "Nonaktifkan" : "Aktifkan"}
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

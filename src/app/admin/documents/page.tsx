@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { useAuth } from "@/lib/auth/context";
-import { MOCK_DOCUMENTS } from "@/lib/mock-data";
+import type { KnowledgeDocument } from "@/types";
 import {
   FileText,
   Plus,
@@ -17,55 +17,102 @@ import {
   LogOut,
   Layers,
   Users,
+  Inbox,
+  Loader2,
 } from "lucide-react";
 
 export default function AdminDocumentsPage() {
   const { user, logout } = useAuth();
-  const [documents, setDocuments] = useState(MOCK_DOCUMENTS);
+  const [documents, setDocuments] = useState<KnowledgeDocument[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<string | null>(null);
 
   // Form State
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [year, setYear] = useState("2025");
+  const [year, setYear] = useState(new Date().getFullYear().toString());
   const [category, setCategory] = useState("Nutrisi Pakan");
   const [description, setDescription] = useState("");
 
-  const handleCreateDocument = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!title) return;
-
-    const newDoc = {
-      id: `doc-${Date.now()}`,
-      title: title.endsWith(".pdf") ? title : `${title.replace(/\s+/g, "_")}.pdf`,
-      author: author || user?.full_name || "Admin TanyaTernak",
-      publication_year: parseInt(year, 10) || 2025,
-      category,
-      description,
-      original_filename: `${title.replace(/\s+/g, "_")}.pdf`,
-      status: "READY" as const,
-      file_size_bytes: 4.2 * 1024 * 1024,
-      download_count: 0,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    };
-
-    setDocuments([newDoc, ...documents]);
-    setIsModalOpen(false);
-    setTitle("");
-    setAuthor("");
-    setDescription("");
-
-    setNotification(
-      `[Development Placeholder] Dokumen "${newDoc.title}" berhasil ditambahkan.`
-    );
-    setTimeout(() => setNotification(null), 4000);
+  const loadDocuments = async () => {
+    try {
+      const res = await fetch("/api/admin/documents");
+      if (res.ok) {
+        const data = await res.json();
+        setDocuments(data.documents || []);
+      }
+    } catch (err) {
+      console.error("Gagal memuat dokumen:", err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleDelete = (id: string) => {
-    setDocuments(documents.filter((d) => d.id !== id));
+  useEffect(() => {
+    loadDocuments();
+  }, []);
+
+  const handleCreateDocument = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title || isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+      const formattedTitle = title.endsWith(".pdf") ? title : `${title.replace(/\s+/g, "_")}.pdf`;
+      const res = await fetch("/api/admin/documents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: formattedTitle,
+          author: author || user?.full_name || "Admin TanyaTernak",
+          publication_year: parseInt(year, 10) || new Date().getFullYear(),
+          category,
+          description: description || "Dokumen teknis terverifikasi untuk peternakan unggas.",
+          original_filename: formattedTitle,
+        }),
+      });
+
+      if (res.ok) {
+        setNotification(`Dokumen "${title}" berhasil ditambahkan ke database.`);
+        setIsModalOpen(false);
+        setTitle("");
+        setAuthor("");
+        setDescription("");
+        await loadDocuments();
+      } else {
+        const err = await res.json();
+        alert(`Gagal menambahkan dokumen: ${err.error || "Terjadi kesalahan"}`);
+      }
+    } catch (err: any) {
+      alert(`Gagal: ${err?.message}`);
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setNotification(null), 4000);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Apakah Anda yakin ingin menghapus dokumen ini dari database?")) return;
+
+    try {
+      const res = await fetch(`/api/admin/documents?id=${id}`, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        setDocuments((prev) => prev.filter((d) => d.id !== id));
+        setNotification("Dokumen berhasil dihapus dari database.");
+        setTimeout(() => setNotification(null), 3000);
+      } else {
+        const err = await res.json();
+        alert(`Gagal menghapus: ${err.error || "Terjadi kesalahan"}`);
+      }
+    } catch (err: any) {
+      alert(`Gagal: ${err?.message}`);
+    }
   };
 
   const filtered = documents.filter(
@@ -82,7 +129,7 @@ export default function AdminDocumentsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <Logo />
           <div className="flex items-center gap-3">
-            <span className="text-xs font-bold text-[#361D10]">{user?.full_name}</span>
+            <span className="text-xs font-bold text-[#361D10]">{user?.full_name || "Admin"}</span>
             <button
               onClick={() => logout()}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4A2D1B] text-white text-xs font-semibold"
@@ -136,105 +183,123 @@ export default function AdminDocumentsPage() {
               Arsip & Manajemen Dokumen RAG
             </h1>
             <p className="text-xs text-[#7A6A60]">
-              Kelola status indexing berkas PDF yang digunakan chatbot ChickAI Assistant untuk menjawab peternak.
+              Kelola status berkas riset ilmiah di database Supabase yang dijadikan referensi chatbot TanyaTernak.
             </p>
           </div>
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F3AC3C] hover:bg-[#E59E2E] text-[#361D10] text-xs font-bold shadow-xs transition-all active:scale-95 self-start sm:self-auto"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#4A2D1B] hover:bg-[#361D10] text-white text-xs font-bold transition-all shadow-xs self-start sm:self-auto"
           >
-            <Plus className="w-4 h-4" />
-            <span>+ Upload PDF</span>
+            <Plus className="w-4 h-4 text-[#DE992B]" />
+            <span>Tambah Dokumen Baru</span>
           </button>
         </div>
 
-        {/* Filters */}
-        <div className="flex items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-[#E8DCCF]">
-          <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-[#8C7B71] absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Cari berdasarkan judul, kategori, atau penulis..."
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#E2D5C7] text-xs text-[#361D10] outline-none"
-            />
+        {/* Filter and Search */}
+        <div className="bg-white rounded-3xl p-6 border border-[#E8DCCF] shadow-xs space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="relative flex-1 max-w-md">
+              <Search className="w-4 h-4 text-[#8C7B71] absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Cari judul, kategori, atau penulis..."
+                className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#E2D5C7] text-xs text-[#361D10] focus:border-[#4A2D1B] outline-none"
+              />
+            </div>
+
+            <div className="text-xs text-[#7A6A60] font-medium">
+              Total {filtered.length} dokumen tersimpan
+            </div>
           </div>
 
-          <span className="text-xs text-[#7A6A60] font-medium">
-            Total Dokumen: <strong>{filtered.length}</strong>
-          </span>
-        </div>
-
-        {/* Documents Table */}
-        <div className="bg-white rounded-3xl border border-[#E8DCCF] overflow-hidden shadow-xs">
+          {/* Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#FAF7F2] text-[#7A6A60] font-bold uppercase tracking-wider border-b border-[#E8DCCF]">
+              <thead className="bg-[#FAF7F2] text-[#7A6A60] font-bold uppercase tracking-wider border-y border-[#E8DCCF]">
                 <tr>
-                  <th className="py-3.5 px-4">Document</th>
-                  <th className="py-3.5 px-3">Category</th>
-                  <th className="py-3.5 px-3">Author & Year</th>
-                  <th className="py-3.5 px-3">Size</th>
-                  <th className="py-3.5 px-3">Status</th>
-                  <th className="py-3.5 px-3">Uploaded At</th>
-                  <th className="py-3.5 px-3 text-right">Actions</th>
+                  <th className="py-3 px-4">Judul Dokumen</th>
+                  <th className="py-3 px-3">Kategori</th>
+                  <th className="py-3 px-3">Penulis</th>
+                  <th className="py-3 px-3">Ukuran</th>
+                  <th className="py-3 px-3">Status</th>
+                  <th className="py-3 px-3">Tanggal Dibuat</th>
+                  <th className="py-3 px-3 text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#F1E8DF]">
-                {filtered.map((doc) => (
-                  <tr key={doc.id} className="hover:bg-[#FAF7F2]/60">
-                    <td className="py-4 px-4 font-bold text-[#361D10]">
-                      <div className="flex items-start gap-2">
-                        <FileText className="w-4 h-4 text-[#DE992B] shrink-0 mt-0.5" />
-                        <div>
-                          <div className="leading-snug">{doc.title}</div>
-                          <div className="text-[11px] font-normal text-[#8C7B71] line-clamp-1">
-                            {doc.description}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="py-4 px-3">
-                      <span className="px-2.5 py-1 rounded-full bg-[#FFF5E5] text-[#8C5D19] font-semibold text-[11px]">
-                        {doc.category}
-                      </span>
-                    </td>
-                    <td className="py-4 px-3 text-[#5A4B42]">
-                      <div>{doc.author || "Anonim"}</div>
-                      <div className="text-[10px] text-[#8C7B71]">{doc.publication_year || 2025}</div>
-                    </td>
-                    <td className="py-4 px-3 text-[#6A5A50]">
-                      {(Number(doc.file_size_bytes || 0) / (1024 * 1024)).toFixed(1)} MB
-                    </td>
-                    <td className="py-4 px-3">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#EAF5EA] text-[#2E7D32] font-bold text-[10px]">
-                        ● {doc.status}
-                      </span>
-                    </td>
-                    <td className="py-4 px-3 text-[#7A6A60]">
-                      {new Date(doc.created_at).toLocaleDateString("id-ID")}
-                    </td>
-                    <td className="py-4 px-3 text-right">
-                      <div className="inline-flex items-center gap-2">
-                        <button
-                          className="p-1.5 rounded-lg text-[#6C5D53] hover:text-[#4A2D1B] hover:bg-[#EADBCE]/50"
-                          title="View Details"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(doc.id)}
-                          className="p-1.5 rounded-lg text-rose-500 hover:text-rose-700 hover:bg-rose-50"
-                          title="Hapus"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                {isLoading ? (
+                  <tr>
+                    <td colSpan={7} className="py-12 text-center text-[#7A6A60]">
+                      <div className="flex items-center justify-center gap-2">
+                        <Loader2 className="w-5 h-5 animate-spin text-[#DE992B]" />
+                        <span>Memuat data dari database...</span>
                       </div>
                     </td>
                   </tr>
-                ))}
+                ) : filtered.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="py-16 text-center">
+                      <div className="flex flex-col items-center justify-center space-y-3">
+                        <div className="w-12 h-12 rounded-2xl bg-[#FAF4EB] text-[#DE992B] flex items-center justify-center">
+                          <Inbox className="w-6 h-6" />
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm font-bold text-[#361D10]">
+                            Belum Ada Dokumen Riset
+                          </p>
+                          <p className="text-xs text-[#8C7A70] max-w-sm mx-auto">
+                            Tabel dokumen di database Supabase Anda saat ini kosong. Klik tombol &quot;Tambah Dokumen Baru&quot; di atas untuk memasukkan dokumen pertama.
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                  filtered.map((doc) => (
+                    <tr key={doc.id} className="hover:bg-[#FAF7F2]/60 transition-colors">
+                      <td className="py-4 px-4 font-bold text-[#361D10]">
+                        <div className="flex items-center gap-2">
+                          <FileText className="w-4 h-4 text-rose-600 shrink-0" />
+                          <span className="truncate max-w-xs">{doc.title}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-3">
+                        <span className="px-2.5 py-1 rounded-full bg-[#FFF5E5] text-[#8C5D19] font-semibold text-[11px]">
+                          {doc.category}
+                        </span>
+                      </td>
+                      <td className="py-4 px-3 text-[#5A4B42]">
+                        <div>{doc.author || "Anonim"}</div>
+                        <div className="text-[10px] text-[#8C7B71]">{doc.publication_year || 2025}</div>
+                      </td>
+                      <td className="py-4 px-3 text-[#6A5A50]">
+                        {(Number(doc.file_size_bytes || 0) / (1024 * 1024)).toFixed(1)} MB
+                      </td>
+                      <td className="py-4 px-3">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#EAF5EA] text-[#2E7D32] font-bold text-[10px]">
+                          ● {doc.status}
+                        </span>
+                      </td>
+                      <td className="py-4 px-3 text-[#7A6A60]">
+                        {new Date(doc.created_at).toLocaleDateString("id-ID")}
+                      </td>
+                      <td className="py-4 px-3 text-right">
+                        <div className="inline-flex items-center gap-2">
+                          <button
+                            onClick={() => handleDelete(doc.id)}
+                            className="p-1.5 rounded-lg text-rose-500 hover:text-rose-700 hover:bg-rose-50"
+                            title="Hapus"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -260,12 +325,12 @@ export default function AdminDocumentsPage() {
 
             <form onSubmit={handleCreateDocument} className="space-y-4">
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[#361D10]">Title *</label>
+                <label className="text-xs font-bold text-[#361D10]">Judul Dokumen *</label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Contoh: Manajemen Biosekuriti Kandang Broiler 2025"
+                  placeholder="Contoh: Manajemen Biosekuriti Kandang Broiler"
                   required
                   className="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#E2D5C7] text-xs text-[#361D10] outline-none"
                 />
@@ -273,7 +338,7 @@ export default function AdminDocumentsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-[#361D10]">Author</label>
+                  <label className="text-xs font-bold text-[#361D10]">Penulis / Instansi</label>
                   <input
                     type="text"
                     value={author}
@@ -283,7 +348,7 @@ export default function AdminDocumentsPage() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-[#361D10]">Year</label>
+                  <label className="text-xs font-bold text-[#361D10]">Tahun Terbit</label>
                   <input
                     type="number"
                     value={year}
@@ -295,7 +360,7 @@ export default function AdminDocumentsPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[#361D10]">Category *</label>
+                <label className="text-xs font-bold text-[#361D10]">Kategori *</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
@@ -303,42 +368,47 @@ export default function AdminDocumentsPage() {
                 >
                   <option value="Nutrisi Pakan">Nutrisi Pakan</option>
                   <option value="Penyakit & Vaksinasi">Penyakit & Vaksinasi</option>
-                  <option value="Manajemen Suhu & Kandang">Manajemen Suhu & Kandang</option>
-                  <option value="Smart Poultry IoT">Smart Poultry IoT</option>
+                  <option value="Manajemen Kandang">Manajemen Kandang</option>
+                  <option value="Ekonomi & Pemasaran">Ekonomi & Pemasaran</option>
+                  <option value="Umum">Umum</option>
                 </select>
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[#361D10]">Description</label>
+                <label className="text-xs font-bold text-[#361D10]">Abstrak / Deskripsi Singkat</label>
                 <textarea
-                  rows={2}
+                  rows={3}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Ringkasan abstrak dokumen riset..."
+                  placeholder="Ringkasan isi dokumen atau metodologi riset..."
                   className="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#E2D5C7] text-xs text-[#361D10] outline-none"
                 />
               </div>
 
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-[#361D10]">PDF File *</label>
-                <div className="p-4 border-2 border-dashed border-[#DFD3C5] rounded-xl text-center text-xs text-[#8C7B71] bg-[#FAF7F2]">
-                  Pilih file PDF dari komputer (Maksimal 25MB)
-                </div>
-              </div>
-
-              <div className="flex justify-end gap-2 pt-2">
+              <div className="flex justify-end gap-2 pt-2 border-t border-[#F1E8DF]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-[#E2D5C7] text-xs font-semibold text-[#5A483E]"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#6E5D52] hover:bg-[#FAF7F2]"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-[#F3AC3C] hover:bg-[#E59E2E] text-[#361D10] text-xs font-bold shadow-xs"
+                  disabled={isSubmitting}
+                  className="px-5 py-2 rounded-xl bg-[#4A2D1B] hover:bg-[#361D10] text-white text-xs font-bold flex items-center gap-1.5 disabled:opacity-50"
                 >
-                  Simpan & Upload
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Menyimpan...</span>
+                    </>
+                  ) : (
+                    <>
+                      <UploadCloud className="w-3.5 h-3.5 text-[#DE992B]" />
+                      <span>Simpan Dokumen</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>

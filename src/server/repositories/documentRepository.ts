@@ -6,6 +6,8 @@ import type { KnowledgeDocument } from "@/types";
 
 export class DocumentRepository {
   async getPublishedDocuments(): Promise<KnowledgeDocument[]> {
+    const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE !== "false";
+
     try {
       const supabase = await createClient();
       const { data, error } = await supabase
@@ -14,17 +16,19 @@ export class DocumentRepository {
         .eq("status", "READY")
         .order("created_at", { ascending: false });
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         return data as KnowledgeDocument[];
       }
     } catch {
-      // Fallback to mock data in dev
+      // Fallback in case of network / initialization issues
     }
 
-    return MOCK_DOCUMENTS;
+    return isDemo ? MOCK_DOCUMENTS : [];
   }
 
   async getAllDocumentsForAdmin(): Promise<KnowledgeDocument[]> {
+    const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE !== "false";
+
     try {
       const adminClient = createAdminClient();
       const { data, error } = await adminClient
@@ -32,14 +36,14 @@ export class DocumentRepository {
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         return data as KnowledgeDocument[];
       }
     } catch {
-      // Fallback to mock data in dev
+      // Fallback in case of network / initialization issues
     }
 
-    return MOCK_DOCUMENTS;
+    return isDemo ? MOCK_DOCUMENTS : [];
   }
 }
 
