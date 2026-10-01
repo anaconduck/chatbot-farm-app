@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MOCK_TEAM } from "@/lib/mock-data";
@@ -12,7 +11,6 @@ import {
   FlaskConical,
   Microscope,
   Cpu,
-  ArrowRight,
 } from "lucide-react";
 
 export default function AboutPage() {
@@ -35,22 +33,6 @@ export default function AboutPage() {
                 keilmuan veteriner, dan operasional peternakan lapangan melalui kecerdasan
                 buatan (AI) yang kredibel dan berbasis literatur ilmiah.
               </p>
-
-              <div className="pt-2 flex flex-wrap gap-4">
-                <Link
-                  href="/chat"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#4A2D1B] hover:bg-[#382112] text-white font-semibold text-sm shadow-md transition-all active:scale-95"
-                >
-                  <span>Mulai Konsultasi AI</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/riset"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-[#DCD0C1] hover:border-[#4A2D1B] text-[#4A2D1B] font-semibold text-sm transition-all"
-                >
-                  Jelajahi Riset
-                </Link>
-              </div>
             </div>
 
             {/* Right Image */}

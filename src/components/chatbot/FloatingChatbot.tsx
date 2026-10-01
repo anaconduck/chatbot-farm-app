@@ -87,10 +87,10 @@ export const FloatingChatbot: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
       {/* Expanded Chat Window */}
       {isOpen && (
-        <div className="mb-3 w-[92vw] sm:w-[380px] h-[520px] max-h-[82vh] bg-white rounded-2xl shadow-2xl border border-[#E8DCCF] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="mb-3 w-[calc(100vw-2rem)] sm:w-[380px] max-w-[380px] h-[500px] max-h-[78vh] bg-white rounded-2xl shadow-2xl border border-[#E8DCCF] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
           {/* Chat Header */}
           <div className="bg-[#4E2E1E] text-white p-3.5 flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-2.5">
@@ -250,22 +250,22 @@ export const FloatingChatbot: React.FC = () => {
         </div>
       )}
 
-      {/* Collapsed Button: Square/Rounded button in the corner matching user instruction */}
+      {/* Collapsed Button: Compact & responsive */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-2xl bg-gradient-to-br from-[#965A2E] to-[#54321D] p-1.5 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#FAF7F2]"
+        className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#965A2E] to-[#54321D] p-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#FAF7F2]"
         aria-label="Buka Chatbot AgroLivestock AI"
       >
         <div className="w-full h-full rounded-xl bg-[#613619] flex items-center justify-center relative overflow-hidden">
           <Image
             src="/images/chatbot/cowboy-robot.png"
             alt="AgroLivestock AI Mascot"
-            width={52}
-            height={52}
+            width={38}
+            height={38}
             className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
           />
           {/* Notification status dot */}
-          <span className="absolute top-1.5 right-1.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#54321D]" />
+          <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#54321D]" />
         </div>
       </button>
     </div>

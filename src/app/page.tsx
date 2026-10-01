@@ -20,7 +20,7 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden pt-12 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <section className="relative overflow-hidden pt-12 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left Copy */}
             <div className="lg:col-span-7 space-y-6">
@@ -68,22 +68,6 @@ export default function HomePage() {
                   priority
                 />
               </div>
-            </div>
-          </div>
-
-          {/* Trust Badges - positioned below hero grid */}
-          <div className="pt-6 border-t border-[#EADECE] grid grid-cols-3 gap-6 max-w-2xl text-left">
-            <div>
-              <div className="text-2xl font-black text-[#361D10]">45+</div>
-              <div className="text-xs text-[#7A6A60] font-medium">Jurnal Ilmiah Unggas</div>
-            </div>
-            <div>
-              <div className="text-2xl font-black text-[#DE992B]">24/7</div>
-              <div className="text-xs text-[#7A6A60] font-medium">Asisten Cerdas Aktif</div>
-            </div>
-            <div>
-              <div className="text-2xl font-black text-[#2E7D32]">100%</div>
-              <div className="text-xs text-[#7A6A60] font-medium">Rujukan Terverifikasi</div>
             </div>
           </div>
         </section>
@@ -188,32 +172,6 @@ export default function HomePage() {
               <h4 className="font-bold text-base text-[#361D10]">Solusi & Sumber Rujukan</h4>
               <p className="text-xs text-[#6B5B51] leading-relaxed">
                 Terima ringkasan praktis lengkap dengan nomor halaman dan judul referensi aslinya.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ACKNOWLEDGEMENTS SECTION - HIBAH FAPET UNIVERSITAS BRAWIJAYA */}
-        <section className="pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#E6DAD0] shadow-sm flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-            <div className="shrink-0 p-3 rounded-2xl bg-[#FAF7F2] border border-[#EADBCE] shadow-xs flex items-center justify-center">
-              <Image
-                src="/images/logo/universitas-brawijaya.svg"
-                alt="Logo Universitas Brawijaya"
-                width={76}
-                height={76}
-                className="object-contain"
-              />
-            </div>
-            <div className="space-y-2 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#EBF2FA] text-[#1D4E89] border border-[#C5D8EE] text-[11px] font-bold tracking-wide uppercase">
-                Program Hibah Fapet UB
-              </div>
-              <h3 className="text-xl sm:text-2xl font-black text-[#361D10]">
-                Didukung oleh Program HIBAH Fakultas Peternakan Universitas Brawijaya
-              </h3>
-              <p className="text-xs sm:text-sm text-[#6C5D53] leading-relaxed max-w-3xl">
-                Pengembangan platform riset dan konsultasi kecerdasan buatan terapan ini didanai melalui Program HIBAH Fakultas Peternakan Universitas Brawijaya (Fapet UB) dalam upaya hilirisasi keilmuan veteriner dan inovasi teknologi agribisnis peternakan nasional.
               </p>
             </div>
           </div>
