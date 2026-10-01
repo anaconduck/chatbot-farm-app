@@ -10,13 +10,9 @@ import {
   Calendar,
   Download,
   Users,
-  FileDown,
   UploadCloud,
   FileText,
   Search,
-  SlidersHorizontal,
-  Eye,
-  Edit2,
   Trash2,
   LogOut,
   CheckCircle,
@@ -24,6 +20,7 @@ import {
   Layers,
   Inbox,
   Loader2,
+  FolderUp,
 } from "lucide-react";
 
 export default function AdminDashboardPage() {
@@ -31,13 +28,9 @@ export default function AdminDashboardPage() {
 
   const [documents, setDocuments] = useState<KnowledgeDocument[]>([]);
   const [stats, setStats] = useState({
-    activeVisitors: 0,
-    activeVisitorsMoM: "0%",
-    pdfDownloads: 0,
-    pdfDownloadsLabel: "Total unduhan",
+    totalVisits: 0,
     totalDocuments: 0,
     totalUsers: 0,
-    monthlyTrends: [] as Array<{ month: string; visits: number; downloads: number }>,
   });
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,7 +40,6 @@ export default function AdminDashboardPage() {
   // Form states
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Nutrisi Pakan");
-  const [accessStatus, setAccessStatus] = useState("Publik (Terbuka untuk Semua Peternak)");
   const [abstractText, setAbstractText] = useState("");
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
 
@@ -96,12 +88,12 @@ export default function AdminDashboardPage() {
           category,
           description: abstractText || "Dokumen teknis terverifikasi untuk peternakan unggas.",
           original_filename: selectedFileName || formattedTitle,
-          file_size_bytes: 3.5 * 1024 * 1024,
+          file_size_bytes: 2.5 * 1024 * 1024,
         }),
       });
 
       if (res.ok) {
-        setUploadSuccess(`Dokumen "${title}" berhasil disimpan ke database.`);
+        setUploadSuccess(`Dokumen "${title}" berhasil diunggah ke database.`);
         setTitle("");
         setAbstractText("");
         setSelectedFileName(null);
@@ -184,7 +176,7 @@ export default function AdminDashboardPage() {
                   Panel Pengelola TanyaTernak
                 </h1>
                 <span className="px-2 py-0.5 rounded-full bg-[#EAF5EA] text-[#2E7D32] border border-[#C6E6C7] text-[10px] font-bold">
-                  ● DATABASE AKTIF
+                  ● SUPABASE AKTIF
                 </span>
               </div>
             </div>
@@ -240,28 +232,27 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* STATISTIK PLATFORM & RISET SECTION */}
+        {/* STATISTIK PLATFORM SECTION */}
         <section className="space-y-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold text-[#361D10]">
-              Statistik Platform & Riset
+              Statistik Platform
             </h2>
             <p className="text-xs text-[#7A6A60]">
-              Metrik riil dari database Supabase Anda.
+              Data terverifikasi langsung dari database Supabase Anda.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {/* Stat 1 */}
+            {/* Stat 1: Total Pengunjung */}
             <div className="bg-white rounded-2xl p-5 border border-[#E8DCCF] shadow-xs flex items-center justify-between">
               <div className="space-y-1">
-                <span className="text-xs text-[#7A6A60] font-medium">Total Pengunjung Aktif</span>
+                <span className="text-xs text-[#7A6A60] font-medium">Total Kunjungan Web</span>
                 <div className="text-2xl font-black text-[#361D10]">
-                  {stats.activeVisitors.toLocaleString("id-ID")}{" "}
-                  <span className="text-xs font-normal text-[#8A7A70]">/ bln</span>
+                  {stats.totalVisits.toLocaleString("id-ID")}
                 </div>
                 <div className="text-[11px] font-semibold text-[#8C7B71]">
-                  {stats.activeVisitors === 0 ? "Belum ada kunjungan tercatat" : `↗ ${stats.activeVisitorsMoM}`}
+                  Tercatat via Supabase
                 </div>
               </div>
               <div className="w-10 h-10 rounded-xl bg-[#FAF4EB] text-[#4A2D1B] flex items-center justify-center">
@@ -269,30 +260,15 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Stat 2 */}
+            {/* Stat 2: Total Dokumen Terunggah */}
             <div className="bg-white rounded-2xl p-5 border border-[#E8DCCF] shadow-xs flex items-center justify-between">
               <div className="space-y-1">
-                <span className="text-xs text-[#7A6A60] font-medium">Unduhan Riset PDF</span>
+                <span className="text-xs text-[#7A6A60] font-medium">Total Dokumen Terunggah</span>
                 <div className="text-2xl font-black text-[#361D10]">
-                  {stats.pdfDownloads.toLocaleString("id-ID")}{" "}
-                  <span className="text-xs font-normal text-[#8A7A70]">unduhan</span>
+                  {stats.totalDocuments.toLocaleString("id-ID")}
                 </div>
                 <div className="text-[11px] font-semibold text-[#8C7B71]">
-                  {stats.pdfDownloadsLabel}
-                </div>
-              </div>
-              <div className="w-10 h-10 rounded-xl bg-[#FAF4EB] text-[#4A2D1B] flex items-center justify-center">
-                <FileDown className="w-5 h-5" />
-              </div>
-            </div>
-
-            {/* Stat 3 */}
-            <div className="bg-white rounded-2xl p-5 border border-[#E8DCCF] shadow-xs flex items-center justify-between">
-              <div className="space-y-1">
-                <span className="text-xs text-[#7A6A60] font-medium">Total Dokumen Terindeks</span>
-                <div className="text-2xl font-black text-[#361D10]">{documents.length}</div>
-                <div className="text-[11px] font-semibold text-[#8C7B71]">
-                  {documents.length === 0 ? "Database kosong" : `${documents.length} dokumen tersimpan`}
+                  {stats.totalDocuments === 0 ? "Belum ada dokumen" : `${stats.totalDocuments} dokumen tersimpan`}
                 </div>
               </div>
               <div className="w-10 h-10 rounded-xl bg-[#FAF4EB] text-[#DE992B] flex items-center justify-center">
@@ -300,7 +276,23 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Stat 4 */}
+            {/* Stat 3: Total Pengguna Terdaftar */}
+            <div className="bg-white rounded-2xl p-5 border border-[#E8DCCF] shadow-xs flex items-center justify-between">
+              <div className="space-y-1">
+                <span className="text-xs text-[#7A6A60] font-medium">Total Akun Terdaftar</span>
+                <div className="text-2xl font-black text-[#361D10]">
+                  {stats.totalUsers.toLocaleString("id-ID")}
+                </div>
+                <div className="text-[11px] font-semibold text-[#8C7B71]">
+                  Pengguna aktif platform
+                </div>
+              </div>
+              <div className="w-10 h-10 rounded-xl bg-[#FAF4EB] text-[#4A2D1B] flex items-center justify-center">
+                <Users className="w-5 h-5" />
+              </div>
+            </div>
+
+            {/* Stat 4: Integrasi Dify */}
             <div className="bg-white rounded-2xl p-5 border border-[#E8DCCF] shadow-xs flex items-center justify-between">
               <div className="space-y-1">
                 <span className="text-xs text-[#7A6A60] font-medium">Status Integrasi Dify</span>
@@ -315,83 +307,21 @@ export default function AdminDashboardPage() {
               </div>
             </div>
           </div>
-
-          {/* BAR CHART SECTION */}
-          <div className="bg-white rounded-3xl p-6 border border-[#E8DCCF] shadow-xs space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <h3 className="font-bold text-base text-[#361D10]">
-                  Tren Kunjungan & Unduhan Riset
-                </h3>
-                <p className="text-xs text-[#7A6A60]">
-                  Perbandingan volume pengunjung bulanan terhadap interaksi unduh dokumen teknis
-                </p>
-              </div>
-
-              {/* Chart Legend */}
-              <div className="flex items-center gap-4 text-xs font-semibold">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded bg-[#5A3825]" />
-                  <span className="text-[#5A3825]">Kunjungan Web</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded bg-[#EEA734]" />
-                  <span className="text-[#EEA734]">Unduhan PDF</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Chart Area */}
-            {stats.monthlyTrends.length > 0 ? (
-              <div className="pt-6 pb-2 px-2 flex items-end justify-between gap-4 h-56 border-b border-[#F1E8DF]">
-                {stats.monthlyTrends.map((trend, idx) => (
-                  <div key={idx} className="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
-                    <div className="w-full flex items-end justify-center gap-1.5 h-full">
-                      <div
-                        style={{ height: `${Math.min(100, (trend.visits / 200) * 100)}%` }}
-                        className="w-4 sm:w-8 bg-[#5A3825] rounded-t-md relative transition-all group-hover:brightness-110"
-                      />
-                      <div
-                        style={{ height: `${Math.min(100, (trend.downloads / 200) * 100)}%` }}
-                        className="w-4 sm:w-8 bg-[#EEA734] rounded-t-md relative transition-all group-hover:brightness-110"
-                      />
-                    </div>
-                    <span className="text-xs font-bold text-[#7A6A60]">{trend.month}</span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="pt-8 pb-8 px-4 flex flex-col items-center justify-center border border-dashed border-[#E8DCCF] rounded-2xl text-center space-y-2 bg-[#FAF7F2]/40">
-                <div className="w-10 h-10 rounded-xl bg-white border border-[#E2D5C7] flex items-center justify-center text-[#DE992B] shadow-xs">
-                  <Calendar className="w-5 h-5" />
-                </div>
-                <p className="text-xs font-bold text-[#361D10]">Belum Ada Data Tren Kunjungan</p>
-                <p className="text-[11px] text-[#8C7B71] max-w-md">
-                  Grafik kunjungan dan unduhan PDF akan otomatis terbentuk saat pengunjung mulai berinteraksi dengan website.
-                </p>
-              </div>
-            )}
-
-            <div className="flex items-center justify-between text-xs text-[#8C7B71] pt-1">
-              <span>Basis data riil dari Supabase PostgreSQL</span>
-              <span className="font-semibold text-[#4A2D1B]">Status: Terkoneksi</span>
-            </div>
-          </div>
         </section>
 
-        {/* UNGGAH DOKUMEN PDF RISET & LAPORAN */}
+        {/* UNGGAH DOKUMEN SECTION */}
         <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8DCCF] shadow-xs space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#F1E8DF] pb-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-[#FFF5E5] text-[#DE992B] flex items-center justify-center">
-                <UploadCloud className="w-5 h-5" />
+                <FolderUp className="w-5 h-5" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-[#361D10]">
-                  Unggah Dokumen PDF Riset & Laporan
+                  Unggah Dokumen Riset & Laporan
                 </h3>
                 <p className="text-xs text-[#7A6A60]">
-                  Publikasikan pedoman teknis budidaya, riset formulasi pakan, dan analisis biosafety flok ke database.
+                  Unggah pedoman teknis budidaya, riset formulasi pakan, dan analisis peternakan ke database.
                 </p>
               </div>
             </div>
@@ -401,141 +331,96 @@ export default function AdminDashboardPage() {
             </span>
           </div>
 
-          <form onSubmit={handleUploadSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left Upload Dropzone */}
-            <div className="lg:col-span-5 border-2 border-dashed border-[#DFD3C5] hover:border-[#DE992B] rounded-2xl p-6 flex flex-col items-center justify-center text-center space-y-3 bg-[#FAF7F2]/40 transition-colors cursor-pointer min-h-[260px]">
-              <div className="w-14 h-14 rounded-2xl bg-white border border-[#E2D5C7] flex items-center justify-center text-[#DE992B] shadow-xs">
-                <FileText className="w-7 h-7" />
-              </div>
-
-              <div className="space-y-1">
-                <p className="font-bold text-sm text-[#361D10]">
-                  Pilih file PDF riset
-                </p>
-                <p className="text-xs text-[#7A6A60]">
-                  Ketik nama dokumen di formulir sebelah kanan
-                </p>
-              </div>
-
-              <div className="text-[10px] font-semibold px-2 py-0.5 rounded bg-[#FAF4EB] text-[#8C5D19] border border-[#F3E2CB]">
-                MAKSIMAL UKURAN: 25MB
-              </div>
-
-              <p className="text-[11px] text-[#9A8A80]">
-                Mendukung jurnal nutrisi, pedoman biosekuriti, dan studi lapang.
-              </p>
-            </div>
-
-            {/* Right Form Fields */}
-            <div className="lg:col-span-7 space-y-4">
+          <form onSubmit={handleUploadSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-[#361D10]">
-                  Judul Riset / Laporan Ilmiah <span className="text-rose-500">*</span>
+                  Judul Dokumen Riset <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Contoh: Analisis Keseimbangan Asam Amino Pakan Ayam"
+                  placeholder="Contoh: Analisis Formulasi Pakan Ayam Layer"
                   required
                   className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E2D5C7] text-xs sm:text-sm text-[#361D10] focus:border-[#4A2D1B] outline-none"
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#361D10]">
-                    Kategori Pembahasan <span className="text-rose-500">*</span>
-                  </label>
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-white border border-[#E2D5C7] text-xs sm:text-sm text-[#361D10] focus:border-[#4A2D1B] outline-none"
-                  >
-                    <option value="Nutrisi Pakan">Nutrisi Pakan</option>
-                    <option value="Penyakit & Vaksinasi">Penyakit & Vaksinasi</option>
-                    <option value="Manajemen Kandang">Manajemen Kandang</option>
-                    <option value="Ekonomi & Pemasaran">Ekonomi & Pemasaran</option>
-                    <option value="Umum">Umum</option>
-                  </select>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#361D10]">Akses Dokumen</label>
-                  <select
-                    value={accessStatus}
-                    onChange={(e) => setAccessStatus(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-white border border-[#E2D5C7] text-xs sm:text-sm text-[#361D10] focus:border-[#4A2D1B] outline-none"
-                  >
-                    <option value="Publik (Terbuka untuk Semua Peternak)">Publik (Terbuka)</option>
-                    <option value="Internal Riset">Internal Riset</option>
-                  </select>
-                </div>
-              </div>
-
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-[#361D10]">
-                  Abstrak / Ringkasan Dokumen
+                  Kategori Pembahasan <span className="text-rose-500">*</span>
                 </label>
-                <textarea
-                  rows={3}
-                  value={abstractText}
-                  onChange={(e) => setAbstractText(e.target.value)}
-                  placeholder="Ringkasan temuan riset, metodologi, dan rekomendasi praktis bagi peternak..."
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E2D5C7] text-xs sm:text-sm text-[#361D10] focus:border-[#4A2D1B] outline-none"
-                />
-              </div>
-
-              {/* Submit Button */}
-              <div className="flex justify-end pt-2">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-6 py-3 rounded-xl bg-[#F3AC3C] hover:bg-[#E59E2E] text-[#361D10] font-bold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95 disabled:opacity-50"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Menyimpan ke Database...</span>
-                    </>
-                  ) : (
-                    <>
-                      <UploadCloud className="w-4 h-4" />
-                      <span>Unggah & Publikasikan Dokumen</span>
-                    </>
-                  )}
-                </button>
+                  <option value="Nutrisi Pakan">Nutrisi Pakan</option>
+                  <option value="Penyakit & Vaksinasi">Penyakit & Vaksinasi</option>
+                  <option value="Manajemen Kandang">Manajemen Kandang</option>
+                  <option value="Ekonomi & Pemasaran">Ekonomi & Pemasaran</option>
+                  <option value="Umum">Umum</option>
+                </select>
               </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-[#361D10]">
+                Deskripsi / Ringkasan Dokumen
+              </label>
+              <textarea
+                rows={3}
+                value={abstractText}
+                onChange={(e) => setAbstractText(e.target.value)}
+                placeholder="Tuliskan keterangan singkat mengenai dokumen ini..."
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E2D5C7] text-xs sm:text-sm text-[#361D10] focus:border-[#4A2D1B] outline-none"
+              />
+            </div>
+
+            <div className="flex justify-end pt-2">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-6 py-2.5 rounded-xl bg-[#4A2D1B] hover:bg-[#382112] text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95 disabled:opacity-50"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Menyimpan ke Database...</span>
+                  </>
+                ) : (
+                  <>
+                    <UploadCloud className="w-4 h-4 text-[#DE992B]" />
+                    <span>Unggah Dokumen</span>
+                  </>
+                )}
+              </button>
             </div>
           </form>
         </section>
 
-        {/* DAFTAR DOKUMEN PDF TERUNGGAH TABLE */}
+        {/* DAFTAR DOKUMEN SECTION */}
         <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8DCCF] shadow-xs space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-lg font-bold text-[#361D10]">
-                Daftar Dokumen PDF Terunggah
+                Daftar Dokumen Terunggah
               </h3>
               <p className="text-xs text-[#7A6A60]">
-                Manajemen arsip jurnal, status visibilitas pustaka, dan rekap statistik unduhan pengguna.
+                Daftar file riset yang tersimpan di database Supabase Anda.
               </p>
             </div>
 
-            <div className="flex items-center gap-2">
-              <div className="relative">
-                <Search className="w-4 h-4 text-[#8C7B71] absolute left-3 top-1/2 -translate-y-1/2" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Cari arsip PDF..."
-                  className="pl-9 pr-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#E2D5C7] text-xs text-[#361D10] focus:border-[#4A2D1B] outline-none"
-                />
-              </div>
-              <button className="p-2 rounded-xl border border-[#E2D5C7] text-[#5A483E] hover:border-[#4A2D1B] transition-colors">
-                <SlidersHorizontal className="w-4 h-4" />
-              </button>
+            <div className="relative">
+              <Search className="w-4 h-4 text-[#8C7B71] absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Cari arsip dokumen..."
+                className="pl-9 pr-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#E2D5C7] text-xs text-[#361D10] focus:border-[#4A2D1B] outline-none"
+              />
             </div>
           </div>
 
@@ -544,19 +429,17 @@ export default function AdminDashboardPage() {
             <table className="w-full text-left text-xs">
               <thead className="bg-[#FAF7F2] text-[#7A6A60] font-bold uppercase tracking-wider border-y border-[#E8DCCF]">
                 <tr>
-                  <th className="py-3 px-4">Nama File PDF</th>
+                  <th className="py-3 px-4">Nama Dokumen</th>
                   <th className="py-3 px-3">Kategori</th>
                   <th className="py-3 px-3">Tanggal Unggah</th>
                   <th className="py-3 px-3">Ukuran File</th>
-                  <th className="py-3 px-3">Total Unduhan</th>
-                  <th className="py-3 px-3">Status</th>
                   <th className="py-3 px-3 text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#F1E8DF]">
                 {isLoading ? (
                   <tr>
-                    <td colSpan={7} className="py-12 text-center text-[#7A6A60]">
+                    <td colSpan={5} className="py-12 text-center text-[#7A6A60]">
                       <div className="flex items-center justify-center gap-2">
                         <Loader2 className="w-5 h-5 animate-spin text-[#DE992B]" />
                         <span>Memuat dokumen dari database...</span>
@@ -565,7 +448,7 @@ export default function AdminDashboardPage() {
                   </tr>
                 ) : filteredDocs.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-16 text-center">
+                    <td colSpan={5} className="py-16 text-center">
                       <div className="flex flex-col items-center justify-center space-y-3">
                         <div className="w-14 h-14 rounded-2xl bg-[#FAF4EB] text-[#DE992B] flex items-center justify-center shadow-xs">
                           <Inbox className="w-7 h-7" />
@@ -575,7 +458,7 @@ export default function AdminDashboardPage() {
                             Belum Ada Dokumen di Database
                           </p>
                           <p className="text-xs text-[#8C7A70] max-w-sm mx-auto">
-                            Tabel basis pengetahuan Anda masih kosong. Silakan gunakan formulir di atas untuk mengunggah dokumen riset pertama.
+                            Tabel dokumen masih kosong. Silakan gunakan formulir di atas untuk mengunggah file pertama.
                           </p>
                         </div>
                       </div>
@@ -589,9 +472,11 @@ export default function AdminDashboardPage() {
                           <FileText className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
                           <div>
                             <div className="leading-snug">{doc.title}</div>
-                            <div className="text-[11px] font-normal text-[#8C7A70] mt-0.5">
-                              {doc.description}
-                            </div>
+                            {doc.description && (
+                              <div className="text-[11px] font-normal text-[#8C7A70] mt-0.5">
+                                {doc.description}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </td>
@@ -610,24 +495,14 @@ export default function AdminDashboardPage() {
                       <td className="py-4 px-3 text-[#6A5A50]">
                         {(Number(doc.file_size_bytes || 0) / (1024 * 1024)).toFixed(1)} MB
                       </td>
-                      <td className="py-4 px-3 font-semibold text-[#361D10]">
-                        📥 {doc.download_count?.toLocaleString("id-ID") || 0}
-                      </td>
-                      <td className="py-4 px-3">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#EAF5EA] text-[#2E7D32] font-bold text-[10px]">
-                          ● Publik
-                        </span>
-                      </td>
                       <td className="py-4 px-3 text-right">
-                        <div className="inline-flex items-center gap-1.5">
-                          <button
-                            onClick={() => handleDelete(doc.id)}
-                            className="p-1.5 rounded-lg text-rose-500 hover:text-rose-700 hover:bg-rose-50 transition-colors"
-                            title="Hapus"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
+                        <button
+                          onClick={() => handleDelete(doc.id)}
+                          className="p-1.5 rounded-lg text-rose-500 hover:text-rose-700 hover:bg-rose-50 transition-colors"
+                          title="Hapus Dokumen"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
                       </td>
                     </tr>
                   ))
@@ -637,10 +512,8 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Pagination info */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-[#F1E8DF] text-xs text-[#7A6A60]">
-            <div>
-              Menampilkan {filteredDocs.length} dari total {documents.length} dokumen publikasi riset
-            </div>
+          <div className="pt-4 border-t border-[#F1E8DF] text-xs text-[#7A6A60]">
+            Total {filteredDocs.length} dari {documents.length} dokumen tersimpan
           </div>
         </section>
       </main>

@@ -224,7 +224,6 @@ export default function AdminDocumentsPage() {
                   <th className="py-3 px-3">Kategori</th>
                   <th className="py-3 px-3">Penulis</th>
                   <th className="py-3 px-3">Ukuran</th>
-                  <th className="py-3 px-3">Status</th>
                   <th className="py-3 px-3">Tanggal Dibuat</th>
                   <th className="py-3 px-3 text-right">Aksi</th>
                 </tr>
@@ -232,7 +231,7 @@ export default function AdminDocumentsPage() {
               <tbody className="divide-y divide-[#F1E8DF]">
                 {isLoading ? (
                   <tr>
-                    <td colSpan={7} className="py-12 text-center text-[#7A6A60]">
+                    <td colSpan={6} className="py-12 text-center text-[#7A6A60]">
                       <div className="flex items-center justify-center gap-2">
                         <Loader2 className="w-5 h-5 animate-spin text-[#DE992B]" />
                         <span>Memuat data dari database...</span>
@@ -241,7 +240,7 @@ export default function AdminDocumentsPage() {
                   </tr>
                 ) : filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-16 text-center">
+                    <td colSpan={6} className="py-16 text-center">
                       <div className="flex flex-col items-center justify-center space-y-3">
                         <div className="w-12 h-12 rounded-2xl bg-[#FAF4EB] text-[#DE992B] flex items-center justify-center">
                           <Inbox className="w-6 h-6" />
@@ -277,11 +276,6 @@ export default function AdminDocumentsPage() {
                       </td>
                       <td className="py-4 px-3 text-[#6A5A50]">
                         {(Number(doc.file_size_bytes || 0) / (1024 * 1024)).toFixed(1)} MB
-                      </td>
-                      <td className="py-4 px-3">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#EAF5EA] text-[#2E7D32] font-bold text-[10px]">
-                          ● {doc.status}
-                        </span>
                       </td>
                       <td className="py-4 px-3 text-[#7A6A60]">
                         {new Date(doc.created_at).toLocaleDateString("id-ID")}

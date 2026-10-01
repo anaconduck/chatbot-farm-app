@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthProvider } from "@/lib/auth/context";
 import { FloatingChatbot } from "@/components/chatbot/FloatingChatbot";
 import { Analytics } from "@vercel/analytics/react";
+import { PageTracker } from "@/components/analytics/PageTracker";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -52,6 +53,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/images/logo/logo1.png?v=5" />
       </head>
       <body className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#2C1D13] antialiased selection:bg-[#DE992B]/20 selection:text-[#4E2E1E]">
+        <PageTracker />
         <AuthProvider>
           {children}
           <FloatingChatbot />
