@@ -34,9 +34,6 @@ yarn-error.log*
 .env*
 !.env.example
 
-# design assets (local only)
-design_web/
-
 # vercel
 .vercel
 
