@@ -14,6 +14,7 @@ import {
   Shield,
   Loader2,
   UserCheck,
+  MessageSquare,
 } from "lucide-react";
 
 interface UserItem {
@@ -121,6 +122,13 @@ export default function AdminUsersPage() {
           >
             <Users className="w-4 h-4 text-[#DE992B]" />
             Manajemen Pengguna ({users.length})
+          </Link>
+          <Link
+            href="/admin/conversations"
+            className="px-4 py-2.5 text-[#6E5D52] hover:text-[#4A2D1B] flex items-center gap-2 whitespace-nowrap"
+          >
+            <MessageSquare className="w-4 h-4" />
+            Percakapan Pengguna
           </Link>
         </div>
       </div>

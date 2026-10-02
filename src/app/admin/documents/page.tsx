@@ -19,6 +19,7 @@ import {
   Users,
   Inbox,
   Loader2,
+  MessageSquare,
 } from "lucide-react";
 
 export default function AdminDocumentsPage() {
@@ -164,6 +165,13 @@ export default function AdminDocumentsPage() {
           >
             <Users className="w-4 h-4" />
             Manajemen Pengguna
+          </Link>
+          <Link
+            href="/admin/conversations"
+            className="px-4 py-2.5 text-[#6E5D52] hover:text-[#4A2D1B] flex items-center gap-2 whitespace-nowrap"
+          >
+            <MessageSquare className="w-4 h-4" />
+            Percakapan Pengguna
           </Link>
         </div>
       </div>

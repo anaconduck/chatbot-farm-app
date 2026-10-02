@@ -18,6 +18,7 @@ import {
   Layers,
   Loader2,
   FolderUp,
+  MessageSquare,
 } from "lucide-react";
 
 export default function AdminDashboardPage() {
@@ -196,6 +197,13 @@ export default function AdminDashboardPage() {
           >
             <Users className="w-4 h-4" />
             Manajemen Pengguna ({stats.totalUsers})
+          </Link>
+          <Link
+            href="/admin/conversations"
+            className="px-4 py-2.5 text-[#6E5D52] hover:text-[#4A2D1B] flex items-center gap-2 whitespace-nowrap"
+          >
+            <MessageSquare className="w-4 h-4" />
+            Percakapan Pengguna
           </Link>
         </div>
       </div>
