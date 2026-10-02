@@ -51,7 +51,7 @@ export default function AdminConversationsPage() {
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
       <header className="sticky top-0 z-30 w-full bg-white border-b border-[#E8DCCF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <Logo />
+          <Logo href="/admin" />
           <div className="flex items-center gap-3">
             <span className="text-xs font-bold text-[#361D10]">{user?.full_name}</span>
             <button

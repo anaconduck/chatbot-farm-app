@@ -17,7 +17,18 @@ export async function middleware(request: NextRequest) {
     request.cookies.get("tanyaternak_role")?.value ||
     request.cookies.get("chickyai_role")?.value;
 
-  // 1. ADMIN ROUTES PROTECTION (/admin/* except /admin/login)
+  // 1. STRICT ADMIN ROLE LOCK:
+  // Jika akun adalah ADMIN dan belum logout, ADMIN HANYA BISA MENGAKSES /admin/*
+  if (roleCookie === "ADMIN") {
+    // Jika admin membuka halaman non-admin (misal: /, /about, /riset, /login, /dashboard)
+    // atau sedang di halaman /admin/login padahal sudah login
+    if (!pathname.startsWith("/admin") || pathname === "/admin/login") {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    }
+    return NextResponse.next();
+  }
+
+  // 2. PROTEKSI ROUTE ADMIN (/admin/* kecuali /admin/login untuk yang belum login)
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
     if (!roleCookie) {
       const loginUrl = new URL("/admin/login", request.url);
@@ -26,14 +37,19 @@ export async function middleware(request: NextRequest) {
     }
 
     if (roleCookie !== "ADMIN") {
-      // Regular user trying to access admin dashboard -> redirect to /dashboard
+      // Regular user yang mencoba masuk ke admin -> redirect ke /dashboard
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 
     return NextResponse.next();
   }
 
-  // 2. AUTHENTICATED USER ROUTES (/dashboard, /chat, /profile)
+  // 3. JIKA USER BIASA SUDAH LOGIN MEMBUKA /login ATAU /register -> redirect ke /dashboard
+  if (roleCookie === "USER" && (pathname === "/login" || pathname === "/register")) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  // 4. PROTECTED USER ROUTES (/dashboard, /chat, /profile)
   const isProtectedUserRoute =
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/chat") ||
@@ -52,9 +68,12 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/admin/:path*",
-    "/dashboard/:path*",
-    "/chat/:path*",
-    "/profile/:path*",
+    /*
+     * Match all request paths except:
+     * - api routes
+     * - _next/static, _next/image
+     * - images, favicon, static files
+     */
+    "/((?!api|_next/static|_next/image|images|favicon.ico|.*\\..*).*)",
   ],
 };

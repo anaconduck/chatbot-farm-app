@@ -156,7 +156,7 @@ export default function AdminDashboardPage() {
       {/* Top Bar */}
       <header className="sticky top-0 z-30 w-full bg-white border-b border-[#E8DCCF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <Logo />
+          <Logo href="/admin" />
 
           <div className="flex items-center gap-4">
             <div className="hidden sm:flex flex-col text-right">

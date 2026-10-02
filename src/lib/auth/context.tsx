@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { Profile, UserRole } from "@/types";
 
@@ -46,9 +46,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
 
   const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
   const supabase = createClient();
+
+  // Watch for route changes: strictly keep logged-in ADMIN inside /admin/*
+  useEffect(() => {
+    if (user?.role === "ADMIN" && pathname) {
+      if (!pathname.startsWith("/admin") || pathname === "/admin/login") {
+        router.replace("/admin");
+      }
+    }
+  }, [user?.role, pathname, router]);
 
   useEffect(() => {
     // Check saved session in local storage or Supabase
@@ -63,6 +73,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           try {
             const parsed = JSON.parse(storedDemo);
             setUser(parsed);
+            document.cookie = `tanyaternak_role=${parsed.role}; path=/; max-age=86400; SameSite=Lax`;
+            if (parsed.role === "ADMIN" && typeof window !== "undefined") {
+              const currentPath = window.location.pathname;
+              if (!currentPath.startsWith("/admin") || currentPath === "/admin/login") {
+                router.replace("/admin");
+              }
+            }
             setIsLoading(false);
             return;
           } catch {
@@ -82,6 +99,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
           if (profile) {
             setUser(profile as Profile);
+            document.cookie = `tanyaternak_role=${profile.role}; path=/; max-age=86400; SameSite=Lax`;
+
+            // If user is Admin and opens a non-admin page, force redirect to /admin
+            if (profile.role === "ADMIN" && typeof window !== "undefined") {
+              const currentPath = window.location.pathname;
+              if (!currentPath.startsWith("/admin") || currentPath === "/admin/login") {
+                router.replace("/admin");
+              }
+            }
           }
         }
       } catch (err) {
@@ -247,6 +273,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = async () => {
+    const wasAdmin = user?.role === "ADMIN";
     try {
       await supabase.auth.signOut();
     } catch {
@@ -257,7 +284,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem("chickyai_demo_user");
     document.cookie = "tanyaternak_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "chickyai_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    router.push("/login");
+
+    if (wasAdmin) {
+      router.push("/admin/login");
+    } else {
+      router.push("/login");
+    }
   };
 
   return (

@@ -13,7 +13,7 @@ export default function AdminAnalyticsPage() {
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
       <header className="sticky top-0 z-30 w-full bg-white border-b border-[#E8DCCF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <Logo />
+          <Logo href="/admin" />
           <button
             onClick={() => logout()}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4A2D1B] text-white text-xs font-semibold"
