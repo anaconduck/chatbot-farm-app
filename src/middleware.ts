@@ -13,6 +13,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Redirect any legacy /admin/login directly to unified /login
+  if (pathname === "/admin/login") {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
   const roleCookie =
     request.cookies.get("tanyaternak_role")?.value ||
     request.cookies.get("chickyai_role")?.value;
@@ -20,18 +25,16 @@ export async function middleware(request: NextRequest) {
   // 1. STRICT ADMIN ROLE LOCK:
   // Jika akun adalah ADMIN dan belum logout, ADMIN HANYA BISA MENGAKSES /admin/*
   if (roleCookie === "ADMIN") {
-    // Jika admin membuka halaman non-admin (misal: /, /about, /riset, /login, /dashboard)
-    // atau sedang di halaman /admin/login padahal sudah login
-    if (!pathname.startsWith("/admin") || pathname === "/admin/login") {
+    if (!pathname.startsWith("/admin")) {
       return NextResponse.redirect(new URL("/admin", request.url));
     }
     return NextResponse.next();
   }
 
-  // 2. PROTEKSI ROUTE ADMIN (/admin/* kecuali /admin/login untuk yang belum login)
-  if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
+  // 2. PROTEKSI ROUTE ADMIN (/admin/*)
+  if (pathname.startsWith("/admin")) {
     if (!roleCookie) {
-      const loginUrl = new URL("/admin/login", request.url);
+      const loginUrl = new URL("/login", request.url);
       loginUrl.searchParams.set("redirect", pathname);
       return NextResponse.redirect(loginUrl);
     }

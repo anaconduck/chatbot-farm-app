@@ -10,7 +10,7 @@ interface AuthContextType {
   role: UserRole | null;
   isLoading: boolean;
   isDemo: boolean;
-  login: (email: string, pass: string, targetRole?: UserRole) => Promise<{ success: boolean; error?: string }>;
+  login: (email: string, pass: string, targetRole?: UserRole) => Promise<{ success: boolean; error?: string; role?: UserRole }>;
   register: (data: { full_name: string; email: string; phone: string; password: string }) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
 }
@@ -54,7 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Watch for route changes: strictly keep logged-in ADMIN inside /admin/*
   useEffect(() => {
     if (user?.role === "ADMIN" && pathname) {
-      if (!pathname.startsWith("/admin") || pathname === "/admin/login") {
+      if (!pathname.startsWith("/admin")) {
         router.replace("/admin");
       }
     }
@@ -76,7 +76,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             document.cookie = `tanyaternak_role=${parsed.role}; path=/; max-age=86400; SameSite=Lax`;
             if (parsed.role === "ADMIN" && typeof window !== "undefined") {
               const currentPath = window.location.pathname;
-              if (!currentPath.startsWith("/admin") || currentPath === "/admin/login") {
+              if (!currentPath.startsWith("/admin")) {
                 router.replace("/admin");
               }
             }
@@ -104,7 +104,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             // If user is Admin and opens a non-admin page, force redirect to /admin
             if (profile.role === "ADMIN" && typeof window !== "undefined") {
               const currentPath = window.location.pathname;
-              if (!currentPath.startsWith("/admin") || currentPath === "/admin/login") {
+              if (!currentPath.startsWith("/admin")) {
                 router.replace("/admin");
               }
             }
@@ -124,7 +124,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     email: string,
     pass: string,
     targetRole?: UserRole
-  ): Promise<{ success: boolean; error?: string }> => {
+  ): Promise<{ success: boolean; error?: string; role?: UserRole }> => {
     setIsLoading(true);
 
     const cleanEmail = email.trim().toLowerCase();
@@ -147,7 +147,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       document.cookie = `tanyaternak_role=${demoProfile.role}; path=/; max-age=86400; SameSite=Lax`;
 
       setIsLoading(false);
-      return { success: true };
+      return { success: true, role: demoProfile.role };
     }
 
     // 2. Real Supabase Authentication
@@ -186,7 +186,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(profile as Profile);
         document.cookie = `tanyaternak_role=${profile.role}; path=/; max-age=86400; SameSite=Lax`;
         setIsLoading(false);
-        return { success: true };
+        return { success: true, role: profile.role as UserRole };
       }
     } catch {
       // In demo mode with random email
@@ -214,7 +214,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem("tanyaternak_demo_user", JSON.stringify(syntheticProfile));
         document.cookie = `tanyaternak_role=${fallbackRole}; path=/; max-age=86400; SameSite=Lax`;
         setIsLoading(false);
-        return { success: true };
+        return { success: true, role: fallbackRole };
       }
     }
 
@@ -273,7 +273,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = async () => {
-    const wasAdmin = user?.role === "ADMIN";
     try {
       await supabase.auth.signOut();
     } catch {
@@ -285,11 +284,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     document.cookie = "tanyaternak_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "chickyai_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-    if (wasAdmin) {
-      router.push("/admin/login");
-    } else {
-      router.push("/login");
-    }
+    router.push("/login");
   };
 
   return (
