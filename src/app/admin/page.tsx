@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { useAuth } from "@/lib/auth/context";
@@ -37,11 +37,10 @@ export default function AdminDashboardPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
 
-  // Form states
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("Nutrisi Pakan");
-  const [abstractText, setAbstractText] = useState("");
-  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+  // File upload state
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   // Fetch initial data from APIs
   const loadData = async () => {
@@ -71,32 +70,45 @@ export default function AdminDashboardPage() {
     loadData();
   }, []);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setSelectedFile(e.dataTransfer.files[0]);
+    }
+  };
+
   const handleUploadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || isSubmitting) return;
+    if (!selectedFile || isSubmitting) return;
 
     setIsSubmitting(true);
     try {
-      const formattedTitle = title.endsWith(".pdf") ? title : `${title.replace(/\s+/g, "_")}.pdf`;
+      const fileName = selectedFile.name;
       const res = await fetch("/api/admin/documents", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          title: formattedTitle,
+          title: fileName,
           author: user?.full_name || "Admin TanyaTernak",
           publication_year: new Date().getFullYear(),
-          category,
-          description: abstractText || "Dokumen teknis terverifikasi untuk peternakan unggas.",
-          original_filename: selectedFileName || formattedTitle,
-          file_size_bytes: 2.5 * 1024 * 1024,
+          category: "Riset Unggas",
+          description: `Dokumen riset terunggah: ${fileName}`,
+          original_filename: fileName,
+          file_size_bytes: selectedFile.size,
         }),
       });
 
       if (res.ok) {
-        setUploadSuccess(`Dokumen "${title}" berhasil diunggah ke database.`);
-        setTitle("");
-        setAbstractText("");
-        setSelectedFileName(null);
+        setUploadSuccess(`Berkas "${fileName}" berhasil diunggah ke database.`);
+        setSelectedFile(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
         await loadData();
       } else {
         const err = await res.json();
@@ -309,7 +321,7 @@ export default function AdminDashboardPage() {
           </div>
         </section>
 
-        {/* UNGGAH DOKUMEN SECTION */}
+        {/* UNGGAH DOKUMEN SECTION - CLEAN DROPZONE ONLY */}
         <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8DCCF] shadow-xs space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#F1E8DF] pb-4">
             <div className="flex items-center gap-3">
@@ -318,10 +330,10 @@ export default function AdminDashboardPage() {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-[#361D10]">
-                  Unggah Dokumen Riset & Laporan
+                  Unggah Berkas Dokumen PDF
                 </h3>
                 <p className="text-xs text-[#7A6A60]">
-                  Unggah pedoman teknis budidaya, riset formulasi pakan, dan analisis peternakan ke database.
+                  Pilih atau seret berkas PDF riset langsung dari komputer Anda.
                 </p>
               </div>
             </div>
@@ -331,68 +343,83 @@ export default function AdminDashboardPage() {
             </span>
           </div>
 
-          <form onSubmit={handleUploadSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-[#361D10]">
-                  Judul Dokumen Riset <span className="text-rose-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Contoh: Analisis Formulasi Pakan Ayam Layer"
-                  required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E2D5C7] text-xs sm:text-sm text-[#361D10] focus:border-[#4A2D1B] outline-none"
-                />
+          <form onSubmit={handleUploadSubmit} className="space-y-5">
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept=".pdf,.doc,.docx"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+
+            {/* Dropzone Box matching user specification */}
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              onDragOver={(e) => {
+                e.preventDefault();
+                setIsDragging(true);
+              }}
+              onDragLeave={() => setIsDragging(false)}
+              onDrop={handleDrop}
+              className={`border-2 border-dashed rounded-3xl p-8 sm:p-12 flex flex-col items-center justify-center text-center space-y-4 cursor-pointer transition-all ${
+                isDragging
+                  ? "border-[#DE992B] bg-[#FFF8EE]"
+                  : selectedFile
+                  ? "border-[#2E7D32] bg-[#EAF5EA]/30"
+                  : "border-[#E2D5C7] hover:border-[#DE992B] bg-[#FAF7F2]/50 hover:bg-[#FAF4EB]/60"
+              }`}
+            >
+              {/* PDF Icon in square rounded box */}
+              <div className="w-16 h-16 rounded-2xl bg-[#FAF4EB] border border-[#E8DCCF] flex items-center justify-center text-[#DE992B] shadow-xs">
+                <FileText className="w-8 h-8" />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-[#361D10]">
-                  Kategori Pembahasan <span className="text-rose-500">*</span>
-                </label>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E2D5C7] text-xs sm:text-sm text-[#361D10] focus:border-[#4A2D1B] outline-none"
-                >
-                  <option value="Nutrisi Pakan">Nutrisi Pakan</option>
-                  <option value="Penyakit & Vaksinasi">Penyakit & Vaksinasi</option>
-                  <option value="Manajemen Kandang">Manajemen Kandang</option>
-                  <option value="Ekonomi & Pemasaran">Ekonomi & Pemasaran</option>
-                  <option value="Umum">Umum</option>
-                </select>
+              {selectedFile ? (
+                <div className="space-y-1.5">
+                  <p className="font-bold text-sm text-[#2E7D32] flex items-center justify-center gap-1.5">
+                    <CheckCircle className="w-4 h-4" />
+                    {selectedFile.name}
+                  </p>
+                  <p className="text-xs text-[#7A6A60]">
+                    Ukuran: {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB • Klik untuk mengganti file
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <p className="font-extrabold text-base text-[#361D10]">
+                    Tarik dan lepaskan file PDF riset ke sini
+                  </p>
+                  <p className="text-xs text-[#7A6A60]">
+                    atau <span className="text-[#DE992B] font-bold underline">klik untuk memilih file</span> dari komputer
+                  </p>
+                </div>
+              )}
+
+              <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1 rounded-full bg-white text-[#8C5D19] border border-[#F3E2CB] shadow-2xs">
+                <span>ⓘ MAKSIMAL UKURAN: 25MB</span>
               </div>
+
+              <p className="text-[11px] text-[#9A8A80] italic">
+                Mendukung laporan flok, jurnal nutrisi pakan, pedoman biosekuriti.
+              </p>
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-[#361D10]">
-                Deskripsi / Ringkasan Dokumen
-              </label>
-              <textarea
-                rows={3}
-                value={abstractText}
-                onChange={(e) => setAbstractText(e.target.value)}
-                placeholder="Tuliskan keterangan singkat mengenai dokumen ini..."
-                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E2D5C7] text-xs sm:text-sm text-[#361D10] focus:border-[#4A2D1B] outline-none"
-              />
-            </div>
-
-            <div className="flex justify-end pt-2">
+            {/* Button Upload */}
+            <div className="flex justify-end pt-1">
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="px-6 py-2.5 rounded-xl bg-[#4A2D1B] hover:bg-[#382112] text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95 disabled:opacity-50"
+                disabled={!selectedFile || isSubmitting}
+                className="px-8 py-3 rounded-xl bg-[#4A2D1B] hover:bg-[#382112] text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Menyimpan ke Database...</span>
+                    <Loader2 className="w-4 h-4 animate-spin text-[#DE992B]" />
+                    <span>Mengunggah ke Database...</span>
                   </>
                 ) : (
                   <>
                     <UploadCloud className="w-4 h-4 text-[#DE992B]" />
-                    <span>Unggah Dokumen</span>
+                    <span>Upload Dokumen</span>
                   </>
                 )}
               </button>
