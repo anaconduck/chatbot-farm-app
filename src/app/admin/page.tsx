@@ -12,13 +12,10 @@ import {
   Users,
   UploadCloud,
   FileText,
-  Search,
-  Trash2,
   LogOut,
   CheckCircle,
   Database,
   Layers,
-  Inbox,
   Loader2,
   FolderUp,
 } from "lucide-react";
@@ -34,7 +31,6 @@ export default function AdminDashboardPage() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
 
   // File upload state
@@ -122,34 +118,7 @@ export default function AdminDashboardPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Apakah Anda yakin ingin menghapus dokumen ini dari database?")) return;
 
-    try {
-      const res = await fetch(`/api/admin/documents?id=${id}`, {
-        method: "DELETE",
-      });
-
-      if (res.ok) {
-        setDocuments((prev) => prev.filter((d) => d.id !== id));
-        setStats((prev) => ({
-          ...prev,
-          totalDocuments: Math.max(0, prev.totalDocuments - 1),
-        }));
-      } else {
-        const err = await res.json();
-        alert(`Gagal menghapus: ${err.error || "Terjadi kesalahan"}`);
-      }
-    } catch (err: any) {
-      alert(`Gagal menghapus: ${err?.message}`);
-    }
-  };
-
-  const filteredDocs = documents.filter(
-    (d) =>
-      d.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      d.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
@@ -183,14 +152,9 @@ export default function AdminDashboardPage() {
               <ShieldCheck className="w-5 h-5 text-[#DE992B]" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-lg font-extrabold text-[#361D10]">
-                  Panel Pengelola TanyaTernak
-                </h1>
-                <span className="px-2 py-0.5 rounded-full bg-[#EAF5EA] text-[#2E7D32] border border-[#C6E6C7] text-[10px] font-bold">
-                  ● SUPABASE AKTIF
-                </span>
-              </div>
+              <h1 className="text-lg font-extrabold text-[#361D10]">
+                Panel Pengelola Website
+              </h1>
             </div>
           </div>
 
@@ -427,122 +391,7 @@ export default function AdminDashboardPage() {
           </form>
         </section>
 
-        {/* DAFTAR DOKUMEN SECTION */}
-        <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8DCCF] shadow-xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h3 className="text-lg font-bold text-[#361D10]">
-                Daftar Dokumen Terunggah
-              </h3>
-              <p className="text-xs text-[#7A6A60]">
-                Daftar file riset yang tersimpan di database Supabase Anda.
-              </p>
-            </div>
 
-            <div className="relative">
-              <Search className="w-4 h-4 text-[#8C7B71] absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Cari arsip dokumen..."
-                className="pl-9 pr-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#E2D5C7] text-xs text-[#361D10] focus:border-[#4A2D1B] outline-none"
-              />
-            </div>
-          </div>
-
-          {/* Table Container */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-[#FAF7F2] text-[#7A6A60] font-bold uppercase tracking-wider border-y border-[#E8DCCF]">
-                <tr>
-                  <th className="py-3 px-4">Nama Dokumen</th>
-                  <th className="py-3 px-3">Kategori</th>
-                  <th className="py-3 px-3">Tanggal Unggah</th>
-                  <th className="py-3 px-3">Ukuran File</th>
-                  <th className="py-3 px-3 text-right">Aksi</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#F1E8DF]">
-                {isLoading ? (
-                  <tr>
-                    <td colSpan={5} className="py-12 text-center text-[#7A6A60]">
-                      <div className="flex items-center justify-center gap-2">
-                        <Loader2 className="w-5 h-5 animate-spin text-[#DE992B]" />
-                        <span>Memuat dokumen dari database...</span>
-                      </div>
-                    </td>
-                  </tr>
-                ) : filteredDocs.length === 0 ? (
-                  <tr>
-                    <td colSpan={5} className="py-16 text-center">
-                      <div className="flex flex-col items-center justify-center space-y-3">
-                        <div className="w-14 h-14 rounded-2xl bg-[#FAF4EB] text-[#DE992B] flex items-center justify-center shadow-xs">
-                          <Inbox className="w-7 h-7" />
-                        </div>
-                        <div className="space-y-1">
-                          <p className="text-sm font-bold text-[#361D10]">
-                            Belum Ada Dokumen di Database
-                          </p>
-                          <p className="text-xs text-[#8C7A70] max-w-sm mx-auto">
-                            Tabel dokumen masih kosong. Silakan gunakan formulir di atas untuk mengunggah file pertama.
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                ) : (
-                  filteredDocs.map((doc) => (
-                    <tr key={doc.id} className="hover:bg-[#FAF7F2]/60 transition-colors">
-                      <td className="py-4 px-4 font-bold text-[#361D10]">
-                        <div className="flex items-start gap-2.5">
-                          <FileText className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                          <div>
-                            <div className="leading-snug">{doc.title}</div>
-                            {doc.description && (
-                              <div className="text-[11px] font-normal text-[#8C7A70] mt-0.5">
-                                {doc.description}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </td>
-                      <td className="py-4 px-3">
-                        <span className="px-2.5 py-1 rounded-full bg-[#FFF5E5] text-[#8C5D19] font-semibold text-[11px]">
-                          {doc.category}
-                        </span>
-                      </td>
-                      <td className="py-4 px-3 text-[#6A5A50]">
-                        {new Date(doc.created_at).toLocaleDateString("id-ID", {
-                          day: "numeric",
-                          month: "short",
-                          year: "numeric",
-                        })}
-                      </td>
-                      <td className="py-4 px-3 text-[#6A5A50]">
-                        {(Number(doc.file_size_bytes || 0) / (1024 * 1024)).toFixed(1)} MB
-                      </td>
-                      <td className="py-4 px-3 text-right">
-                        <button
-                          onClick={() => handleDelete(doc.id)}
-                          className="p-1.5 rounded-lg text-rose-500 hover:text-rose-700 hover:bg-rose-50 transition-colors"
-                          title="Hapus Dokumen"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Pagination info */}
-          <div className="pt-4 border-t border-[#F1E8DF] text-xs text-[#7A6A60]">
-            Total {filteredDocs.length} dari {documents.length} dokumen tersimpan
-          </div>
-        </section>
       </main>
     </div>
   );
