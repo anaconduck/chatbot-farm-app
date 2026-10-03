@@ -12,7 +12,6 @@ import {
   Cpu,
   Layers,
   ArrowRight,
-  CheckCircle,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -55,17 +54,6 @@ export default function HomePage() {
                 >
                   <span>Pelajari Lebih Lanjut</span>
                 </Link>
-              </div>
-
-              <div className="flex items-center gap-6 pt-3 text-xs text-[#7A6A60]">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#2E7D32]" />
-                  <span>Rujukan Terverifikasi</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#2E7D32]" />
-                  <span>Akses Cepat 24/7</span>
-                </div>
               </div>
             </div>
 

@@ -88,7 +88,7 @@ export default function AboutPage() {
         </section>
 
         {/* VISI & MISI KAMI */}
-        <section className="py-6 pb-16 sm:pb-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="pt-6 pb-14 sm:pb-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Visi */}
             <Reveal delayMs={100}>

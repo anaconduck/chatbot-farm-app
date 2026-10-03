@@ -8,6 +8,7 @@ export interface PoultryFact {
   description: string;
   footerLabel: string;
   footerValue: string;
+  image?: string;
 }
 
 export const MOCK_FACTS: PoultryFact[] = [
@@ -16,6 +17,7 @@ export const MOCK_FACTS: PoultryFact[] = [
     badge: "Fotoperiodisme & Kelenjar Pineal",
     factNumber: "Fakta #01",
     title: "Pengaruh Spektrum Cahaya terhadap Siklus Bertelur",
+    image: "/images/facts/fact-1-light.jpg",
     description:
       "Ayam memiliki reseptor visual ekstra-retinal khusus yang sangat peka terhadap spektrum cahaya merah dan jingga (panjang gelombang 630–660 nm). Radiasi foton ini menembus batok kepala secara langsung untuk merangsang hipotalamus, memicu pelepasan hormon GnRH yang mengatur sintesis ovulasi dan produksi telur harian secara optimal.",
     footerLabel: "Spektrum Efektif: 630–660 nm",
@@ -26,6 +28,7 @@ export const MOCK_FACTS: PoultryFact[] = [
     badge: "Struktur Kalsium",
     factNumber: "Fakta #02",
     title: "Anatomi Cangkang Telur & Porositas Mikro",
+    image: "/images/facts/fact-2-eggshell.jpg",
     description:
       "Meskipun tampak padat dan kaku, sebutir cangkang telur memiliki lebih dari 7.000 hingga 17.000 pori mikro berbentuk corong. Struktur mikroskopis ini memfasilitasi respirasi difusi pertukaran gas oksigen, uap air, dan karbon dioksida selama pembentukan embrio dan penyimpanan.",
     footerLabel: "Kepadatan Pori",
@@ -36,6 +39,7 @@ export const MOCK_FACTS: PoultryFact[] = [
     badge: "Kognisi Sosial",
     factNumber: "Fakta #03",
     title: "Daya Ingat & Pengenalan Wajah",
+    image: "/images/facts/fact-3-cognition.jpg",
     description:
       "Ayam memiliki memori asosiatif yang luar biasa tajam. Penelitian neurobiologi mengonfirmasi unggas mampu membedakan dan mengingat lebih dari 100 wajah individu sesama ayam maupun penjaga kandang manusia dalam tatanan hierarki sosial (pecking order).",
     footerLabel: "Memori Identitas",
