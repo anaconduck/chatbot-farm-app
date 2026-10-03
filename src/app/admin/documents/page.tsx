@@ -21,9 +21,11 @@ import {
   Loader2,
   MessageSquare,
 } from "lucide-react";
+import { useToast } from "@/components/ui/Toast";
 
 export default function AdminDocumentsPage() {
   const { user, logout } = useAuth();
+  const toast = useToast();
   const [documents, setDocuments] = useState<KnowledgeDocument[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -77,6 +79,7 @@ export default function AdminDocumentsPage() {
       });
 
       if (res.ok) {
+        toast.success(`Dokumen "${title}" berhasil ditambahkan.`);
         setNotification(`Dokumen "${title}" berhasil ditambahkan ke database.`);
         setIsModalOpen(false);
         setTitle("");
@@ -85,10 +88,10 @@ export default function AdminDocumentsPage() {
         await loadDocuments();
       } else {
         const err = await res.json();
-        alert(`Gagal menambahkan dokumen: ${err.error || "Terjadi kesalahan"}`);
+        toast.error(`Gagal menambahkan dokumen: ${err.error || "Terjadi kesalahan"}`);
       }
     } catch (err: any) {
-      alert(`Gagal: ${err?.message}`);
+      toast.error(`Gagal: ${err?.message}`);
     } finally {
       setIsSubmitting(false);
       setTimeout(() => setNotification(null), 4000);
@@ -105,14 +108,15 @@ export default function AdminDocumentsPage() {
 
       if (res.ok) {
         setDocuments((prev) => prev.filter((d) => d.id !== id));
+        toast.success("Dokumen berhasil dihapus dari database.");
         setNotification("Dokumen berhasil dihapus dari database.");
         setTimeout(() => setNotification(null), 3000);
       } else {
         const err = await res.json();
-        alert(`Gagal menghapus: ${err.error || "Terjadi kesalahan"}`);
+        toast.error(`Gagal menghapus: ${err.error || "Terjadi kesalahan"}`);
       }
     } catch (err: any) {
-      alert(`Gagal: ${err?.message}`);
+      toast.error(`Gagal: ${err?.message}`);
     }
   };
 

@@ -16,6 +16,7 @@ import {
   UserCheck,
   MessageSquare,
 } from "lucide-react";
+import { useToast } from "@/components/ui/Toast";
 
 interface UserItem {
   id: string;
@@ -28,6 +29,7 @@ interface UserItem {
 
 export default function AdminUsersPage() {
   const { user, logout } = useAuth();
+  const toast = useToast();
   const [users, setUsers] = useState<UserItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -65,11 +67,15 @@ export default function AdminUsersPage() {
         setUsers((prev) =>
           prev.map((u) => (u.id === id ? { ...u, status: nextStatus } : u))
         );
+        toast.success(`Status pengguna diubah ke ${nextStatus}.`);
         setActionNotice(`Status pengguna berhasil diperbarui ke ${nextStatus}.`);
         setTimeout(() => setActionNotice(null), 3000);
+      } else {
+        const err = await res.json();
+        toast.error(`Gagal: ${err.error || "Terjadi kesalahan"}`);
       }
     } catch (err: any) {
-      alert(`Gagal memperbarui status: ${err?.message}`);
+      toast.error(`Gagal memperbarui status: ${err?.message}`);
     }
   };
 

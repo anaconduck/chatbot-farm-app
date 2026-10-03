@@ -1,9 +1,19 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { requireAdminRole } from "@/server/authorization";
 import { MOCK_DOCUMENTS } from "@/lib/mock-data";
 
 export async function GET() {
   const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE !== "false";
+
+  try {
+    await requireAdminRole();
+  } catch {
+    return NextResponse.json(
+      { error: "Akses ditolak: Diperlukan hak akses administrator." },
+      { status: 403 }
+    );
+  }
 
   try {
     const adminClient = createAdminClient();
@@ -24,11 +34,28 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    await requireAdminRole();
+  } catch {
+    return NextResponse.json(
+      { error: "Akses ditolak: Diperlukan hak akses administrator." },
+      { status: 403 }
+    );
+  }
+
+  try {
     const body = await req.json();
+
+    if (!body.title || typeof body.title !== "string" || !body.title.trim()) {
+      return NextResponse.json(
+        { error: "Judul dokumen wajib diisi." },
+        { status: 400 }
+      );
+    }
+
     const adminClient = createAdminClient();
 
     const newDoc = {
-      title: body.title,
+      title: body.title.trim(),
       author: body.author || "Admin TanyaTernak",
       publication_year: body.publication_year || new Date().getFullYear(),
       category: body.category || "Umum",
@@ -51,11 +78,23 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ document: data, success: true });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message || "Failed to create document" }, { status: 500 });
+    return NextResponse.json(
+      { error: err?.message || "Gagal menyimpan dokumen." },
+      { status: 500 }
+    );
   }
 }
 
 export async function DELETE(req: Request) {
+  try {
+    await requireAdminRole();
+  } catch {
+    return NextResponse.json(
+      { error: "Akses ditolak: Diperlukan hak akses administrator." },
+      { status: 403 }
+    );
+  }
+
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
@@ -73,6 +112,9 @@ export async function DELETE(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message || "Failed to delete document" }, { status: 500 });
+    return NextResponse.json(
+      { error: err?.message || "Gagal menghapus dokumen." },
+      { status: 500 }
+    );
   }
 }

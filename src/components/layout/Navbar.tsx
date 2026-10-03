@@ -137,7 +137,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-[#EADBCE] bg-[#FAF7F2] px-4 pt-3 pb-6 space-y-3">
+        <div className="md:hidden border-t border-[#EADBCE] bg-[#FAF7F2] px-4 pt-3 pb-6 space-y-3 animate-fade-in shadow-lg">
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}

@@ -1,9 +1,19 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { requireAdminRole } from "@/server/authorization";
 import { MOCK_USERS } from "@/lib/mock-data";
 
 export async function GET() {
   const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE !== "false";
+
+  try {
+    await requireAdminRole();
+  } catch {
+    return NextResponse.json(
+      { error: "Akses ditolak: Diperlukan hak akses administrator." },
+      { status: 403 }
+    );
+  }
 
   try {
     const adminClient = createAdminClient();
@@ -37,8 +47,17 @@ export async function GET() {
 
 export async function PATCH(req: Request) {
   try {
+    await requireAdminRole();
+  } catch {
+    return NextResponse.json(
+      { error: "Akses ditolak: Diperlukan hak akses administrator." },
+      { status: 403 }
+    );
+  }
+
+  try {
     const { id, is_active } = await req.json();
-    if (!id) return NextResponse.json({ error: "Missing ID" }, { status: 400 });
+    if (!id) return NextResponse.json({ error: "ID pengguna diperlukan." }, { status: 400 });
 
     const adminClient = createAdminClient();
     const { data, error } = await adminClient
@@ -51,6 +70,6 @@ export async function PATCH(req: Request) {
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
     return NextResponse.json({ user: data, success: true });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message }, { status: 500 });
+    return NextResponse.json({ error: err?.message || "Gagal memperbarui status pengguna." }, { status: 500 });
   }
 }

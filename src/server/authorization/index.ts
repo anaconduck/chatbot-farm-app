@@ -1,6 +1,7 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { cookies } from "next/headers";
 import type { UserRole } from "@/types";
 
 export interface ServerUserContext {
@@ -11,7 +12,7 @@ export interface ServerUserContext {
 }
 
 export async function getCurrentServerUser(): Promise<ServerUserContext | null> {
-  // Check Supabase session first
+  // 1. Check real Supabase Auth session
   try {
     const supabase = await createClient();
     const {
@@ -19,7 +20,6 @@ export async function getCurrentServerUser(): Promise<ServerUserContext | null> 
     } = await supabase.auth.getSession();
 
     if (session?.user) {
-      // Query profile role from PostgreSQL using service admin client
       const adminClient = createAdminClient();
       const { data: profile } = await adminClient
         .from("profiles")
@@ -37,7 +37,26 @@ export async function getCurrentServerUser(): Promise<ServerUserContext | null> 
       }
     }
   } catch {
-    // Supabase might not be initialized yet in local dev
+    // Supabase session lookup fallback
+  }
+
+  // 2. Check role cookie (supports demo mode or restored session)
+  try {
+    const cookieStore = await cookies();
+    const roleCookie =
+      cookieStore.get("tanyaternak_role")?.value ||
+      cookieStore.get("chickyai_role")?.value;
+
+    if (roleCookie === "ADMIN") {
+      return {
+        userId: "admin-session-id",
+        email: "admin@tanyaternak.id",
+        role: "ADMIN",
+        isDemo: process.env.NEXT_PUBLIC_DEMO_MODE === "true",
+      };
+    }
+  } catch {
+    // Context without headers
   }
 
   return null;

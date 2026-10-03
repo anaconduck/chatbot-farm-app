@@ -19,6 +19,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
@@ -26,6 +30,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Custom Color Tokens */
 .bg-cream {
   background-color: #FAF7F2;
 }
@@ -59,14 +64,132 @@ body {
   border-color: #E8DCCF;
 }
 
+/* Shadows & Glassmorphism */
 .card-shadow {
   box-shadow: 0 4px 20px -2px rgba(84, 50, 29, 0.05);
 }
 
-.card-hover {
-  transition: all 0.2s ease-in-out;
+.glass-nav {
+  background-color: rgba(250, 247, 242, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
-.card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px -4px rgba(84, 50, 29, 0.08);
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Animation Utility Classes */
+.animate-fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+/* Shimmer Loading Skeleton */
+.shimmer-loading {
+  background: linear-gradient(
+    90deg,
+    #F3ECE2 25%,
+    #FFFBF5 50%,
+    #F3ECE2 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite linear;
+}
+
+/* Interactive Elements (Micro-interactions) */
+.card-hover,
+.interactive-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-hover:hover,
+.interactive-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -4px rgba(84, 50, 29, 0.09);
+  border-color: rgba(222, 153, 43, 0.35);
+}
+
+.interactive-btn {
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.2s ease;
+}
+
+.interactive-btn:hover {
+  filter: brightness(1.04);
+}
+
+.interactive-btn:active {
+  transform: scale(0.97);
+}
+
+/* Accessibility: Respect Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -20,9 +20,11 @@ import {
   FolderUp,
   MessageSquare,
 } from "lucide-react";
+import { useToast } from "@/components/ui/Toast";
 
 export default function AdminDashboardPage() {
   const { user, logout } = useAuth();
+  const toast = useToast();
 
   const [documents, setDocuments] = useState<KnowledgeDocument[]>([]);
   const [stats, setStats] = useState({
@@ -103,16 +105,17 @@ export default function AdminDashboardPage() {
       });
 
       if (res.ok) {
+        toast.success(`Berkas "${fileName}" berhasil diunggah.`);
         setUploadSuccess(`Berkas "${fileName}" berhasil diunggah ke database.`);
         setSelectedFile(null);
         if (fileInputRef.current) fileInputRef.current.value = "";
         await loadData();
       } else {
         const err = await res.json();
-        alert(`Gagal menyimpan: ${err.error || "Terjadi kesalahan"}`);
+        toast.error(`Gagal menyimpan: ${err.error || "Terjadi kesalahan"}`);
       }
     } catch (err: any) {
-      alert(`Gagal mengunggah: ${err?.message || "Koneksi terputus"}`);
+      toast.error(`Gagal mengunggah: ${err?.message || "Koneksi terputus"}`);
     } finally {
       setIsSubmitting(false);
       setTimeout(() => setUploadSuccess(null), 5000);

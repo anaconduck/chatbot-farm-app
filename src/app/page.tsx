@@ -5,12 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Reveal } from "@/components/ui/Reveal";
 import {
   Bot,
   ShieldCheck,
   Cpu,
   Layers,
   ArrowRight,
+  Sparkles,
+  CheckCircle,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -20,10 +23,15 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden pt-12 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden pt-12 sm:pt-16 lg:pt-20 pb-14 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left Copy */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-6 animate-fade-up">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF5E5] border border-[#F3DB9A] text-xs font-bold text-[#8C5D19] shadow-2xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#DE992B]" />
+                <span>Teknologi AI & Repositori Riset Fapet UB</span>
+              </div>
+
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#361D10] leading-[1.15] tracking-tight">
                 Konsultasi & Riset Peternakan Unggas Berbasis{" "}
                 <span className="text-[#DE992B] underline decoration-[#DE992B]/40 decoration-wavy decoration-2">
@@ -40,7 +48,7 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link
                   href="/chat"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#4A2D1B] hover:bg-[#382112] text-white font-bold text-sm shadow-md transition-all active:scale-95"
+                  className="interactive-btn inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#4A2D1B] hover:bg-[#382112] text-white font-bold text-sm shadow-md active:scale-95"
                 >
                   <Bot className="w-5 h-5 text-[#DE992B]" />
                   <span>Mulai Bertanya</span>
@@ -49,126 +57,158 @@ export default function HomePage() {
 
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white border border-[#DCD0C1] hover:border-[#4A2D1B] text-[#4A2D1B] font-bold text-sm shadow-xs transition-all"
+                  className="interactive-btn inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white border border-[#DCD0C1] hover:border-[#4A2D1B] text-[#4A2D1B] font-bold text-sm shadow-xs"
                 >
                   <span>Pelajari Lebih Lanjut</span>
                 </Link>
               </div>
+
+              <div className="flex items-center gap-6 pt-3 text-xs text-[#7A6A60]">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle className="w-4 h-4 text-[#2E7D32]" />
+                  <span>Rujukan Terverifikasi</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle className="w-4 h-4 text-[#2E7D32]" />
+                  <span>Akses Cepat 24/7</span>
+                </div>
+              </div>
             </div>
 
-            <div className="lg:col-span-5 relative -mt-6 sm:-mt-10 lg:-mt-14">
-              <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group">
+            {/* Right Hero Media */}
+            <div className="lg:col-span-5 relative animate-fade-in">
+              <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group interactive-card">
                 <Image
                   src="/images/farm/modern-poultry-farm.jpg"
                   alt="Modern Poultry Farm"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   priority
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                <div className="absolute bottom-4 left-4 right-4 text-white text-xs font-semibold drop-shadow-md">
+                  Kandang Closed-House Modern Berstandar Ilmiah
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* FEATURES SECTION */}
-        <section className="py-16 bg-white/70 border-y border-[#E9DDD0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF4EB] border border-[#F3E2CB] text-[11px] font-bold text-[#966318] uppercase">
-                FITUR UTAMA TANYATERNAK
+        <section className="py-20 bg-white/70 border-y border-[#E9DDD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+            <Reveal>
+              <div className="text-center max-w-2xl mx-auto space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF4EB] border border-[#F3E2CB] text-[11px] font-bold text-[#966318] uppercase tracking-wider">
+                  FITUR UTAMA TANYATERNAK
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-[#361D10]">
+                  Solusi Cerdas untuk Setiap Aspek Peternakan Anda
+                </h2>
+                <p className="text-sm text-[#6C5D53]">
+                  Menggabungkan kapabilitas model RAG modern dengan dokumen keilmuan unggas pilihan.
+                </p>
               </div>
-              <h2 className="text-3xl font-extrabold text-[#361D10]">
-                Solusi Cerdas untuk Setiap Aspek Peternakan Anda
-              </h2>
-              <p className="text-sm text-[#6C5D53]">
-                Menggabungkan kapabilitas model RAG modern dengan dokumen keilmuan unggas pilihan.
-              </p>
-            </div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-[#FAF7F2] rounded-2xl p-7 border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-[#FFF3D6] text-[#DE992B] border border-[#F3DB9A] flex items-center justify-center">
-                  <Layers className="w-6 h-6" />
+              <Reveal delayMs={100}>
+                <div className="interactive-card bg-[#FAF7F2] rounded-3xl p-7 border border-[#E8DCCF] shadow-xs space-y-4 h-full">
+                  <div className="w-12 h-12 rounded-2xl bg-[#FFF3D6] text-[#DE992B] border border-[#F3DB9A] flex items-center justify-center shadow-xs">
+                    <Layers className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#361D10]">
+                    Formulasi Nutrisi & Pakan
+                  </h3>
+                  <p className="text-xs text-[#6B5B51] leading-relaxed">
+                    Hitung kebutuhan asam amino, energi metabolis, dan imbangan kalsium-fosfor untuk ayam ras petelur (layer) maupun pedaging (broiler) sesuai fase pertumbuhan.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-[#361D10]">
-                  Formulasi Nutrisi & Pakan
-                </h3>
-                <p className="text-xs text-[#6B5B51] leading-relaxed">
-                  Hitung kebutuhan asam amino, energi metabolis, dan imbangan kalsium-fosfor untuk ayam ras petelur (layer) maupun pedaging (broiler) sesuai fase pertumbuhan.
-                </p>
-              </div>
+              </Reveal>
 
-              <div className="bg-[#FAF7F2] rounded-2xl p-7 border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-[#EAF5EA] text-[#2E7D32] border border-[#C8E6C9] flex items-center justify-center">
-                  <ShieldCheck className="w-6 h-6" />
+              <Reveal delayMs={200}>
+                <div className="interactive-card bg-[#FAF7F2] rounded-3xl p-7 border border-[#E8DCCF] shadow-xs space-y-4 h-full">
+                  <div className="w-12 h-12 rounded-2xl bg-[#EAF5EA] text-[#2E7D32] border border-[#C8E6C9] flex items-center justify-center shadow-xs">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#361D10]">
+                    Biosekuriti & Pengendalian Penyakit
+                  </h3>
+                  <p className="text-xs text-[#6B5B51] leading-relaxed">
+                    Panduan sanitasi tiga zona kandang, jadwal vaksinasi berkala, serta identifikasi awal gejala klinis penyakit unggas seperti ND, AI, IB, dan Coryza.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-[#361D10]">
-                  Biosekuriti & Pengendalian Penyakit
-                </h3>
-                <p className="text-xs text-[#6B5B51] leading-relaxed">
-                  Panduan sanitasi tiga zona kandang, jadwal vaksinasi berkala, serta identifikasi awal gejala klinis penyakit unggas seperti ND, AI, IB, dan Coryza.
-                </p>
-              </div>
+              </Reveal>
 
-              <div className="bg-[#FAF7F2] rounded-2xl p-7 border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F0EAE1] text-[#4A2D1B] border border-[#D5C7B7] flex items-center justify-center">
-                  <Cpu className="w-6 h-6" />
+              <Reveal delayMs={300}>
+                <div className="interactive-card bg-[#FAF7F2] rounded-3xl p-7 border border-[#E8DCCF] shadow-xs space-y-4 h-full">
+                  <div className="w-12 h-12 rounded-2xl bg-[#F0EAE1] text-[#4A2D1B] border border-[#D5C7B7] flex items-center justify-center shadow-xs">
+                    <Cpu className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#361D10]">
+                    Manajemen Kandang Closed-House
+                  </h3>
+                  <p className="text-xs text-[#6B5B51] leading-relaxed">
+                    Optimalkan kecepatan angin (wind speed), evaporative cooling pad, dan pembuangan gas amonia menggunakan standar mikroklimat tropis Indonesia.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-[#361D10]">
-                  Manajemen Kandang Closed-House
-                </h3>
-                <p className="text-xs text-[#6B5B51] leading-relaxed">
-                  Optimalkan kecepatan angin (wind speed), evaporative cooling pad, dan pembuangan gas amonia menggunakan standar mikroklimat tropis Indonesia.
-                </p>
-              </div>
+              </Reveal>
             </div>
           </div>
         </section>
 
         {/* HOW IT WORKS SECTION */}
-        <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] uppercase">
-              ALUR KERJA
+        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+          <Reveal>
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] uppercase tracking-wider">
+                ALUR KERJA
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#361D10]">
+                Bagaimana TanyaTernak Bekerja
+              </h2>
+              <p className="text-sm text-[#6C5D53]">
+                Tiga langkah mudah untuk mendapatkan insight ilmiah secara instan
+              </p>
             </div>
-            <h2 className="text-3xl font-extrabold text-[#361D10]">
-              Bagaimana TanyaTernak Bekerja
-            </h2>
-            <p className="text-sm text-[#6C5D53]">
-              Tiga langkah mudah untuk mendapatkan insight ilmiah secara instan
-            </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-6 border border-[#E8DCCF] text-center space-y-3">
-              <div className="w-10 h-10 rounded-full bg-[#361D10] text-white font-bold text-base flex items-center justify-center mx-auto">
-                1
+            <Reveal delayMs={100}>
+              <div className="interactive-card bg-white rounded-3xl p-7 border border-[#E8DCCF] text-center space-y-4 h-full shadow-xs">
+                <div className="w-11 h-11 rounded-2xl bg-[#361D10] text-white font-extrabold text-base flex items-center justify-center mx-auto shadow-xs">
+                  1
+                </div>
+                <h4 className="font-bold text-base text-[#361D10]">Ketik Pertanyaan</h4>
+                <p className="text-xs text-[#6B5B51] leading-relaxed">
+                  Tulis kendala pakan, penurunan produksi, atau ventilasi kandang dalam bahasa sehari-hari.
+                </p>
               </div>
-              <h4 className="font-bold text-base text-[#361D10]">Ketik Pertanyaan</h4>
-              <p className="text-xs text-[#6B5B51] leading-relaxed">
-                Tulis kendala pakan, penurunan produksi, atau ventilasi kandang dalam bahasa sehari-hari.
-              </p>
-            </div>
+            </Reveal>
 
-            <div className="bg-white rounded-2xl p-6 border border-[#E8DCCF] text-center space-y-3">
-              <div className="w-10 h-10 rounded-full bg-[#DE992B] text-white font-bold text-base flex items-center justify-center mx-auto">
-                2
+            <Reveal delayMs={200}>
+              <div className="interactive-card bg-white rounded-3xl p-7 border border-[#E8DCCF] text-center space-y-4 h-full shadow-xs">
+                <div className="w-11 h-11 rounded-2xl bg-[#DE992B] text-white font-extrabold text-base flex items-center justify-center mx-auto shadow-xs">
+                  2
+                </div>
+                <h4 className="font-bold text-base text-[#361D10]">Analisis Literatur RAG</h4>
+                <p className="text-xs text-[#6B5B51] leading-relaxed">
+                  AI mencari dan mencocokkan bab relevan dari puluhan buku dan dokumen ilmiah terindeks.
+                </p>
               </div>
-              <h4 className="font-bold text-base text-[#361D10]">Analisis Literatur RAG</h4>
-              <p className="text-xs text-[#6B5B51] leading-relaxed">
-                AI mencari dan mencocokkan bab relevan dari puluhan buku dan dokumen ilmiah terindeks.
-              </p>
-            </div>
+            </Reveal>
 
-            <div className="bg-white rounded-2xl p-6 border border-[#E8DCCF] text-center space-y-3">
-              <div className="w-10 h-10 rounded-full bg-[#2E7D32] text-white font-bold text-base flex items-center justify-center mx-auto">
-                3
+            <Reveal delayMs={300}>
+              <div className="interactive-card bg-white rounded-3xl p-7 border border-[#E8DCCF] text-center space-y-4 h-full shadow-xs">
+                <div className="w-11 h-11 rounded-2xl bg-[#2E7D32] text-white font-extrabold text-base flex items-center justify-center mx-auto shadow-xs">
+                  3
+                </div>
+                <h4 className="font-bold text-base text-[#361D10]">Solusi & Sumber Rujukan</h4>
+                <p className="text-xs text-[#6B5B51] leading-relaxed">
+                  Terima ringkasan praktis lengkap dengan nomor halaman dan judul referensi aslinya.
+                </p>
               </div>
-              <h4 className="font-bold text-base text-[#361D10]">Solusi & Sumber Rujukan</h4>
-              <p className="text-xs text-[#6B5B51] leading-relaxed">
-                Terima ringkasan praktis lengkap dengan nomor halaman dan judul referensi aslinya.
-              </p>
-            </div>
+            </Reveal>
           </div>
         </section>
       </main>
