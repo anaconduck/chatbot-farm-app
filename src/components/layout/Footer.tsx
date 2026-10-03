@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-[#EFEAE2] border-t border-[#E3D9CC] py-6 sm:py-7 text-sm text-[#736357]">
+    <footer className="w-full bg-[#EFEAE2] border-t border-[#E3D9CC] py-6 sm:py-7 text-sm text-[#736357] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
         {/* Left Side: 3 Logos & Grant Info */}
         <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 text-center sm:text-left">

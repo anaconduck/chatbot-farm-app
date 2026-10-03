@@ -53,7 +53,7 @@ export default function RootLayout({
         <link rel="icon" href="/images/logo/logo1.png?v=5" type="image/png" />
         <link rel="apple-touch-icon" href="/images/logo/logo1.png?v=5" />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#2C1D13] antialiased selection:bg-[#DE992B]/20 selection:text-[#4E2E1E]">
+      <body className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#2C1D13] antialiased selection:bg-[#DE992B]/20 selection:text-[#4E2E1E] overflow-x-hidden max-w-full w-full">
         <PageTracker />
         <ToastProvider>
           <AuthProvider>

@@ -19,9 +19,9 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8 pb-14 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden pt-8 sm:pt-10 lg:pt-14 pb-14 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             {/* Left Copy */}
             <div className="lg:col-span-7 space-y-6 animate-fade-up">
@@ -58,8 +58,8 @@ export default function HomePage() {
             </div>
 
             {/* Right Hero Media */}
-            <div className="lg:col-span-5 relative animate-fade-in lg:mt-12">
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#DE992B]/20 to-[#4A2D1B]/15 rounded-3xl blur-xl opacity-60 pointer-events-none" />
+            <div className="lg:col-span-5 relative animate-fade-in mt-6 lg:mt-12">
+              <div className="hidden sm:block absolute -inset-1 bg-gradient-to-r from-[#DE992B]/20 to-[#4A2D1B]/15 rounded-3xl blur-lg opacity-60 pointer-events-none" />
               <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group interactive-card">
                 <Image
                   src="/images/farm/modern-poultry-farm.jpg"
@@ -79,7 +79,7 @@ export default function HomePage() {
         </section>
 
         {/* FEATURES SECTION */}
-        <section className="py-20 bg-white/70 border-y border-[#E9DDD0]">
+        <section className="py-20 bg-white/70 border-y border-[#E9DDD0] overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
             <Reveal>
               <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -142,7 +142,7 @@ export default function HomePage() {
         </section>
 
         {/* HOW IT WORKS SECTION */}
-        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 overflow-hidden">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] uppercase tracking-wider">
