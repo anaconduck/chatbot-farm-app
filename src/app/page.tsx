@@ -58,7 +58,7 @@ export default function HomePage() {
             </div>
 
             {/* Right Hero Media */}
-            <div className="lg:col-span-5 relative animate-fade-in lg:mt-7">
+            <div className="lg:col-span-5 relative animate-fade-in lg:mt-12">
               <div className="absolute -inset-1 bg-gradient-to-r from-[#DE992B]/20 to-[#4A2D1B]/15 rounded-3xl blur-xl opacity-60 pointer-events-none" />
               <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group interactive-card">
                 <Image
