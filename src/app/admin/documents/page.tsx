@@ -22,6 +22,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { useToast } from "@/components/ui/Toast";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export default function AdminDocumentsPage() {
   const { user, logout } = useAuth();
@@ -242,14 +243,37 @@ export default function AdminDocumentsPage() {
               </thead>
               <tbody className="divide-y divide-[#F1E8DF]">
                 {isLoading ? (
-                  <tr>
-                    <td colSpan={6} className="py-12 text-center text-[#7A6A60]">
-                      <div className="flex items-center justify-center gap-2">
-                        <Loader2 className="w-5 h-5 animate-spin text-[#DE992B]" />
-                        <span>Memuat data dari database...</span>
-                      </div>
-                    </td>
-                  </tr>
+                  Array.from({ length: 5 }).map((_, idx) => (
+                    <tr key={`skeleton-doc-${idx}`} className="animate-pulse">
+                      <td className="py-4 px-4">
+                        <div className="flex items-center gap-2.5">
+                          <Skeleton className="w-7 h-7 rounded-lg shrink-0" />
+                          <div className="space-y-1.5 flex-1 max-w-xs">
+                            <Skeleton className={`h-4 ${idx % 2 === 0 ? "w-48 sm:w-56" : "w-36 sm:w-44"}`} />
+                            <Skeleton className="h-2.5 w-24" />
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-4 px-3">
+                        <Skeleton className="h-5 w-20 rounded-full" />
+                      </td>
+                      <td className="py-4 px-3">
+                        <Skeleton className="h-4 w-24" />
+                      </td>
+                      <td className="py-4 px-3">
+                        <Skeleton className="h-3.5 w-14" />
+                      </td>
+                      <td className="py-4 px-3">
+                        <Skeleton className="h-3.5 w-20" />
+                      </td>
+                      <td className="py-4 px-3 text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          <Skeleton className="w-7 h-7 rounded-lg" />
+                          <Skeleton className="w-7 h-7 rounded-lg" />
+                        </div>
+                      </td>
+                    </tr>
+                  ))
                 ) : filtered.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="py-16 text-center">

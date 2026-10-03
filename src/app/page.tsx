@@ -12,7 +12,6 @@ import {
   Cpu,
   Layers,
   ArrowRight,
-  Sparkles,
   CheckCircle,
 } from "lucide-react";
 
@@ -23,15 +22,10 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden pt-12 sm:pt-16 lg:pt-20 pb-14 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8 pb-14 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left Copy */}
             <div className="lg:col-span-7 space-y-6 animate-fade-up">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF5E5] border border-[#F3DB9A] text-xs font-bold text-[#8C5D19] shadow-2xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#DE992B]" />
-                <span>Teknologi AI & Repositori Riset Fapet UB</span>
-              </div>
-
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#361D10] leading-[1.15] tracking-tight">
                 Konsultasi & Riset Peternakan Unggas Berbasis{" "}
                 <span className="text-[#DE992B] underline decoration-[#DE992B]/40 decoration-wavy decoration-2">
