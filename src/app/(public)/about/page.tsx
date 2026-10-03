@@ -1,14 +1,9 @@
 import React from "react";
-import Image from "next/image";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
-import { MOCK_TEAM } from "@/lib/mock-data";
 import {
-  Cpu,
   GraduationCap,
-  Microscope,
-  FlaskConical,
   Award,
   ShieldCheck,
   CheckCircle,
@@ -93,7 +88,7 @@ export default function AboutPage() {
         </section>
 
         {/* VISI & MISI KAMI */}
-        <section className="py-6 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-6 pb-16 sm:pb-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Visi */}
             <Reveal delayMs={100}>
@@ -141,74 +136,6 @@ export default function AboutPage() {
                 </div>
               </div>
             </Reveal>
-          </div>
-        </section>
-
-        {/* TIM RISET & DEWAN PAKAR */}
-        <section className="pt-6 pb-8 sm:pb-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <div className="text-center space-y-2 mb-10">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#DE992B] block">
-                Kolaborator Ahli
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#361D10]">
-                Tim Riset & Dewan Pakar
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6C5D53] max-w-xl mx-auto">
-                Didukung oleh akademisi dan praktisi veteriner Fakultas Peternakan Universitas Brawijaya
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {MOCK_TEAM.map((member, idx) => (
-              <Reveal key={member.id} delayMs={(idx % 3) * 100}>
-                <div
-                  className="bg-white rounded-3xl overflow-hidden border border-[#E8DCCF] shadow-xs hover:shadow-md transition-all flex flex-col group h-full interactive-card"
-                >
-                  <div className="relative aspect-4/3 overflow-hidden bg-[#EAE2D7]">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute bottom-3 left-3">
-                      <span className="px-2.5 py-1 rounded-md bg-white/95 text-[10px] font-extrabold tracking-wider text-[#4A2D1B] shadow-sm uppercase">
-                        {member.specialtyBadge}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div className="space-y-1.5">
-                      <h3 className="font-bold text-base text-[#361D10] leading-snug">
-                        {member.name}
-                      </h3>
-                      <p className="text-xs font-semibold text-[#DE992B]">
-                        {member.role}
-                      </p>
-                      <p className="text-xs text-[#6C5D53] leading-relaxed pt-2">
-                        {member.description}
-                      </p>
-                    </div>
-
-                    <div className="pt-4 border-t border-[#F1E8DF] flex items-center justify-between text-xs text-[#5B4C42]">
-                      <span className="font-medium">{member.achievement}</span>
-                      {member.specialtyBadge.includes("KESEHATAN") && (
-                        <Microscope className="w-4 h-4 text-[#DE992B]" />
-                      )}
-                      {member.specialtyBadge.includes("NUTRISI") && (
-                        <FlaskConical className="w-4 h-4 text-[#DE992B]" />
-                      )}
-                      {member.specialtyBadge.includes("SISTEM") && (
-                        <Cpu className="w-4 h-4 text-[#DE992B]" />
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </section>
       </main>

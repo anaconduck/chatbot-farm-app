@@ -23,7 +23,7 @@ export default function HomePage() {
       <main className="flex-1">
         {/* HERO SECTION */}
         <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8 pb-14 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             {/* Left Copy */}
             <div className="lg:col-span-7 space-y-6 animate-fade-up">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#361D10] leading-[1.15] tracking-tight">
@@ -70,7 +70,8 @@ export default function HomePage() {
             </div>
 
             {/* Right Hero Media */}
-            <div className="lg:col-span-5 relative animate-fade-in">
+            <div className="lg:col-span-5 relative animate-fade-in lg:-mt-3">
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#DE992B]/20 to-[#4A2D1B]/15 rounded-3xl blur-xl opacity-60 pointer-events-none" />
               <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group interactive-card">
                 <Image
                   src="/images/farm/modern-poultry-farm.jpg"
