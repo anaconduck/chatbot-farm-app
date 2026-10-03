@@ -32,6 +32,24 @@ export default function HomePage() {
                 </span>
               </h1>
 
+              {/* Mobile Hero Media (Placed directly under title on mobile view) */}
+              <div className="lg:hidden relative animate-fade-in my-5">
+                <div className="relative rounded-2xl overflow-hidden border-2 border-white shadow-lg aspect-4/3 group interactive-card">
+                  <Image
+                    src="/images/farm/modern-poultry-farm.jpg"
+                    alt="Modern Poultry Farm"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                  <div className="absolute bottom-3 left-3 right-3 text-white text-[11px] font-semibold drop-shadow-md">
+                    Kandang Closed-House Modern Berstandar Ilmiah
+                  </div>
+                </div>
+              </div>
+
               <p className="text-base sm:text-lg text-[#6A5A50] leading-relaxed max-w-2xl">
                 Tingkatkan efisiensi pakan, kendalikan mikroklimat kandang closed-house,
                 dan perkuat biosekuriti peternakan ayam Anda bersama TanyaTernak.
@@ -57,8 +75,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Hero Media */}
-            <div className="lg:col-span-5 relative animate-fade-in mt-6 lg:mt-12">
+            {/* Desktop Right Hero Media */}
+            <div className="hidden lg:block lg:col-span-5 relative animate-fade-in lg:mt-12">
               <div className="hidden sm:block absolute -inset-1 bg-gradient-to-r from-[#DE992B]/20 to-[#4A2D1B]/15 rounded-3xl blur-lg opacity-60 pointer-events-none" />
               <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl aspect-4/3 group interactive-card">
                 <Image
@@ -142,7 +160,7 @@ export default function HomePage() {
         </section>
 
         {/* HOW IT WORKS SECTION */}
-        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 overflow-hidden">
+        <section className="pt-16 sm:pt-20 pb-8 sm:pb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 overflow-hidden">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] uppercase tracking-wider">
