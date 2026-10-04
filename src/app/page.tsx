@@ -21,7 +21,7 @@ export default function HomePage() {
 
       <main className="flex-1 w-full max-w-full overflow-x-hidden">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden pt-8 sm:pt-10 lg:pt-14 pb-14 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden pt-8 sm:pt-10 lg:pt-14 pb-10 sm:pb-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             {/* Left Copy */}
             <div className="lg:col-span-7 space-y-6 animate-fade-up">
@@ -97,8 +97,8 @@ export default function HomePage() {
         </section>
 
         {/* FEATURES SECTION */}
-        <section className="py-20 bg-white/70 border-y border-[#E9DDD0] overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        <section className="pt-10 sm:pt-12 pb-12 sm:pb-14 bg-white/70 border-y border-[#E9DDD0] overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14">
             <Reveal>
               <div className="text-center max-w-2xl mx-auto space-y-3">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF4EB] border border-[#F3E2CB] text-[11px] font-bold text-[#966318] uppercase tracking-wider">
@@ -160,7 +160,7 @@ export default function HomePage() {
         </section>
 
         {/* HOW IT WORKS SECTION */}
-        <section className="pt-16 sm:pt-20 pb-8 sm:pb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 overflow-hidden">
+        <section className="pt-10 sm:pt-12 pb-8 sm:pb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14 overflow-hidden">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFE8DF] border border-[#DFD3C4] text-[11px] font-bold text-[#6D4226] uppercase tracking-wider">
